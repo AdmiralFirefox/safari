@@ -1,0 +1,210 @@
+@use "../themeprovider/themeprovider" as theme_provider;
+
+.main-nav-wrapper {
+  background: theme_provider.$nav_background;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .nav-left-side {
+    display: flex;
+    align-items: center;
+
+    //Web Logo
+    .web-logo {
+      position: relative;
+      left: -2.3em;
+      width: 10em;
+      height: 3em;
+      cursor: pointer;
+    }
+
+    //location wrapper
+    .deliver-location {
+      display: none;
+    }
+  }
+
+  .nav-right-side {
+    display: none;
+  }
+}
+
+@media (min-width: theme_provider.$navbar_media_query_value) {
+  .main-nav-wrapper {
+    .nav-left-side {
+      .web-logo {
+        left: -1.3em;
+      }
+
+      //location wrapper
+      .deliver-location {
+        display: flex;
+        align-items: center;
+        margin-left: -2.5em;
+        cursor: pointer;
+
+        //location icon
+        .location-icon {
+          color: theme_provider.$white_color;
+          font-size: 2rem;
+        }
+
+        //location text wrapper
+        .location-text {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          text-align: left;
+          line-height: 1.1em;
+
+          //location title
+          .location-text-title {
+            color: theme_provider.$gray_color;
+            font-weight: 650;
+            font-size: 0.9rem;
+          }
+
+          //location country
+          .location-text-country {
+            color: theme_provider.$white_color;
+            font-weight: 650;
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+
+    .nav-right-side {
+      display: flex;
+      align-items: center;
+
+      //Search Products
+      .search-products {
+        display: flex;
+        align-items: center;
+        margin-right: 1.1em;
+        cursor: pointer;
+
+        //Search Icon
+        .search-icon {
+          color: theme_provider.$white_color;
+          font-size: 2rem;
+          margin-right: 0.2em;
+        }
+
+        //Search Text Wrapper
+        .search-products-text {
+          line-height: 1.1em;
+
+          //Search Text Search
+          .search-products-text-search {
+            color: theme_provider.$gray_color;
+            font-weight: 650;
+            font-size: 0.9rem;
+          }
+          //Search Text Product
+          .search-products-text-product {
+            color: theme_provider.$white_color;
+            font-weight: 650;
+            font-size: 1.1rem;
+          }
+        }
+      }
+
+      //Sign In Link Text Wrapper
+      .sign-in-text-link {
+        margin-right: 1.1em;
+        line-height: 1.1em;
+        cursor: pointer;
+
+        //Sign In Text
+        .sign-in-text-signin {
+          color: theme_provider.$gray_color;
+          font-weight: 650;
+          font-size: 0.9rem;
+        }
+
+        //Accounts Text
+        .sign-in-text-accounts {
+          color: theme_provider.$white_color;
+          font-weight: 650;
+          font-size: 1.1rem;
+        }
+      }
+
+      //Orders Link Text Wrapper
+      .orders-text-link {
+        margin-right: 0.9em;
+        line-height: 1.1em;
+        cursor: pointer;
+
+        //Return Text
+        .orders-text-link-returns {
+          color: theme_provider.$gray_color;
+          font-weight: 650;
+          font-size: 0.9rem;
+        }
+
+        //Orders Text
+        .orders-text-link-orders {
+          color: theme_provider.$white_color;
+          font-weight: 650;
+          font-size: 1.1rem;
+        }
+      }
+
+      //Favorites Link Wrapper
+      .favorites-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 0.9em;
+        cursor: pointer;
+
+        //Favorites Icon
+        .favorites-icon {
+          color: theme_provider.$pink_color;
+          font-size: 3.2rem;
+        }
+
+        //Favorites Count
+        .favorites-count {
+          color: theme_provider.$black_color;
+          font-weight: 700;
+          font-size: 1.7rem;
+          position: absolute;
+          top: 0.5em;
+        }
+      }
+
+      //Cart Link
+      .cart-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+
+        //Cart Icon
+        .cart-icon {
+          position: relative;
+          width: 3.2em;
+          height: 3em;
+          margin-top: 0.8em;
+          margin-right: 0.6em;
+          transform: rotateY(180deg);
+        }
+
+        //Cart Count
+        .cart-link-count {
+          color: theme_provider.$orange_color;
+          font-size: 1.7rem;
+          font-weight: 700;
+          position: absolute;
+          top: 0.2em;
+        }
+      }
+    }
+  }
+}

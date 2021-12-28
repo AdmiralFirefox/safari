@@ -1,0 +1,29 @@
+@use "../themeprovider/themeprovider" as theme_provider;
+
+.category-nav-wrapper {
+  display: none;
+}
+
+@media (min-width: theme_provider.$navbar_media_query_value) {
+  .category-nav-wrapper {
+    display: flex;
+    align-items: center;
+    background: theme_provider.$category_nav_background;
+    padding: 0.7em 0.5em;
+
+    a {
+      color: theme_provider.$white_color;
+      font-weight: 600;
+      margin: 0em 0.5em;
+      font-size: 1.1rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &::first-letter {
+        text-transform: capitalize;
+      }
+    }
+  }
+}

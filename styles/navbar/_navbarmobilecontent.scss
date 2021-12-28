@@ -1,0 +1,248 @@
+@use "../themeprovider/themeprovider" as theme_provider;
+
+//Close Icon
+.close-nav-icon {
+  color: theme_provider.$red_color;
+  position: absolute;
+  right: 0.2em;
+  top: 0.15em;
+  z-index: 3;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.5s ease-in-out;
+
+  &:hover {
+    color: theme_provider.$red_color_hover;
+  }
+}
+
+//Navbar Header
+.navbar-mobile-content-header {
+  background: theme_provider.$category_nav_background;
+  padding: 1em;
+
+  p {
+    color: theme_provider.$white_color;
+    font-size: 1.2rem;
+    font-weight: 650;
+    margin-bottom: 0.4em;
+  }
+}
+
+//Page Links
+.mobile-nav-page-links {
+  //Location Link Wrapper
+  .mobile-nav-location {
+    padding: 0.6em;
+    display: flex;
+    align-items: center;
+    transition: background 0.5s ease-in-out;
+    cursor: pointer;
+
+    //Location Icon
+    .mobile-nav-location-icon {
+      color: theme_provider.$black_color;
+      font-size: 2rem;
+    }
+
+    //Location Text
+    p {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-left: 0.3em;
+    }
+
+    &:hover {
+      background: theme_provider.$hovered_background;
+    }
+  }
+
+  //Search Link Wrapper
+  .mobile-nav-search {
+    display: flex;
+    align-items: center;
+    padding: 0.6em;
+    transition: background 0.5s ease-in-out;
+    cursor: pointer;
+
+    //Search Icon
+    .mobile-nav-search-icon {
+      color: theme_provider.$black_color;
+      font-size: 2rem;
+    }
+
+    //Search Text
+    p {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-left: 0.3em;
+    }
+
+    &:hover {
+      background: theme_provider.$hovered_background;
+    }
+  }
+
+  //Orders Wrapper
+  .mobile-nav-orders {
+    display: flex;
+    align-items: center;
+    padding: 0.6em;
+    transition: background 0.5s ease-in-out;
+    cursor: pointer;
+
+    //Order Image
+    .mobile-nav-orders-image {
+      position: relative;
+      width: 3em;
+      height: 3em;
+    }
+
+    //Orders Text
+    p {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-left: 0.5em;
+    }
+
+    &:hover {
+      background: theme_provider.$hovered_background;
+    }
+  }
+
+  //Favorites Wrapper
+  .mobile-nav-favorites {
+    display: flex;
+    align-items: center;
+    padding: 0.6em;
+    transition: background 0.5s ease-in-out;
+    cursor: pointer;
+
+    div:first-child {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      //Favorites Icon
+      .mobile-nav-favorites-icon {
+        color: theme_provider.$pink_color;
+        font-size: 2.5rem;
+      }
+
+      //Favorites Count
+      .mobile-nav-favorites-count {
+        position: absolute;
+        margin-top: 0.2em;
+        margin-left: 0em;
+        font-size: 1.2rem;
+      }
+    }
+
+    //Favorites Text
+    p {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-left: 0.5em;
+    }
+
+    &:hover {
+      background: theme_provider.$hovered_background;
+    }
+  }
+
+  //Cart Wrapper
+  .mobile-nav-cart {
+    display: flex;
+    align-items: center;
+    padding: 0.6em;
+    transition: background 0.5s ease-in-out;
+    cursor: pointer;
+
+    div:first-child {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .mobile-nav-cart-image {
+        position: relative;
+        width: 2.7em;
+        height: 3em;
+        transform: rotateY(180deg);
+      }
+
+      //Cart Count
+      .mobile-nav-cart-count {
+        color: theme_provider.$orange_color;
+        position: absolute;
+        margin-top: -0.4em;
+        font-size: 1.2rem;
+      }
+    }
+
+    //Cart Text
+    p {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-left: 0.5em;
+    }
+
+    &:hover {
+      background: theme_provider.$hovered_background;
+    }
+  }
+}
+
+//Divider
+.mobile-nav-divider {
+  background: theme_provider.$category_nav_background;
+  height: 0.5em;
+}
+
+//Category Links
+.mobile-nav-category-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-bottom: 1.5em;
+
+  h1 {
+    font-size: 1.6rem;
+    padding: 0.3em;
+  }
+
+  a {
+    color: theme_provider.$black_color;
+    font-weight: 650;
+    transition: background 0.5s ease-in-out;
+    font-size: 1.1rem;
+    width: 100%;
+    padding: 0.5em;
+
+    &:hover {
+      background: theme_provider.$hovered_background;
+    }
+
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+}
+
+//Hamburger Icon
+.hamburger-icon-wrapper {
+  display: block;
+
+  .hamburger-icon {
+    color: theme_provider.$white_color;
+    font-size: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+@media (min-width: theme_provider.$navbar_media_query_value) {
+  .hamburger-icon-wrapper {
+    display: none;
+  }
+}

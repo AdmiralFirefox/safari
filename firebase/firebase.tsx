@@ -2,14 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAoGguNqudPGoKvOjh-NTO2AFblvxO-Szg",
-  authDomain: "next-safari.firebaseapp.com",
-  projectId: "next-safari",
-  storageBucket: "next-safari.appspot.com",
-  messagingSenderId: "1035387976537",
-  appId: "1:1035387976537:web:2b60659bf1037a56842a48",
-  measurementId: "G-V7T3FQ9YP3",
-}; //this is where your firebase app values you copied will go
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
+};
 
 initializeApp(firebaseConfig);
 
