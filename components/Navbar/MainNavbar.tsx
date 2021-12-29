@@ -1,4 +1,6 @@
-import { FC } from "react";
+import { FC, useContext, useState, useRef } from "react";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
+import { AuthContext } from "../../context/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
 import { IoLocationSharp } from "react-icons/io5";
@@ -8,8 +10,85 @@ import { IconContext } from "react-icons";
 import CategoryNavbar from "./CategoryNavbar";
 import NavbarMobileContent from "./NavbarMobileContent";
 import mainNavStyles from "../../styles/Home.module.scss";
+import ProfileDropdown from "./ProfileDropdown";
 
 const MainNavbar: FC = () => {
+  const user = useContext(AuthContext);
+  const dropDownRef = useRef(null);
+
+  const [profileDropDown, setProfileDropDown] = useState(false);
+
+  const openProfileDropDown = () => {
+    setProfileDropDown(true);
+  };
+
+  const closeProfileDropDown = () => {
+    setProfileDropDown(false);
+  };
+
+  useOnClickOutside(dropDownRef, closeProfileDropDown);
+
+  const userSignedIn = () => {
+    if (!user) {
+      return (
+        <Link href="/login" passHref>
+          <div className={mainNavStyles["sign-in-text-link"]}>
+            <p className={mainNavStyles["sign-in-text-signin"]}>Sign In,</p>
+            <p className={mainNavStyles["sign-in-text-accounts"]}>
+              Accounts &amp; Lists
+            </p>
+          </div>
+        </Link>
+      );
+    } else {
+      return (
+        <>
+          {user.photoURL === null ? (
+            <div className={mainNavStyles["user-profile-anonymous-wrapper"]}>
+              <div
+                className={mainNavStyles["user-profile-anonymous"]}
+                onClick={openProfileDropDown}
+              >
+                <Image
+                  src="/assets/AnonymousUser.png"
+                  alt="Anonymous user"
+                  width={70}
+                  height={70}
+                  objectFit="contain"
+                />
+              </div>
+              <ProfileDropdown
+                profileDropDown={profileDropDown}
+                dropDownRef={dropDownRef}
+                closeProfileDropDown={closeProfileDropDown}
+              />
+            </div>
+          ) : (
+            <div className={mainNavStyles["user-profile-display-wrapper"]}>
+              <div
+                className={mainNavStyles["user-profile-display"]}
+                onClick={openProfileDropDown}
+              >
+                <Image
+                  src={user.photoURL}
+                  alt="User Photo"
+                  width={65}
+                  height={65}
+                  objectFit="contain"
+                />
+              </div>
+              <ProfileDropdown
+                profileDropDown={profileDropDown}
+                dropDownRef={dropDownRef}
+                closeProfileDropDown={closeProfileDropDown}
+              />
+            </div>
+          )}
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <div className={mainNavStyles["main-nav-wrapper"]}>
@@ -65,14 +144,7 @@ const MainNavbar: FC = () => {
             </div>
           </Link>
 
-          <Link href="/" passHref>
-            <div className={mainNavStyles["sign-in-text-link"]}>
-              <p className={mainNavStyles["sign-in-text-signin"]}>Sign In,</p>
-              <p className={mainNavStyles["sign-in-text-accounts"]}>
-                Accounts &amp; Lists
-              </p>
-            </div>
-          </Link>
+          {userSignedIn()}
 
           <Link href="/" passHref>
             <div className={mainNavStyles["orders-text-link"]}>

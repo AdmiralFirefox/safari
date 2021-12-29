@@ -1,0 +1,35 @@
+@use "../themeprovider/themeprovider" as theme_provider;
+
+.dropdown-wrapper {
+  background: theme_provider.$dropdown_background;
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  margin-top: 4em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .dropdown-close-icon {
+    color: theme_provider.$red_color;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0.5em;
+    top: 0.3em;
+    cursor: pointer;
+    transition: color 0.5s ease-in-out;
+
+    &:hover {
+      color: theme_provider.$red_color_hover;
+    }
+  }
+
+  p {
+    color: theme_provider.$white_color;
+    font-size: 1.1rem;
+    font-weight: 650;
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+  }
+}

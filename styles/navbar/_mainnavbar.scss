@@ -134,6 +134,36 @@
         }
       }
 
+      //User Profile Anonymous Wrapper
+      .user-profile-anonymous-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        //User Profile Anonymous
+        .user-profile-anonymous {
+          margin-right: 1.1em;
+          cursor: pointer;
+        }
+      }
+
+      //User Profile Signed In Wrapper
+      .user-profile-display-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        //User Profile Signed In
+        .user-profile-display {
+          margin-right: 1.1em;
+          cursor: pointer;
+
+          img {
+            border-radius: 50%;
+          }
+        }
+      }
+
       //Orders Link Text Wrapper
       .orders-text-link {
         margin-right: 0.9em;
@@ -175,7 +205,7 @@
           font-weight: 700;
           font-size: 1.7rem;
           position: absolute;
-          top: 0.5em;
+          margin-top: 0.1em;
         }
       }
 
@@ -202,7 +232,7 @@
           font-size: 1.7rem;
           font-weight: 700;
           position: absolute;
-          top: 0.2em;
+          margin-top: -0.2em;
         }
       }
     }
