@@ -444,4 +444,90 @@
   margin-top: 1em;
 }
 
+.location-modal-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.location-modal-wrapper {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 3;
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.5);
+  width: min(33em, 80%);
+}
+.location-modal-wrapper .location-modal-content-header {
+  background: #eaeded;
+  padding: 1em;
+}
+.location-modal-wrapper .location-modal-content-header p {
+  color: #000;
+  text-align: center;
+  margin-top: 0.6em;
+  font-weight: 650;
+  font-size: 1.7rem;
+}
+.location-modal-wrapper .location-modal-content-header .location-modal-close-button {
+  color: #c82b04;
+  font-size: 2rem;
+  position: absolute;
+  right: 0.2em;
+  top: 0.2em;
+  cursor: pointer;
+  transition: color 0.5s ease-in-out;
+}
+.location-modal-wrapper .location-modal-content-header .location-modal-close-button:hover {
+  color: #fa3605;
+}
+.location-modal-wrapper .location-modal-content {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em;
+}
+.location-modal-wrapper .location-modal-content p {
+  color: #565959;
+  font-weight: 650;
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1em;
+}
+.location-modal-wrapper .location-modal-content .done-button-wrapper {
+  margin-top: 1.4em;
+}
+
+@media (min-width: 46em) {
+  .location-modal-wrapper {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .location-modal-wrapper .location-modal-content-header {
+    padding: 1.2em;
+  }
+  .location-modal-wrapper .location-modal-content-header p {
+    margin-top: 0em;
+    text-align: left;
+  }
+  .location-modal-wrapper .location-modal-content-header .location-modal-close-button {
+    right: 0.4em;
+    top: 0.4em;
+  }
+  .location-modal-wrapper .location-modal-content {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .location-modal-wrapper .location-modal-content p {
+    text-align: left;
+  }
+  .location-modal-wrapper .location-modal-content .done-button-wrapper {
+    align-self: flex-end;
+  }
+}
+
 /*# sourceMappingURL=Home.module.css.map */

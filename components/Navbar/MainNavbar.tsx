@@ -1,5 +1,6 @@
-import { FC, useContext, useState, useRef } from "react";
+import { FC, useContext, useState, useRef, useEffect } from "react";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
+import { useLockedBody } from "../../hooks/useLockedBody";
 import { AuthContext } from "../../context/AuthContext";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,24 +10,63 @@ import { BsHeartFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import CategoryNavbar from "./CategoryNavbar";
 import NavbarMobileContent from "./NavbarMobileContent";
-import mainNavStyles from "../../styles/Home.module.scss";
 import ProfileDropdown from "./ProfileDropdown";
+import LocationModal from "../Modal/LocationModal";
+import { SelectChangeEvent } from "@mui/material/Select";
+import mainNavStyles from "../../styles/Home.module.scss";
 
 const MainNavbar: FC = () => {
   const user = useContext(AuthContext);
   const dropDownRef = useRef(null);
 
+  const [locationModal, setLocationModal] = useState(false);
+  const [lockBody, setLockBody] = useState(false);
   const [profileDropDown, setProfileDropDown] = useState(false);
+  const [country, setCountry] = useState("United States");
 
+  const handleCountryChange = (e: SelectChangeEvent) => {
+    setCountry(e.target.value);
+  };
+
+  //Open Profile Dropdown
   const openProfileDropDown = () => {
     setProfileDropDown(true);
   };
 
+  //Close Profile Dropdown
   const closeProfileDropDown = () => {
     setProfileDropDown(false);
   };
 
+  //Open Location Modal
+  const openLocationModal = () => {
+    setLocationModal(true);
+    setLockBody(true);
+  };
+
+  //Close Location Modal
+  const closeLocationModal = () => {
+    setLocationModal(false);
+    setLockBody(false);
+  };
+
+  //Storing Country State in Local Storage
+  useEffect(() => {
+    const json = localStorage.getItem("country") as string;
+    const saveCountry = JSON.parse(json);
+
+    if (saveCountry) {
+      setCountry(saveCountry);
+    }
+  }, []);
+
+  useEffect(() => {
+    const json = JSON.stringify(country);
+    localStorage.setItem("country", json);
+  }, [country]);
+
   useOnClickOutside(dropDownRef, closeProfileDropDown);
+  useLockedBody(lockBody);
 
   const userSignedIn = () => {
     if (!user) {
@@ -93,7 +133,10 @@ const MainNavbar: FC = () => {
     <>
       <div className={mainNavStyles["main-nav-wrapper"]}>
         <div className={mainNavStyles["nav-left-side"]}>
-          <NavbarMobileContent />
+          <NavbarMobileContent
+            country={country}
+            openLocationModal={openLocationModal}
+          />
 
           <Link href="/" passHref>
             <div className={mainNavStyles["web-logo"]}>
@@ -106,7 +149,10 @@ const MainNavbar: FC = () => {
             </div>
           </Link>
 
-          <div className={mainNavStyles["deliver-location"]}>
+          <div
+            className={mainNavStyles["deliver-location"]}
+            onClick={openLocationModal}
+          >
             <div>
               <IconContext.Provider
                 value={{ className: mainNavStyles["location-icon"] }}
@@ -117,11 +163,17 @@ const MainNavbar: FC = () => {
             <div className={mainNavStyles["location-text"]}>
               <p className={mainNavStyles["location-text-title"]}>Deliver to</p>
               <p className={mainNavStyles["location-text-country"]}>
-                Philippines
+                {country}
               </p>
             </div>
           </div>
         </div>
+
+        <LocationModal
+          closeLocationModal={closeLocationModal}
+          locationModal={locationModal}
+          handleCountryChange={handleCountryChange}
+        />
 
         <div className={mainNavStyles["nav-right-side"]}>
           <Link href="/" passHref>

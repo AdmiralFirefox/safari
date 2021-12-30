@@ -44,7 +44,15 @@ const SignOutButton = styled(Button)<ButtonProps>(() => ({
   },
 }));
 
-const NavbarMobileContent: FC = () => {
+interface NavbarMobileProps {
+  country: string;
+  openLocationModal: () => void;
+}
+
+const NavbarMobileContent: FC<NavbarMobileProps> = ({
+  country,
+  openLocationModal,
+}) => {
   const user = useContext(AuthContext);
   const router = useRouter();
 
@@ -179,7 +187,10 @@ const NavbarMobileContent: FC = () => {
           <Link href="/" passHref>
             <div
               className={mobileNavStyles["mobile-nav-location"]}
-              onClick={toggleDrawer(anchor, false)}
+              onClick={() => {
+                setSideBar({ left: false });
+                openLocationModal();
+              }}
             >
               <IconContext.Provider
                 value={{
@@ -188,7 +199,7 @@ const NavbarMobileContent: FC = () => {
               >
                 <IoLocationSharp />
               </IconContext.Provider>
-              <p>Deliver to Philippines</p>
+              <p>Deliver to {country}</p>
             </div>
           </Link>
 
