@@ -13,6 +13,7 @@ import NavbarMobileContent from "./NavbarMobileContent";
 import ProfileDropdown from "./ProfileDropdown";
 import LocationModal from "../Modal/LocationModal";
 import { SelectChangeEvent } from "@mui/material/Select";
+import { toast, Zoom } from "react-toastify";
 import mainNavStyles from "../../styles/Home.module.scss";
 
 const MainNavbar: FC = () => {
@@ -26,6 +27,16 @@ const MainNavbar: FC = () => {
 
   const handleCountryChange = (e: SelectChangeEvent) => {
     setCountry(e.target.value);
+    toast.success(`Country selected to ${e.target.value}`, {
+      position: "top-center",
+      autoClose: 5000,
+      transition: Zoom,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    });
   };
 
   //Open Profile Dropdown
