@@ -85,6 +85,7 @@ const LocationModal: FC<LocationModalProps> = ({
                 stiffness: 100,
               }}
               className={locationModalStyles["location-modal-wrapper"]}
+              style={{ maxHeight: `calc(${size.height!}px - 10vh)` }}
             >
               <div
                 className={locationModalStyles["location-modal-content-header"]}
