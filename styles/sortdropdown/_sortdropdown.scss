@@ -1,0 +1,6 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+//Select Icon
+.MuiSelect-icon {
+  color: theme-provider.$black-color !important;
+}

@@ -1,39 +1,29 @@
+import { ChangeEvent, useState } from "react";
 import type { NextPage } from "next";
-import Link from "next/link";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import HomeSlider from "../components/Slider/HomeSlider";
+import SortDropdown from "../components/SortDropdown/SortDropdown";
+import { SelectChangeEvent } from "@mui/material/Select";
 import homeStyles from "../styles/Home.module.scss";
 
 const Home: NextPage = () => {
-  const user = useContext(AuthContext);
+  const [sortProducts, setSortProducts] = useState("default");
 
-  //Sign Out
-  const signOutAccount = async () => {
-    await signOut(auth);
+  const handleSortProductChange = (e: SelectChangeEvent) => {
+    setSortProducts(e.target.value);
   };
 
   return (
-    <div>
-      {!user ? (
-        <>
-          <h1>You are logged out</h1>
-          <Link href="/login">
-            <a>Click here to login</a>
-          </Link>
-        </>
-      ) : (
-        <>
-          <button onClick={signOutAccount}>Sign Out</button>
-          {user.email === null ? (
-            <h1>Welcome Anonymous!</h1>
-          ) : (
-            <h1>Welcome {user.email}!</h1>
-          )}
-        </>
-      )}
-    </div>
+    <>
+      <HomeSlider />
+      <div className={homeStyles["home-content-wrapper"]}>
+        <div className={homeStyles["home-sort-products"]}>
+          <SortDropdown
+            sortProducts={sortProducts}
+            handleSortProductChange={handleSortProductChange}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

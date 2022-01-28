@@ -1,0 +1,24 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+.home-content-wrapper {
+  position: relative;
+  bottom: 5em;
+  z-index: 2;
+
+  //Sort Products Wrapper
+  .home-sort-products {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1.2em;
+  }
+}
+
+@media (min-width: theme-provider.$media_query_small_value) {
+  .home-content-wrapper {
+    bottom: 11em;
+
+    .home-sort-products {
+      margin-right: 3em;
+    }
+  }
+}

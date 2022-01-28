@@ -1,3 +1,5 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
 .swiper {
   width: 100%;
   height: 100%;
@@ -7,31 +9,39 @@
   user-select: none;
 }
 
+// Prev Arrow
 .swiper-button-prev {
-  color: #000 !important;
+  color: theme-provider.$black_color !important;
   position: absolute !important;
   display: none !important;
   font-weight: 700 !important;
 }
 
+// Next Arrow
 .swiper-button-next {
-  color: #000 !important;
+  color: theme-provider.$black_color !important;
   position: absolute !important;
   display: none !important;
   font-weight: 700 !important;
 }
 
+//Gradient Shadow
 .carousel-gradient-shadow {
   display: block;
   width: 100%;
   height: 6em;
-  background: linear-gradient(180deg, transparent, #fff, #fff);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    theme-provider.$white-background,
+    theme-provider.$white-background
+  );
   position: relative;
   bottom: 3.5em;
   z-index: 2;
 }
 
-@media (min-width: 40em) {
+@media (min-width: theme-provider.$media_query_small_value) {
   .carousel-gradient-shadow {
     height: 10em;
     bottom: 7.5em;
@@ -49,26 +59,3 @@
     display: block !important;
   }
 }
-.MuiSelect-icon {
-  color: #000 !important;
-}
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-/*# sourceMappingURL=globals.css.map */
