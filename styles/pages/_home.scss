@@ -11,14 +11,177 @@
     justify-content: flex-end;
     margin-right: 1.2em;
   }
+
+  //Products
+  .home-products {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 2em;
+    margin: 2.5em 3em;
+
+    .home-product-item {
+      border: 3px solid theme-provider.$gray-color;
+      padding: 0.5em 1em;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+
+      div:first-child {
+        //Category
+        .home-product-item-category {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          p {
+            color: theme-provider.$slightly-light-gray-color;
+            font-weight: 600;
+            font-style: italic;
+            font-size: 0.9rem;
+          }
+        }
+
+        //Image
+        .home-product-item-image {
+          display: flex;
+          justify-content: center;
+          position: relative;
+          width: 100%;
+          height: 10em;
+          margin: 1em 0em;
+          cursor: pointer;
+        }
+
+        //Title
+        .home-product-item-title {
+          font-size: 1rem;
+          font-weight: 700;
+          line-height: 1.3em;
+        }
+
+        //Price
+        .home-product-item-price {
+          color: theme-provider.$slightly-light-gray-color;
+          font-size: 0.9rem;
+          font-weight: 500;
+        }
+      }
+
+      div:last-child {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        align-self: center;
+        width: 100%;
+      }
+    }
+  }
+
+  //Products Last Batch
+  .home-products-last-batch-wrapper {
+    display: flex;
+    justify-content: center;
+
+    .home-products-last-batch {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
+      grid-gap: 2em;
+      margin: 2.5em 0em;
+      width: min(80%, 40em);
+
+      .home-product-item {
+        border: 3px solid theme-provider.$gray-color;
+        padding: 0.5em 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: left;
+
+        div:first-child {
+          //Category
+          .home-product-item-category {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            p {
+              color: theme-provider.$slightly-light-gray-color;
+              font-weight: 600;
+              font-style: italic;
+              font-size: 0.9rem;
+            }
+          }
+
+          //Image
+          .home-product-item-image {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            height: 10em;
+            margin: 1em 0em;
+            cursor: pointer;
+          }
+
+          //Title
+          .home-product-item-title {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.3em;
+          }
+
+          //Price
+          .home-product-item-price {
+            color: theme-provider.$slightly-light-gray-color;
+            font-size: 0.9rem;
+            font-weight: 500;
+          }
+        }
+
+        div:last-child {
+          margin-top: 1em;
+          margin-bottom: 1em;
+          align-self: center;
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
-@media (min-width: theme-provider.$media_query_small_value) {
+//More than 528px
+@media (min-width: theme-provider.$media_query_tiny_value) {
+  .home-content-wrapper {
+    bottom: 11em;
+
+    .home-products {
+      margin: 2.5em 2em;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+//More than 736px
+@media (min-width: theme-provider.$media_query_normal_value) {
   .home-content-wrapper {
     bottom: 11em;
 
     .home-sort-products {
       margin-right: 3em;
+    }
+
+    .home-products {
+      grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+      margin: 2.5em 6em;
+    }
+  }
+}
+
+//More than 1440px
+@media (min-width: theme-provider.$media_query_big_screen) {
+  .home-content-wrapper {
+    .home-products {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 }

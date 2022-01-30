@@ -41,12 +41,14 @@
   z-index: 2;
 }
 
-@media (min-width: theme-provider.$media_query_small_value) {
+@media (min-width: theme-provider.$media_query_tiny_value) {
   .carousel-gradient-shadow {
     height: 10em;
     bottom: 7.5em;
   }
+}
 
+@media (min-width: theme-provider.$media_query_small_value) {
   .swiper-button-prev {
     top: 5.5em !important;
     left: 1em !important;

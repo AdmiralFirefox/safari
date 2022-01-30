@@ -540,13 +540,136 @@
   justify-content: flex-end;
   margin-right: 1.2em;
 }
+.home-content-wrapper .home-products {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2em;
+  margin: 2.5em 3em;
+}
+.home-content-wrapper .home-products .home-product-item {
+  border: 3px solid #d6d6d6;
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+.home-content-wrapper .home-products .home-product-item div:first-child .home-product-item-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.home-content-wrapper .home-products .home-product-item div:first-child .home-product-item-category p {
+  color: #999999;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+.home-content-wrapper .home-products .home-product-item div:first-child .home-product-item-image {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 10em;
+  margin: 1em 0em;
+  cursor: pointer;
+}
+.home-content-wrapper .home-products .home-product-item div:first-child .home-product-item-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+.home-content-wrapper .home-products .home-product-item div:first-child .home-product-item-price {
+  color: #999999;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.home-content-wrapper .home-products .home-product-item div:last-child {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  align-self: center;
+  width: 100%;
+}
+.home-content-wrapper .home-products-last-batch-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.home-content-wrapper .home-products-last-batch-wrapper .home-products-last-batch {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
+  grid-gap: 2em;
+  margin: 2.5em 0em;
+  width: min(80%, 40em);
+}
+.home-content-wrapper .home-products-last-batch-wrapper .home-products-last-batch .home-product-item {
+  border: 3px solid #d6d6d6;
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+.home-content-wrapper .home-products-last-batch-wrapper .home-products-last-batch .home-product-item div:first-child .home-product-item-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.home-content-wrapper .home-products-last-batch-wrapper .home-products-last-batch .home-product-item div:first-child .home-product-item-category p {
+  color: #999999;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+.home-content-wrapper .home-products-last-batch-wrapper .home-products-last-batch .home-product-item div:first-child .home-product-item-image {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 10em;
+  margin: 1em 0em;
+  cursor: pointer;
+}
+.home-content-wrapper .home-products-last-batch-wrapper .home-products-last-batch .home-product-item div:first-child .home-product-item-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+.home-content-wrapper .home-products-last-batch-wrapper .home-products-last-batch .home-product-item div:first-child .home-product-item-price {
+  color: #999999;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.home-content-wrapper .home-products-last-batch-wrapper .home-products-last-batch .home-product-item div:last-child {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  align-self: center;
+  width: 100%;
+}
 
-@media (min-width: 40em) {
+@media (min-width: 33em) {
+  .home-content-wrapper {
+    bottom: 11em;
+  }
+  .home-content-wrapper .home-products {
+    margin: 2.5em 2em;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 46em) {
   .home-content-wrapper {
     bottom: 11em;
   }
   .home-content-wrapper .home-sort-products {
     margin-right: 3em;
+  }
+  .home-content-wrapper .home-products {
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    margin: 2.5em 6em;
+  }
+}
+@media (min-width: 90em) {
+  .home-content-wrapper .home-products {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

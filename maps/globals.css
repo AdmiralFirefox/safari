@@ -31,12 +31,13 @@
   z-index: 2;
 }
 
-@media (min-width: 40em) {
+@media (min-width: 33em) {
   .carousel-gradient-shadow {
     height: 10em;
     bottom: 7.5em;
   }
-
+}
+@media (min-width: 40em) {
   .swiper-button-prev {
     top: 5.5em !important;
     left: 1em !important;
