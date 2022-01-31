@@ -20,6 +20,30 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
   const [sortProducts, setSortProducts] = useState("default");
   const [arrowUp, setArrowUp] = useState(false);
 
+  const sortedProducts = products.sort((a, b) =>
+    sortProducts === "default"
+      ? a.id > b.id
+        ? 1
+        : -1
+      : sortProducts === "price-desc"
+      ? b.price > a.price
+        ? 1
+        : -1
+      : sortProducts === "price-asc"
+      ? a.price > b.price
+        ? 1
+        : -1
+      : sortProducts === "ratings-desc"
+      ? b.rating.rate > a.rating.rate
+        ? 1
+        : -1
+      : sortProducts === "ratings-asc"
+      ? a.rating.rate > b.rating.rate
+        ? 1
+        : -1
+      : 0
+  );
+
   const handleSortProductChange = (e: SelectChangeEvent) => {
     setSortProducts(e.target.value);
   };
@@ -57,7 +81,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
         </div>
 
         <div className={homeStyles["home-products"]}>
-          {products.slice(0, 8).map((product) => {
+          {sortedProducts.slice(0, 8).map((product) => {
             return (
               <div key={product.id} className={homeStyles["home-product-item"]}>
                 <div>
@@ -112,7 +136,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
         </div>
 
         <div className={homeStyles["home-products"]}>
-          {products.slice(8, 16).map((product) => {
+          {sortedProducts.slice(8, 16).map((product) => {
             return (
               <div key={product.id} className={homeStyles["home-product-item"]}>
                 <div>
@@ -168,7 +192,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
 
         <div className={homeStyles["home-products-last-batch-wrapper"]}>
           <div className={homeStyles["home-products-last-batch"]}>
-            {products.slice(16, 20).map((product) => {
+            {sortedProducts.slice(16, 20).map((product) => {
               return (
                 <div
                   key={product.id}
