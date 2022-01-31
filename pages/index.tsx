@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GetStaticProps } from "next";
 import type { NextPage } from "next";
 import Image from "next/image";
@@ -11,15 +11,39 @@ import Rating from "@mui/material/Rating";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
+import { IoArrowUpCircle } from "react-icons/io5";
+import { IconContext } from "react-icons";
 import Footer from "../components/Footer/Footer";
 import homeStyles from "../styles/Home.module.scss";
 
 const Home: NextPage<ProductsProps> = ({ products }) => {
   const [sortProducts, setSortProducts] = useState("default");
+  const [arrowUp, setArrowUp] = useState(false);
 
   const handleSortProductChange = (e: SelectChangeEvent) => {
     setSortProducts(e.target.value);
   };
+
+  //Scrolls to the Top of the Page
+  const scrollToTopPage = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const fadeArrowUp = () => {
+      if (window.scrollY >= 90) {
+        setArrowUp(true);
+      } else {
+        setArrowUp(false);
+      }
+    };
+
+    window.addEventListener("scroll", fadeArrowUp);
+
+    return () => {
+      window.removeEventListener("scroll", fadeArrowUp);
+    };
+  }, []);
 
   return (
     <>
@@ -194,6 +218,18 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
 
       <div className={homeStyles["home-footer-wrapper"]}>
         <Footer />
+      </div>
+
+      <div onClick={scrollToTopPage}>
+        <IconContext.Provider
+          value={{
+            className: arrowUp
+              ? homeStyles["home-scroll-to-top-active"]
+              : homeStyles["home-scroll-to-top"],
+          }}
+        >
+          <IoArrowUpCircle />
+        </IconContext.Provider>
       </div>
     </>
   );
