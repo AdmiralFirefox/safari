@@ -658,7 +658,6 @@
   bottom: 0.3em;
   right: 0.3em;
   z-index: 2;
-  cursor: pointer;
   opacity: 0;
   transform: translateY(-0.5em);
   transition: color 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.4s ease-in-out;
