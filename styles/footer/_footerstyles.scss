@@ -1,0 +1,42 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+.footer-wrapper {
+  background: theme-provider.$category_nav_background;
+  padding: 4em 1em 4em 3em;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2em;
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+    //Footer Title
+    p {
+      color: theme-provider.$white-color;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.9em;
+    }
+
+    //Footer Links
+    a {
+      color: theme-provider.$white-color;
+      margin-bottom: 0.6em;
+      font-size: 0.9rem;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (min-width: theme-provider.$media_query_tiny_value) {
+  .footer-wrapper {
+    padding: 4em 7em;
+    grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
+  }
+}

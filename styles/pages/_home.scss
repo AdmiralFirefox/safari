@@ -149,6 +149,11 @@
   }
 }
 
+//Home Footer
+.home-footer-wrapper {
+  margin-top: -2em;
+}
+
 //More than 528px
 @media (min-width: theme-provider.$media_query_tiny_value) {
   .home-content-wrapper {
@@ -158,6 +163,10 @@
       margin: 2.5em 2em;
       grid-template-columns: repeat(2, 1fr);
     }
+  }
+
+  .home-footer-wrapper {
+    margin-top: -8em;
   }
 }
 

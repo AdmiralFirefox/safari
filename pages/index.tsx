@@ -11,6 +11,7 @@ import Rating from "@mui/material/Rating";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
+import Footer from "../components/Footer/Footer";
 import homeStyles from "../styles/Home.module.scss";
 
 const Home: NextPage<ProductsProps> = ({ products }) => {
@@ -145,7 +146,10 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
           <div className={homeStyles["home-products-last-batch"]}>
             {products.slice(16, 20).map((product) => {
               return (
-                <div key={product.id} className={homeStyles["home-product-item"]}>
+                <div
+                  key={product.id}
+                  className={homeStyles["home-product-item"]}
+                >
                   <div>
                     <div className={homeStyles["home-product-item-category"]}>
                       <p>{product.category}</p>
@@ -186,6 +190,10 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
             })}
           </div>
         </div>
+      </div>
+
+      <div className={homeStyles["home-footer-wrapper"]}>
+        <Footer />
       </div>
     </>
   );
