@@ -14,65 +14,39 @@
 
   //Products
   .home-products {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 2em;
-    margin: 2.5em 3em;
+    @include theme-provider.product-wrapper-mobile();
 
     .home-product-item {
-      border: 3px solid theme-provider.$gray_color;
-      padding: 0.5em 1em;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      text-align: left;
+      @include theme-provider.product-item();
 
       div:first-child {
         //Category
         .home-product-item-category {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+          @include theme-provider.product-item-category();
 
           p {
-            color: theme-provider.$slightly_light_gray_color;
-            font-weight: 600;
-            font-style: italic;
-            font-size: 0.9rem;
+            @include theme-provider.product-item-category-text();
           }
         }
 
         //Image
         .home-product-item-image {
-          display: flex;
-          justify-content: center;
-          position: relative;
-          width: 100%;
-          height: 10em;
-          margin: 1em 0em;
-          cursor: pointer;
+          @include theme-provider.product-item-image();
         }
 
         //Title
         .home-product-item-title {
-          font-size: 1rem;
-          font-weight: 700;
-          line-height: 1.3em;
+          @include theme-provider.product-item-title();
         }
 
         //Price
         .home-product-item-price {
-          color: theme-provider.$slightly_light_gray_color;
-          font-size: 0.9rem;
-          font-weight: 500;
+          @include theme-provider.product-item-price();
         }
       }
 
       div:last-child {
-        margin-top: 1em;
-        margin-bottom: 1em;
-        align-self: center;
-        width: 100%;
+        @include theme-provider.product-item-button-wrapper();
       }
     }
   }
@@ -197,8 +171,7 @@
     bottom: 11em;
 
     .home-products {
-      margin: 2.5em 2em;
-      grid-template-columns: repeat(2, 1fr);
+      @include theme-provider.product-wrapper-tiny-screen();
     }
   }
 
@@ -227,8 +200,7 @@
     }
 
     .home-products {
-      grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
-      margin: 2.5em 6em;
+      @include theme-provider.product-wrapper-normal-screen();
     }
   }
 }
@@ -237,7 +209,7 @@
 @media (min-width: theme-provider.$media_query_big_screen) {
   .home-content-wrapper {
     .home-products {
-      grid-template-columns: repeat(4, 1fr);
+      @include theme-provider.product-wrapper-big-screen();
     }
   }
 }

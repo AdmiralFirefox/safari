@@ -286,7 +286,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
           </Link>
           {categories.map((category, i) => {
             return (
-              <Link href="/" key={i}>
+              <Link href={`/category/${category}`} key={i}>
                 <a onClick={toggleDrawer(anchor, false)}>{category}</a>
               </Link>
             );

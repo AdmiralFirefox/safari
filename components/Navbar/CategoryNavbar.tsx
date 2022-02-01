@@ -11,7 +11,7 @@ const CategoryNavbar: FC = () => {
       </Link>
       {categories.map((category, i) => {
         return (
-          <Link key={i} href="/">
+          <Link key={i} href={`/category/${category}`}>
             <a>{category}</a>
           </Link>
         );

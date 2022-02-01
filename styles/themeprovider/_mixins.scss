@@ -1,0 +1,84 @@
+@use "./fontcolor" as theme-provider;
+
+//Product Wrapper Mobile
+@mixin product-wrapper-mobile {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2em;
+  margin: 2.5em 3em;
+}
+
+//Product Wrapper on Media Query Tiny Value
+@mixin product-wrapper-tiny-screen {
+  margin: 2.5em 2em;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+//Product Wrapper on Media Query Normal Value
+@mixin product-wrapper-normal-screen {
+  grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+  margin: 2.5em 6em;
+}
+
+//Product Wrapper on Media Query Big Screen
+@mixin product-wrapper-big-screen {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+//Product Item
+@mixin product-item {
+  border: 3px solid theme-provider.$gray_color;
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+//Product Item Category Wrapper
+@mixin product-item-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+//Product Item Category Text
+@mixin product-item-category-text {
+  color: theme-provider.$slightly_light_gray_color;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+//Product Image
+@mixin product-item-image {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 10em;
+  margin: 1em 0em;
+  cursor: pointer;
+}
+
+//Product Title
+@mixin product-item-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+
+//Product Price
+@mixin product-item-price {
+  color: theme-provider.$slightly_light_gray_color;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+//Add to Cart Button Wrapper
+@mixin product-item-button-wrapper {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  align-self: center;
+  width: 100%;
+}

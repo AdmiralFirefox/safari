@@ -730,6 +730,110 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+.category-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0.7em;
+}
+.category-title p {
+  color: #000;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-left: 0.5em;
+}
+.category-title p::first-letter {
+  text-transform: uppercase;
+}
+.category-title .category-sort-products {
+  margin: 0.5em 0em 0em 1em;
+}
+
+.category-products {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2em;
+  margin: 2.5em 3em;
+}
+.category-products .category-product-item {
+  border: 3px solid #d6d6d6;
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+.category-products .category-product-item div:first-child .category-product-item-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.category-products .category-product-item div:first-child .category-product-item-category p {
+  color: #999999;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+.category-products .category-product-item div:first-child .category-product-item-image {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 10em;
+  margin: 1em 0em;
+  cursor: pointer;
+}
+.category-products .category-product-item div:first-child .category-product-item-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+.category-products .category-product-item div:first-child .category-product-item-price {
+  color: #999999;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.category-products .category-product-item div:last-child {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  align-self: center;
+  width: 100%;
+}
+
+.category-footer-wrapper {
+  margin-top: 4em;
+}
+
+@media (min-width: 33em) {
+  .category-title {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.7em;
+  }
+  .category-title p {
+    margin-left: 0.5em;
+  }
+  .category-title .category-sort-products {
+    margin: 0em 1.5em 0em 0em;
+  }
+
+  .category-products {
+    margin: 2.5em 2em;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 46em) {
+  .category-products {
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    margin: 2.5em 6em;
+  }
+}
+@media (min-width: 90em) {
+  .category-products {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 .footer-wrapper {
   background: #232f3e;
   padding: 4em 1em 4em 3em;

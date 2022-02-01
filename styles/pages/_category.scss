@@ -1,0 +1,101 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+.category-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0.7em;
+
+  p {
+    color: theme-provider.$black_color;
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-left: 0.5em;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  //Category Sort Products
+  .category-sort-products {
+    margin: 0.5em 0em 0em 1em;
+  }
+}
+
+//Products
+.category-products {
+  @include theme-provider.product-wrapper-mobile();
+
+  .category-product-item {
+    @include theme-provider.product-item();
+
+    div:first-child {
+      //Category
+      .category-product-item-category {
+        @include theme-provider.product-item-category();
+
+        p {
+          @include theme-provider.product-item-category-text();
+        }
+      }
+
+      //Image
+      .category-product-item-image {
+        @include theme-provider.product-item-image();
+      }
+
+      //Title
+      .category-product-item-title {
+        @include theme-provider.product-item-title();
+      }
+
+      //Price
+      .category-product-item-price {
+        @include theme-provider.product-item-price();
+      }
+    }
+
+    div:last-child {
+      @include theme-provider.product-item-button-wrapper();
+    }
+  }
+}
+
+//Category Footer
+.category-footer-wrapper {
+  margin-top: 4em;
+}
+
+@media (min-width: theme-provider.$media_query_tiny_value) {
+  .category-title {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.7em;
+
+    p {
+      margin-left: 0.5em;
+    }
+
+    .category-sort-products {
+      margin: 0em 1.5em 0em 0em;
+    }
+  }
+
+  .category-products {
+    @include theme-provider.product-wrapper-tiny-screen();
+  }
+}
+
+@media (min-width: theme-provider.$media_query_normal_value) {
+  .category-products {
+    @include theme-provider.product-wrapper-normal-screen();
+  }
+}
+
+@media (min-width: theme-provider.$media_query_big_screen) {
+  .category-products {
+    @include theme-provider.product-wrapper-big-screen();
+  }
+}

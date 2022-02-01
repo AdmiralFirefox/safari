@@ -75,8 +75,8 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
       <div className={homeStyles["home-content-wrapper"]}>
         <div className={homeStyles["home-sort-products"]}>
           <SortDropdown
-            sortProducts={sortProducts}
-            handleSortProductChange={handleSortProductChange}
+            sortValue={sortProducts}
+            onChangeValue={handleSortProductChange}
           />
         </div>
 

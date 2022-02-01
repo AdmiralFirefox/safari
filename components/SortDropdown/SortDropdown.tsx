@@ -5,13 +5,13 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 interface SortDropdownProps {
-  sortProducts: string;
-  handleSortProductChange: (e: SelectChangeEvent) => void;
+  sortValue: string;
+  onChangeValue: (e: SelectChangeEvent) => void;
 }
 
 const SortDropdown: FC<SortDropdownProps> = ({
-  sortProducts,
-  handleSortProductChange,
+  sortValue,
+  onChangeValue,
 }) => {
   return (
     <FormControl
@@ -38,8 +38,8 @@ const SortDropdown: FC<SortDropdownProps> = ({
           color: "#000",
           fontWeight: 700,
         }}
-        onChange={handleSortProductChange}
-        value={sortProducts}
+        onChange={onChangeValue}
+        value={sortValue}
       >
         <MenuItem value="default">Default</MenuItem>
         <MenuItem value="price-asc">Price - Ascending</MenuItem>
