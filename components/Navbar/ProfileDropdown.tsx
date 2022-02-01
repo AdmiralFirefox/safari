@@ -5,8 +5,6 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import { IoCloseCircle } from "react-icons/io5";
 import { IconContext } from "react-icons";
-import { auth } from "../../firebase/firebase";
-import { signOut } from "firebase/auth";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";
 import dropDownStyles from "../../styles/Home.module.scss";
@@ -15,6 +13,7 @@ interface ProfileDropdownProps {
   profileDropDown: boolean;
   dropDownRef: MutableRefObject<null>;
   closeProfileDropDown: () => void;
+  signOutAccount: () => Promise<void>;
 }
 
 const SignOutButton = styled(Button)<ButtonProps>(() => ({
@@ -32,14 +31,10 @@ const ProfileDropdown: FC<ProfileDropdownProps> = ({
   profileDropDown,
   dropDownRef,
   closeProfileDropDown,
+  signOutAccount,
 }) => {
   const user = useContext(AuthContext);
   const size: Size = useWindowSize();
-
-  //Sign Out
-  const signOutAccount = async () => {
-    await signOut(auth);
-  };
 
   return (
     <>

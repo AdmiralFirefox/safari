@@ -1,7 +1,9 @@
 import { FC, useContext, useState, useRef, useEffect } from "react";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { useLockedBody } from "../../hooks/useLockedBody";
+import { auth } from "../../firebase/firebase";
 import { AuthContext } from "../../context/AuthContext";
+import { signOut } from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { IoLocationSharp } from "react-icons/io5";
@@ -63,6 +65,12 @@ const MainNavbar: FC = () => {
     setLockBody(false);
   };
 
+  //Sign Out
+  const signOutAccount = async () => {
+    await signOut(auth);
+    setLockBody(false);
+  };
+
   //Storing Country State in Local Storage
   useEffect(() => {
     const json = localStorage.getItem("country") as string;
@@ -114,6 +122,7 @@ const MainNavbar: FC = () => {
                 profileDropDown={profileDropDown}
                 dropDownRef={dropDownRef}
                 closeProfileDropDown={closeProfileDropDown}
+                signOutAccount={signOutAccount}
               />
             </div>
           ) : (
@@ -134,6 +143,7 @@ const MainNavbar: FC = () => {
                 profileDropDown={profileDropDown}
                 dropDownRef={dropDownRef}
                 closeProfileDropDown={closeProfileDropDown}
+                signOutAccount={signOutAccount}
               />
             </div>
           )}
