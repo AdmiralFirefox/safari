@@ -413,6 +413,14 @@
     display: none;
   }
 }
+.profile-dropdown-invisible-backdrop {
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
 .dropdown-wrapper {
   background: #333333;
   box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.5);
@@ -423,7 +431,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  z-index: 2;
+  z-index: 4;
 }
 .dropdown-wrapper .dropdown-close-icon {
   color: #c82b04;

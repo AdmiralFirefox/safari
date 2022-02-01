@@ -7,6 +7,8 @@ import { IoCloseCircle } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { Size } from "../../types/WindowSize/WindowSize";
 import dropDownStyles from "../../styles/Home.module.scss";
 
 interface ProfileDropdownProps {
@@ -32,6 +34,7 @@ const ProfileDropdown: FC<ProfileDropdownProps> = ({
   closeProfileDropDown,
 }) => {
   const user = useContext(AuthContext);
+  const size: Size = useWindowSize();
 
   //Sign Out
   const signOutAccount = async () => {
@@ -42,27 +45,43 @@ const ProfileDropdown: FC<ProfileDropdownProps> = ({
     <>
       <AnimatePresence initial={false}>
         {profileDropDown && (
-          <motion.div
-            key="dropdown"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ type: "spring", damping: 10, stiffness: 100 }}
-            ref={dropDownRef}
-            className={dropDownStyles["dropdown-wrapper"]}
-          >
-            <IconContext.Provider
-              value={{ className: dropDownStyles["dropdown-close-icon"] }}
+          <>
+            <motion.div
+              key="locationmodalbackdrop"
+              className={dropDownStyles["profile-dropdown-invisible-backdrop"]}
+              onClick={closeProfileDropDown}
+              style={{ width: `${size.width}px`, height: `${size.height}px` }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+
+            <motion.div
+              key="dropdown"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ type: "spring", damping: 10, stiffness: 100 }}
+              ref={dropDownRef}
+              className={dropDownStyles["dropdown-wrapper"]}
             >
-              <div onClick={closeProfileDropDown}>
-                <IoCloseCircle />
-              </div>
-            </IconContext.Provider>
-            <p>
-              Hello, {user!.email!.substring(0, user!.email!.indexOf("@"))}!
-            </p>
-            <SignOutButton onClick={signOutAccount}>Sign Out</SignOutButton>
-          </motion.div>
+              <IconContext.Provider
+                value={{ className: dropDownStyles["dropdown-close-icon"] }}
+              >
+                <div onClick={closeProfileDropDown}>
+                  <IoCloseCircle />
+                </div>
+              </IconContext.Provider>
+              {user!.email !== null ? (
+                <p>
+                  Hello, {user!.email!.substring(0, user!.email!.indexOf("@"))}!
+                </p>
+              ) : (
+                <p>Anonymous</p>
+              )}
+              <SignOutButton onClick={signOutAccount}>Sign Out</SignOutButton>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

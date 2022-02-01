@@ -42,11 +42,13 @@ const MainNavbar: FC = () => {
   //Open Profile Dropdown
   const openProfileDropDown = () => {
     setProfileDropDown(true);
+    setLockBody(true);
   };
 
   //Close Profile Dropdown
   const closeProfileDropDown = () => {
     setProfileDropDown(false);
+    setLockBody(false);
   };
 
   //Open Location Modal
