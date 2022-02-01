@@ -24,6 +24,30 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
   const router = useRouter();
   const categoryName = router.query.category;
 
+  const sortedCategoryProducts = categoryProducts.sort((a, b) =>
+    sortCategoryProducts === "default"
+      ? a.id > b.id
+        ? 1
+        : -1
+      : sortCategoryProducts === "price-desc"
+      ? b.price > a.price
+        ? 1
+        : -1
+      : sortCategoryProducts === "price-asc"
+      ? a.price > b.price
+        ? 1
+        : -1
+      : sortCategoryProducts === "ratings-desc"
+      ? b.rating.rate > a.rating.rate
+        ? 1
+        : -1
+      : sortCategoryProducts === "ratings-asc"
+      ? a.rating.rate > b.rating.rate
+        ? 1
+        : -1
+      : 0
+  );
+
   const handleSortCategoryProductsChange = (e: SelectChangeEvent) => {
     setSortCategoryProducts(e.target.value);
   };
@@ -52,7 +76,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
       </div>
 
       <div className={categoryStyles["category-products"]}>
-        {categoryProducts.map((product) => {
+        {sortedCategoryProducts.map((product) => {
           return (
             <div
               key={product.id}
