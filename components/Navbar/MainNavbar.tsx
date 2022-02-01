@@ -168,6 +168,7 @@ const MainNavbar: FC = () => {
                 alt="Web Logo"
                 layout="fill"
                 objectFit="contain"
+                priority
               />
             </div>
           </Link>
