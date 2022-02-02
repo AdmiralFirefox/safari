@@ -200,7 +200,7 @@ const MainNavbar: FC = () => {
         />
 
         <div className={mainNavStyles["nav-right-side"]}>
-          <Link href="/" passHref>
+          <Link href="/searchproduct" passHref>
             <div className={mainNavStyles["search-products"]}>
               <div>
                 <IconContext.Provider

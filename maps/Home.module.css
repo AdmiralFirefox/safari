@@ -834,6 +834,92 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+.search-product-input {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.3em;
+}
+
+.search-product-results-text {
+  color: #000;
+  font-weight: 700;
+  font-size: min(max(1rem, 2vw), 1.3rem);
+  margin: 1.3em 1em 0em 0.8em;
+  word-break: break-all;
+}
+
+.search-products-wrapper {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 2em;
+  margin: 2.5em 3em;
+}
+.search-products-wrapper .search-product-item {
+  border: 3px solid #d6d6d6;
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+.search-products-wrapper .search-product-item div:first-child .search-product-item-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search-products-wrapper .search-product-item div:first-child .search-product-item-category p {
+  color: #999999;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+.search-products-wrapper .search-product-item div:first-child .search-product-item-image {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 10em;
+  margin: 1em 0em;
+  cursor: pointer;
+}
+.search-products-wrapper .search-product-item div:first-child .search-product-item-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+.search-products-wrapper .search-product-item div:first-child .search-product-item-price {
+  color: #999999;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.search-products-wrapper .search-product-item div:last-child {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  align-self: center;
+  width: 100%;
+}
+
+@media (min-width: 33em) {
+  .search-products-wrapper {
+    margin: 2.5em 2em;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 4em;
+  }
+}
+@media (min-width: 46em) {
+  .search-products-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    margin: 2.5em 6em;
+    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+    margin-bottom: 4em;
+  }
+}
+@media (min-width: 90em) {
+  .search-products-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 .footer-wrapper {
   background: #232f3e;
   padding: 4em 1em 4em 3em;

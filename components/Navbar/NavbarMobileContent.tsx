@@ -184,26 +184,24 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
         {userSignedIn()}
 
         <div className={mobileNavStyles["mobile-nav-page-links"]}>
-          <Link href="/" passHref>
-            <div
-              className={mobileNavStyles["mobile-nav-location"]}
-              onClick={() => {
-                setSideBar({ left: false });
-                openLocationModal();
+          <div
+            className={mobileNavStyles["mobile-nav-location"]}
+            onClick={() => {
+              setSideBar({ left: false });
+              openLocationModal();
+            }}
+          >
+            <IconContext.Provider
+              value={{
+                className: mobileNavStyles["mobile-nav-location-icon"],
               }}
             >
-              <IconContext.Provider
-                value={{
-                  className: mobileNavStyles["mobile-nav-location-icon"],
-                }}
-              >
-                <IoLocationSharp />
-              </IconContext.Provider>
-              <p>Deliver to {country}</p>
-            </div>
-          </Link>
+              <IoLocationSharp />
+            </IconContext.Provider>
+            <p>Deliver to {country}</p>
+          </div>
 
-          <Link href="/" passHref>
+          <Link href="/searchproduct" passHref>
             <div
               className={mobileNavStyles["mobile-nav-search"]}
               onClick={toggleDrawer(anchor, false)}
