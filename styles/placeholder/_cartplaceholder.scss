@@ -1,0 +1,81 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+.cart-placeholder-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+
+  .cart-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: theme-provider.$light_gray_background;
+    width: min(85%, 55em);
+    padding: 2em;
+    border-radius: 20px;
+
+    .cart-placeholder-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h1 {
+        text-align: center;
+        line-height: 1em;
+        margin-top: 0.8em;
+      }
+
+      p {
+        text-align: center;
+        margin-top: 0.8em;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+
+      //Button Wrapper
+      .cart-placeholder-button-wrapper {
+        display: grid;
+        margin-top: 1.5em;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1.2em;
+      }
+    }
+  }
+}
+
+@media (min-width: theme-provider.$media_query_tiny_value) {
+  .cart-placeholder-wrapper {
+    .cart-placeholder {
+      .cart-placeholder-content {
+        //Button Wrapper
+        .cart-placeholder-button-wrapper {
+          margin-top: 1em;
+          grid-template-columns: repeat(2, 1fr);
+          grid-gap: 1.5em;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: theme-provider.$media_query_normal_value) {
+  .cart-placeholder-wrapper {
+    .cart-placeholder {
+      flex-direction: row;
+      justify-content: space-around;
+
+      .cart-placeholder-content {
+        align-items: flex-start;
+
+        h1 {
+          text-align: left;
+          margin-top: 0em;
+        }
+
+        p {
+          text-align: left;
+        }
+      }
+    }
+  }
+}

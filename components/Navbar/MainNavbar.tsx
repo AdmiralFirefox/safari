@@ -246,7 +246,7 @@ const MainNavbar: FC = () => {
             </div>
           </Link>
 
-          <Link href="/" passHref>
+          <Link href="/cart" passHref>
             <div className={mainNavStyles["cart-link"]}>
               <div className={mainNavStyles["cart-icon"]}>
                 <Image
