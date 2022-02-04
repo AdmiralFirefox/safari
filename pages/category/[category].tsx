@@ -119,7 +119,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                 </p>
               </div>
               <div>
-                <AddtoCartButton />
+                <AddtoCartButton onButtonClick={() => console.log("Cliked")} />
               </div>
             </div>
           );

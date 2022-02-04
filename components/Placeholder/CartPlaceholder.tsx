@@ -28,7 +28,7 @@ const CartPlaceholder: FC = () => {
           />
         </div>
         <div className={cartPlaceholderStyles["cart-placeholder-content"]}>
-          <h1>Log In to see your cart</h1>
+          <h1>Log In to see your Cart</h1>
           <p>Shop today&apos;s deal!</p>
           <div
             className={cartPlaceholderStyles["cart-placeholder-button-wrapper"]}

@@ -12,8 +12,16 @@ const AddCartButton = styled(Button)<ButtonProps>(() => ({
   },
 }));
 
-const AddtoCartButton: FC = () => {
-  return <AddCartButton variant="contained">Add to Cart</AddCartButton>;
+interface AddtoCartButtonProps {
+  onButtonClick: any;
+}
+
+const AddtoCartButton: FC<AddtoCartButtonProps> = ({ onButtonClick }) => {
+  return (
+    <AddCartButton variant="contained" onClick={onButtonClick}>
+      Add to Cart
+    </AddCartButton>
+  );
 };
 
 export default AddtoCartButton;

@@ -4,6 +4,8 @@ import MainNavbar from "../Navbar/MainNavbar";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
 import Meta from "./Meta";
+import { Provider } from "react-redux";
+import { store } from "../../app/store";
 
 const queryClient = new QueryClient();
 
@@ -15,10 +17,12 @@ const Layout: FC = ({ children }) => {
       <Meta />
       <ToastContainer />
       <QueryClientProvider client={queryClient}>
-        {asPath === "/login" ? null : asPath === "/signup" ? null : (
-          <MainNavbar />
-        )}
-        {children}
+        <Provider store={store}>
+          {asPath === "/login" ? null : asPath === "/signup" ? null : (
+            <MainNavbar />
+          )}
+          {children}
+        </Provider>
       </QueryClientProvider>
     </>
   );

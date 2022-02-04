@@ -110,7 +110,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                 </p>
               </div>
               <div>
-                <AddtoCartButton />
+                <AddtoCartButton onButtonClick={() => console.log("Cliked")} />
               </div>
             </div>
           );

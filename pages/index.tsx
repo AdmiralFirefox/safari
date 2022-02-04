@@ -14,11 +14,15 @@ import AddtoCartButton from "../components/Button/AddtoCartButton";
 import { IoArrowUpCircle } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import Footer from "../components/Footer/Footer";
+import { addItemToCart } from "../features/Cart/CartSlice";
+import { useAppDispatch } from "../app/reduxhooks";
 import homeStyles from "../styles/Home.module.scss";
 
 const Home: NextPage<ProductsProps> = ({ products }) => {
   const [sortProducts, setSortProducts] = useState("default");
   const [arrowUp, setArrowUp] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const sortedProducts = products.sort((a, b) =>
     sortProducts === "default"
@@ -53,6 +57,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  //Arrow Appears when scrolling up to the page
   useEffect(() => {
     const fadeArrowUp = () => {
       if (window.scrollY >= 90) {
@@ -117,7 +122,9 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   </p>
                 </div>
                 <div>
-                  <AddtoCartButton />
+                  <AddtoCartButton
+                    onButtonClick={() => dispatch(addItemToCart(product))}
+                  />
                 </div>
               </div>
             );
@@ -172,7 +179,9 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   </p>
                 </div>
                 <div>
-                  <AddtoCartButton />
+                  <AddtoCartButton
+                    onButtonClick={() => dispatch(addItemToCart(product))}
+                  />
                 </div>
               </div>
             );
@@ -231,7 +240,9 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                     </p>
                   </div>
                   <div>
-                    <AddtoCartButton />
+                    <AddtoCartButton
+                      onButtonClick={() => dispatch(addItemToCart(product))}
+                    />
                   </div>
                 </div>
               );

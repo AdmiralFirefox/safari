@@ -1,0 +1,222 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+//Cart Title
+.cart-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 1.5em 1.5em 1em 1.5em;
+}
+
+.cart-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2.5em;
+
+  //Category
+  .cart-item-category {
+    @include theme-provider.product-item-category-text();
+  }
+
+  .cart-content {
+    background: theme-provider.$light_gray_background;
+    width: min(85%, 27em);
+    padding: 2em;
+    margin: 1em 0em;
+    border-radius: 20px;
+
+    .cart-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0.8em;
+
+      .cart-item-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        //Image
+        .cart-item-image {
+          position: relative;
+          width: 100%;
+          height: 10em;
+          margin-bottom: 1em;
+        }
+
+        //Info Icon
+        .cart-item-info-icon {
+          cursor: pointer;
+        }
+
+        .cart-item-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          //Title
+          .cart-item-title {
+            color: theme-provider.$black_color;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2em;
+          }
+
+          //Price
+          .cart-item-price {
+            @include theme-provider.product-item-price();
+          }
+        }
+
+        .cart-item-quantity {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 1em;
+
+          div:first-child {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8em;
+
+            //Quantity
+            p {
+              color: theme-provider.$black_color;
+              margin: 0em 0.8em;
+              font-size: 1.3rem;
+              font-weight: 700;
+            }
+          }
+        }
+
+        //Subtotal
+        .cart-item-subtotal {
+          color: theme-provider.$black_color;
+          font-size: 1.1rem;
+          font-weight: 700;
+          text-align: left;
+          margin-top: 1em;
+          text-align: center;
+        }
+      }
+
+      //Remove Icon
+      .cart-item-remove-icon {
+        margin-top: 0.5em;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+//Grand Total
+.cart-grandtotal-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .cart-grandtotal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: theme-provider.$light_gray_background;
+    padding: 1em;
+    margin-bottom: 3em;
+    width: min(85%, 27em);
+    border-radius: 20px;
+
+    //Grand Total Text
+    p {
+      color: theme-provider.$black_color;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: theme-provider.$media_query_normal_value) {
+  //Cart Title
+  .cart-title {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-content-wrapper {
+    .cart-content {
+      width: min(85%, 60em);
+      padding: 1.5em;
+
+      .cart-item {
+        flex-direction: row;
+        justify-content: space-around;
+
+        .cart-item-content {
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+
+          //Image
+          .cart-item-image {
+            width: 10em;
+          }
+
+          //Info Icon
+          .cart-item-info-icon {
+            margin-left: 0.5em;
+          }
+
+          .cart-item-info {
+            align-items: flex-start;
+            margin-left: 0.7em;
+
+            //Title
+            .cart-item-title {
+              width: 11em;
+              text-align: left;
+            }
+
+            //Price
+            .cart-item-price {
+              margin-bottom: 1em;
+            }
+          }
+
+          .cart-item-quantity {
+            margin-left: 1em;
+            margin-top: 0em;
+          }
+
+          //Subtotal
+          .cart-item-subtotal {
+            margin-left: 1.5em;
+            margin-top: 0em;
+          }
+        }
+
+        //Remove Icon
+        .cart-item-remove-icon {
+          margin-left: 0.5em;
+          margin-top: 0em;
+        }
+      }
+    }
+  }
+
+  //Grand Total
+  .cart-grandtotal-wrapper {
+    .cart-grandtotal {
+      flex-direction: row;
+      justify-content: center;
+      width: min(85%, 60em);
+
+      p {
+        margin-bottom: 0em;
+        margin-right: 1.2em;
+      }
+    }
+  }
+}
