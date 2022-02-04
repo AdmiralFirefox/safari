@@ -12,14 +12,20 @@ const ButtonQuantity = styled(Button)<ButtonProps>(() => ({
 
 interface UpdateQuantityButtonProps {
   onButtonClick: () => void;
+  disabledButton?: boolean;
 }
 
 const UpdateQuantityButton: FC<UpdateQuantityButtonProps> = ({
   children,
   onButtonClick,
+  disabledButton,
 }) => {
   return (
-    <ButtonQuantity variant="contained" onClick={onButtonClick}>
+    <ButtonQuantity
+      variant="contained"
+      onClick={onButtonClick}
+      disabled={disabledButton}
+    >
       {children}
     </ButtonQuantity>
   );

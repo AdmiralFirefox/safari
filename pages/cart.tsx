@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, ChangeEvent } from "react";
 import Image from "next/image";
 import { AuthContext } from "../context/AuthContext";
 import type { NextPage } from "next";
@@ -7,6 +7,7 @@ import {
   decrementQuantity,
   clearCart,
   removeItemFromCart,
+  setQuantity,
 } from "../features/Cart/CartSlice";
 import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
 import { useLockedBody } from "../hooks/useLockedBody";
@@ -31,15 +32,23 @@ const Cart: NextPage = () => {
   const cart = useAppSelector((state: { cart: Product[] }) => state.cart);
   const dispatch = useAppDispatch();
 
-  const [updateQuantity, setUpdateQuantity] = useState("");
+  const [updateQuantity, setUpdateQuantity] = useState(1);
   const [updateQuantityModal, setUpdateQuantityModal] = useState<
     boolean | number
   >(false);
   const [lockBody, setLockBody] = useState(false);
 
+  //Handling Quantity Changes
+  const handleQuantityChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setUpdateQuantity(Number(e.target.value));
+  };
+
   //Open Edit Quantity Modal
   const openQuantityModal = (id: number) => {
     setLockBody(true);
+    setUpdateQuantity(0);
     if (updateQuantityModal === id) {
       setUpdateQuantityModal(true);
     }
@@ -51,6 +60,7 @@ const Cart: NextPage = () => {
   const closeQuantityModal = () => {
     setLockBody(false);
     setUpdateQuantityModal(false);
+    setUpdateQuantity(0);
   };
 
   //Total Price of all the items in the cart
@@ -91,6 +101,14 @@ const Cart: NextPage = () => {
             itemImage={item.image}
             itemRating={item.rating.rate}
             itemPrice={item.price}
+            handleQuantityChange={handleQuantityChange}
+            quantityValue={item.quantity}
+            updateItemQuantity={() => {
+              dispatch(setQuantity({ ...item, quantity: updateQuantity }));
+              closeQuantityModal();
+              setUpdateQuantity(0);
+            }}
+            disabledButton={updateQuantity <= 0 || updateQuantity > 50}
           />
         );
       })}
@@ -152,8 +170,9 @@ const Cart: NextPage = () => {
                         onButtonClick={() =>
                           dispatch(incrementQuantity(item.id))
                         }
+                        disabledButton={item!.quantity! >= 50}
                       >
-                        <AddIcon sx={{ color: "#000" }} />
+                        <AddIcon />
                       </ItemQuantityButton>
 
                       <p>{item.quantity}</p>
@@ -162,8 +181,9 @@ const Cart: NextPage = () => {
                         onButtonClick={() =>
                           dispatch(decrementQuantity(item.id))
                         }
+                        disabledButton={item!.quantity! <= 1}
                       >
-                        <RemoveIcon sx={{ color: "#000" }} />
+                        <RemoveIcon />
                       </ItemQuantityButton>
                     </div>
 
@@ -178,7 +198,7 @@ const Cart: NextPage = () => {
 
                   <div className={cartStyles["cart-item-subtotal"]}>
                     <p>Subtotal:</p>
-                    <p>$ {(item.quantity! * item.price).toFixed(2)}</p>
+                    <p>${(item.quantity! * item.price).toFixed(2)}</p>
                   </div>
                 </div>
 

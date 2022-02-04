@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ChangeEvent, KeyboardEvent } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";
 import Image from "next/image";
@@ -18,6 +18,12 @@ interface UpdateQuantityModalProps {
   itemImage: string;
   itemRating: number;
   itemPrice: number;
+  quantityValue: number | undefined;
+  updateItemQuantity: () => void;
+  disabledButton: boolean;
+  handleQuantityChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
 }
 
 const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
@@ -28,9 +34,20 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
   itemImage,
   itemRating,
   itemPrice,
+  handleQuantityChange,
+  quantityValue,
+  updateItemQuantity,
+  disabledButton,
 }) => {
   const size: Size = useWindowSize();
   const isMobile = size.width! < 736;
+
+  //Input only numbers
+  const handleKeyPressChange = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (!/[0-9]/.test(event.key)) {
+      event.preventDefault();
+    }
+  };
 
   return (
     <>
@@ -135,6 +152,9 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
                     sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
                     placeholder="Enter Quantity"
                     inputProps={{ "aria-label": "Enter Quantity" }}
+                    onChange={handleQuantityChange}
+                    defaultValue={quantityValue}
+                    onKeyPress={handleKeyPressChange}
                   />
                 </Paper>
 
@@ -144,7 +164,8 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
                   }
                 >
                   <UpdateQuantityButton
-                    onButtonClick={() => console.log("Update Quantity")}
+                    onButtonClick={updateItemQuantity}
+                    disabledButton={disabledButton}
                   >
                     Update
                   </UpdateQuantityButton>

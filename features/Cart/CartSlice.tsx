@@ -33,9 +33,9 @@ const cartSlice = createSlice({
       item!.quantity!++;
 
       //Setting the Limit to 50
-      // if (item!.quantity! >= 50) {
-      //   item!.quantity = 50
-      // }
+      if (item!.quantity! >= 50) {
+        item!.quantity = 50;
+      }
     },
 
     //Decrement Quantity from Cart
