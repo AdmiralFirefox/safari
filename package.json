@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.6",
+    "@reduxjs/toolkit": "^1.7.2",
     "axios": "^0.24.0",
     "firebase": "^9.6.1",
     "framer-motion": "^5.5.5",
@@ -22,6 +23,7 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "react-query": "^3.34.7",
+    "react-redux": "^7.2.6",
     "react-toastify": "^8.1.0",
     "sass": "^1.45.1",
     "swiper": "^7.4.1"
