@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import Image from "next/image";
 import { AuthContext } from "../context/AuthContext";
 import type { NextPage } from "next";
@@ -9,6 +9,7 @@ import {
   removeItemFromCart,
 } from "../features/Cart/CartSlice";
 import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
+import { useLockedBody } from "../hooks/useLockedBody";
 import Rating from "@mui/material/Rating";
 import { Product } from "../types/Product/Product";
 import InfoIcon from "@mui/icons-material/Info";
@@ -21,12 +22,36 @@ import ClearCartButton from "../components/Button/ClearCartButton";
 import ItemQuantityButton from "../components/Button/ItemQuantityButton";
 import UpdateQuantityButton from "../components/Button/UpdateQuantityButton";
 import CheckoutButton from "../components/Button/CheckoutButton";
-import cartStyles from "../styles/Home.module.scss";
 import EmptyCart from "../components/EmptyPlaceholder/EmptyCart";
+import UpdateQuantityModal from "../components/Modal/UpdateQuantityModal";
+import cartStyles from "../styles/Home.module.scss";
 
 const Cart: NextPage = () => {
   const user = useContext(AuthContext);
   const cart = useAppSelector((state: { cart: Product[] }) => state.cart);
+  const dispatch = useAppDispatch();
+
+  const [updateQuantity, setUpdateQuantity] = useState("");
+  const [updateQuantityModal, setUpdateQuantityModal] = useState<
+    boolean | number
+  >(false);
+  const [lockBody, setLockBody] = useState(false);
+
+  //Open Edit Quantity Modal
+  const openQuantityModal = (id: number) => {
+    setLockBody(true);
+    if (updateQuantityModal === id) {
+      setUpdateQuantityModal(true);
+    }
+
+    setUpdateQuantityModal(id);
+  };
+
+  //Close Edit Quantity Modal
+  const closeQuantityModal = () => {
+    setLockBody(false);
+    setUpdateQuantityModal(false);
+  };
 
   //Total Price of all the items in the cart
   const getTotalPrice = () => {
@@ -35,6 +60,8 @@ const Cart: NextPage = () => {
       0
     );
   };
+
+  useLockedBody(lockBody);
 
   if (!user) {
     return <CartPlaceholder />;
@@ -48,8 +75,25 @@ const Cart: NextPage = () => {
     <>
       <div className={cartStyles["cart-title"]}>
         <h1>Your Cart:</h1>
-        <ClearCartButton>Clear Cart</ClearCartButton>
+        <ClearCartButton onButtonClick={() => dispatch(clearCart())}>
+          Clear Cart
+        </ClearCartButton>
       </div>
+
+      {cart.map((item) => {
+        return (
+          <UpdateQuantityModal
+            itemTitle={item.title}
+            active={updateQuantityModal === item.id}
+            key={item.id}
+            closeQuantityModal={closeQuantityModal}
+            itemCategory={item.category}
+            itemImage={item.image}
+            itemRating={item.rating.rate}
+            itemPrice={item.price}
+          />
+        );
+      })}
 
       <div className={cartStyles["cart-content-wrapper"]}>
         {cart.map((item) => {
@@ -104,19 +148,31 @@ const Cart: NextPage = () => {
 
                   <div className={cartStyles["cart-item-quantity"]}>
                     <div>
-                      <ItemQuantityButton>
+                      <ItemQuantityButton
+                        onButtonClick={() =>
+                          dispatch(incrementQuantity(item.id))
+                        }
+                      >
                         <AddIcon sx={{ color: "#000" }} />
                       </ItemQuantityButton>
 
                       <p>{item.quantity}</p>
 
-                      <ItemQuantityButton>
+                      <ItemQuantityButton
+                        onButtonClick={() =>
+                          dispatch(decrementQuantity(item.id))
+                        }
+                      >
                         <RemoveIcon sx={{ color: "#000" }} />
                       </ItemQuantityButton>
                     </div>
 
                     <div>
-                      <UpdateQuantityButton>Edit Quantity</UpdateQuantityButton>
+                      <UpdateQuantityButton
+                        onButtonClick={() => openQuantityModal(item.id)}
+                      >
+                        Edit Quantity
+                      </UpdateQuantityButton>
                     </div>
                   </div>
 
@@ -126,7 +182,10 @@ const Cart: NextPage = () => {
                   </div>
                 </div>
 
-                <div className={cartStyles["cart-item-remove-icon"]}>
+                <div
+                  className={cartStyles["cart-item-remove-icon"]}
+                  onClick={() => dispatch(removeItemFromCart(item.id))}
+                >
                   <IconButton>
                     <RemoveCircleIcon
                       sx={{
@@ -149,7 +208,7 @@ const Cart: NextPage = () => {
       <div className={cartStyles["cart-grandtotal-wrapper"]}>
         <div className={cartStyles["cart-grandtotal"]}>
           <p>
-            Total &#40;{cart.length} items&#41;: ${getTotalPrice()}
+            Total &#40;{cart.length} items&#41;: ${getTotalPrice().toFixed(2)}
           </p>
           <CheckoutButton>Proceed to Checkout</CheckoutButton>
         </div>

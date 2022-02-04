@@ -13,7 +13,7 @@ const AddCartButton = styled(Button)<ButtonProps>(() => ({
 }));
 
 interface AddtoCartButtonProps {
-  onButtonClick: any;
+  onButtonClick: () => void;
 }
 
 const AddtoCartButton: FC<AddtoCartButtonProps> = ({ onButtonClick }) => {

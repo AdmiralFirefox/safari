@@ -2,7 +2,7 @@ import { FC } from "react";
 import { styled } from "@mui/material/styles";
 import Button, { ButtonProps } from "@mui/material/Button";
 
-const ClearAllItemsButton = styled(Button)<ButtonProps>(() => ({
+const CancelEditButton = styled(Button)<ButtonProps>(() => ({
   color: "#fff",
   backgroundColor: "hsl(12, 96%, 40%)",
   "&:hover": {
@@ -10,19 +10,16 @@ const ClearAllItemsButton = styled(Button)<ButtonProps>(() => ({
   },
 }));
 
-interface ClearCartButtonProps {
+interface CancelButtonProps {
   onButtonClick: () => void;
 }
 
-const ClearCartButton: FC<ClearCartButtonProps> = ({
-  children,
-  onButtonClick,
-}) => {
+const CancelButton: FC<CancelButtonProps> = ({ children, onButtonClick }) => {
   return (
-    <ClearAllItemsButton variant="contained" onClick={onButtonClick}>
+    <CancelEditButton variant="contained" onClick={onButtonClick}>
       {children}
-    </ClearAllItemsButton>
+    </CancelEditButton>
   );
 };
 
-export default ClearCartButton;
+export default CancelButton;

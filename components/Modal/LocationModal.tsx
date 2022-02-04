@@ -42,6 +42,7 @@ const LocationModal: FC<LocationModalProps> = ({
   handleCountryChange,
 }) => {
   const size: Size = useWindowSize();
+  const isMobile = size.width! < 736;
 
   const {
     data: countries,
@@ -74,10 +75,10 @@ const LocationModal: FC<LocationModalProps> = ({
               key="contentlocationmodal"
               initial={{
                 opacity: 0,
-                top: size.width! < 736 ? "5%" : "45%",
+                top: isMobile ? "5%" : "45%",
               }}
-              animate={{ opacity: 1, top: size.width! < 736 ? "10%" : "50%" }}
-              exit={{ opacity: 0, top: size.width! < 736 ? "5%" : "45%" }}
+              animate={{ opacity: 1, top: isMobile ? "10%" : "50%" }}
+              exit={{ opacity: 0, top: isMobile ? "5%" : "45%" }}
               transition={{
                 duration: 0.3,
                 type: "spring",

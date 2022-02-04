@@ -539,6 +539,77 @@
     align-self: flex-end;
   }
 }
+.quantity-modal-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.quantity-modal {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 4;
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.5);
+  width: min(85%, 23em);
+  overflow-y: auto;
+}
+.quantity-modal .quantity-modal-header {
+  background: #eaeded;
+  padding: 1em;
+}
+.quantity-modal .quantity-modal-header p {
+  color: #000;
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-align: center;
+}
+.quantity-modal .quantity-modal-content {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em 1.2em;
+}
+.quantity-modal .quantity-modal-content .quantity-modal-item-category {
+  color: #999999;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+.quantity-modal .quantity-modal-content .quantity-modal-item-image {
+  position: relative;
+  width: 100%;
+  height: 8em;
+  margin-top: 0.5em;
+}
+.quantity-modal .quantity-modal-content .quantity-modal-item-title {
+  color: #000;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 1em;
+  line-height: 1.2em;
+}
+.quantity-modal .quantity-modal-content .quantity-modal-item-price {
+  color: #999999;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.quantity-modal .quantity-modal-content .quantity-modal-button-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.3em;
+  margin-top: 1em;
+}
+
+@media (min-width: 46em) {
+  .quantity-modal {
+    transform: translate(-50%, -50%);
+  }
+}
 .home-content-wrapper {
   position: relative;
   bottom: 5em;

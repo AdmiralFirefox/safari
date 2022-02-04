@@ -10,8 +10,19 @@ const ButtonQuantity = styled(Button)<ButtonProps>(() => ({
   },
 }));
 
-const UpdateQuantityButton: FC = ({ children }) => {
-  return <ButtonQuantity variant="contained">{children}</ButtonQuantity>;
+interface UpdateQuantityButtonProps {
+  onButtonClick: () => void;
+}
+
+const UpdateQuantityButton: FC<UpdateQuantityButtonProps> = ({
+  children,
+  onButtonClick,
+}) => {
+  return (
+    <ButtonQuantity variant="contained" onClick={onButtonClick}>
+      {children}
+    </ButtonQuantity>
+  );
 };
 
 export default UpdateQuantityButton;
