@@ -22,6 +22,7 @@ import ItemQuantityButton from "../components/Button/ItemQuantityButton";
 import UpdateQuantityButton from "../components/Button/UpdateQuantityButton";
 import CheckoutButton from "../components/Button/CheckoutButton";
 import cartStyles from "../styles/Home.module.scss";
+import EmptyCart from "../components/EmptyPlaceholder/EmptyCart";
 
 const Cart: NextPage = () => {
   const user = useContext(AuthContext);
@@ -39,12 +40,8 @@ const Cart: NextPage = () => {
     return <CartPlaceholder />;
   }
 
-  if (cart.length === 0) {
-    return (
-      <div>
-        <h1>Cart is Empty</h1>
-      </div>
-    );
+  if (cart.length === 0 && user) {
+    return <EmptyCart />;
   }
 
   return (
