@@ -25,6 +25,7 @@ import UpdateQuantityButton from "../components/Button/UpdateQuantityButton";
 import CheckoutButton from "../components/Button/CheckoutButton";
 import EmptyCart from "../components/EmptyPlaceholder/EmptyCart";
 import UpdateQuantityModal from "../components/Modal/UpdateQuantityModal";
+import ClearCartModal from "../components/Modal/ClearCartModal";
 import cartStyles from "../styles/Home.module.scss";
 
 const Cart: NextPage = () => {
@@ -36,6 +37,7 @@ const Cart: NextPage = () => {
   const [updateQuantityModal, setUpdateQuantityModal] = useState<
     boolean | number
   >(false);
+  const [clearCartModal, setClearCartModal] = useState(false);
   const [lockBody, setLockBody] = useState(false);
 
   //Handling Quantity Changes
@@ -63,6 +65,18 @@ const Cart: NextPage = () => {
     setUpdateQuantity(0);
   };
 
+  //Open Clear Cart Modal
+  const openClearCartModal = () => {
+    setLockBody(true);
+    setClearCartModal(true);
+  };
+
+  //Close Clear Cart Modal
+  const closeClearCartModal = () => {
+    setLockBody(false);
+    setClearCartModal(false);
+  };
+
   //Total Price of all the items in the cart
   const getTotalPrice = () => {
     return cart.reduce(
@@ -73,19 +87,30 @@ const Cart: NextPage = () => {
 
   useLockedBody(lockBody);
 
+  //If the user is not logged in
   if (!user) {
     return <CartPlaceholder />;
   }
 
+  //If the cart is empty
   if (cart.length === 0 && user) {
     return <EmptyCart />;
   }
 
   return (
     <>
+      <ClearCartModal
+        clearCartModal={clearCartModal}
+        closeClearCartModal={closeClearCartModal}
+        onCartClear={() => {
+          dispatch(clearCart());
+          closeClearCartModal();
+        }}
+      />
+
       <div className={cartStyles["cart-title"]}>
         <h1>Your Cart:</h1>
-        <ClearCartButton onButtonClick={() => dispatch(clearCart())}>
+        <ClearCartButton onButtonClick={openClearCartModal}>
           Clear Cart
         </ClearCartButton>
       </div>

@@ -610,6 +610,38 @@
     transform: translate(-50%, -50%);
   }
 }
+.clear-cart-modal-backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.clear-cart-modal-wrapper {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(85%, 30em);
+  z-index: 4;
+}
+.clear-cart-modal-wrapper .clear-cart-modal {
+  background: #eaeded;
+  box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.5);
+  padding: 1.2em;
+}
+.clear-cart-modal-wrapper .clear-cart-modal p {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+.clear-cart-modal-wrapper .clear-cart-modal .clear-cart-modal-button-wrapper {
+  margin-top: 1.5em;
+  display: flex;
+  justify-content: center;
+}
+
 .home-content-wrapper {
   position: relative;
   bottom: 5em;
