@@ -13,7 +13,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button, { ButtonProps } from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import locationModalStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/modal/LocationModal.module.scss";
 
 interface LocationModalProps {
   locationModal: boolean;
@@ -63,7 +63,7 @@ const LocationModal: FC<LocationModalProps> = ({
           <>
             <motion.div
               key="locationmodalbackdrop"
-              className={locationModalStyles["location-modal-backdrop"]}
+              className={styles["location-modal-backdrop"]}
               onClick={closeLocationModal}
               style={{ width: `${size.width}px`, height: `${size.height}px` }}
               initial={{ opacity: 0 }}
@@ -85,26 +85,23 @@ const LocationModal: FC<LocationModalProps> = ({
                 damping: 10,
                 stiffness: 100,
               }}
-              className={locationModalStyles["location-modal-wrapper"]}
+              className={styles["location-modal-wrapper"]}
               style={{ maxHeight: `calc(${size.height!}px - 10vh)` }}
             >
-              <div
-                className={locationModalStyles["location-modal-content-header"]}
-              >
+              <div className={styles["location-modal-content-header"]}>
                 <p>Choose your location:</p>
 
                 <div onClick={closeLocationModal}>
                   <IconContext.Provider
                     value={{
-                      className:
-                        locationModalStyles["location-modal-close-button"],
+                      className: styles["location-modal-close-button"],
                     }}
                   >
                     <IoCloseCircle />
                   </IconContext.Provider>
                 </div>
               </div>
-              <div className={locationModalStyles["location-modal-content"]}>
+              <div className={styles["location-modal-content"]}>
                 <p>
                   Delivery options and delivery speeds may vary for different
                   locations:
@@ -141,7 +138,7 @@ const LocationModal: FC<LocationModalProps> = ({
                     )}
                   </Select>
                 </FormControl>
-                <div className={locationModalStyles["done-button-wrapper"]}>
+                <div className={styles["done-button-wrapper"]}>
                   <DoneButton onClick={closeLocationModal}>Done</DoneButton>
                 </div>
               </div>

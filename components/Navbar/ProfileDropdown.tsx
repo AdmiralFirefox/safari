@@ -7,7 +7,7 @@ import { IoCloseCircle } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";
-import dropDownStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/navbar/ProfileDropdown.module.scss";
 
 interface ProfileDropdownProps {
   profileDropDown: boolean;
@@ -43,7 +43,7 @@ const ProfileDropdown: FC<ProfileDropdownProps> = ({
           <>
             <motion.div
               key="locationmodalbackdrop"
-              className={dropDownStyles["profile-dropdown-invisible-backdrop"]}
+              className={styles["profile-dropdown-invisible-backdrop"]}
               onClick={closeProfileDropDown}
               style={{ width: `${size.width}px`, height: `${size.height}px` }}
               initial={{ opacity: 0 }}
@@ -58,10 +58,10 @@ const ProfileDropdown: FC<ProfileDropdownProps> = ({
               exit={{ opacity: 0, y: -10 }}
               transition={{ type: "spring", damping: 10, stiffness: 100 }}
               ref={dropDownRef}
-              className={dropDownStyles["dropdown-wrapper"]}
+              className={styles["dropdown-wrapper"]}
             >
               <IconContext.Provider
-                value={{ className: dropDownStyles["dropdown-close-icon"] }}
+                value={{ className: styles["dropdown-close-icon"] }}
               >
                 <div onClick={closeProfileDropDown}>
                   <IoCloseCircle />

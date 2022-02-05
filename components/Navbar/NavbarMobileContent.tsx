@@ -18,7 +18,7 @@ import { IoCloseCircle } from "react-icons/io5";
 import { BsHeartFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import { styled } from "@mui/material/styles";
-import mobileNavStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/navbar/NavbarMobileContent.module.scss";
 
 type Anchor = "left";
 
@@ -83,7 +83,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
   const userSignedIn = () => {
     if (!user) {
       return (
-        <div className={mobileNavStyles["navbar-mobile-content-header"]}>
+        <div className={styles["navbar-mobile-content-header"]}>
           <p> Accounts &amp; Lists</p>
           <LogInButton
             onClick={() => {
@@ -97,15 +97,11 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
       );
     } else {
       return (
-        <div className={mobileNavStyles["navbar-mobile-content-header-signin"]}>
+        <div className={styles["navbar-mobile-content-header-signin"]}>
           {user.photoURL === null ? (
-            <div
-              className={mobileNavStyles["navbar-mobile-content-header-user"]}
-            >
+            <div className={styles["navbar-mobile-content-header-user"]}>
               <div
-                className={
-                  mobileNavStyles["navbar-mobile-content-header-user-image"]
-                }
+                className={styles["navbar-mobile-content-header-user-image"]}
               >
                 <Image
                   src="/assets/AnonymousUser.png"
@@ -132,13 +128,9 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
               </div>
             </div>
           ) : (
-            <div
-              className={mobileNavStyles["navbar-mobile-content-header-user"]}
-            >
+            <div className={styles["navbar-mobile-content-header-user"]}>
               <div
-                className={
-                  mobileNavStyles["navbar-mobile-content-header-user-image"]
-                }
+                className={styles["navbar-mobile-content-header-user-image"]}
               >
                 <Image
                   src={user.photoURL}
@@ -174,18 +166,16 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
     >
       <div>
         <div onClick={toggleDrawer(anchor, false)}>
-          <IconContext.Provider
-            value={{ className: mobileNavStyles["close-nav-icon"] }}
-          >
+          <IconContext.Provider value={{ className: styles["close-nav-icon"] }}>
             <IoCloseCircle />
           </IconContext.Provider>
         </div>
 
         {userSignedIn()}
 
-        <div className={mobileNavStyles["mobile-nav-page-links"]}>
+        <div className={styles["mobile-nav-page-links"]}>
           <div
-            className={mobileNavStyles["mobile-nav-location"]}
+            className={styles["mobile-nav-location"]}
             onClick={() => {
               setSideBar({ left: false });
               openLocationModal();
@@ -193,7 +183,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
           >
             <IconContext.Provider
               value={{
-                className: mobileNavStyles["mobile-nav-location-icon"],
+                className: styles["mobile-nav-location-icon"],
               }}
             >
               <IoLocationSharp />
@@ -203,11 +193,11 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
 
           <Link href="/searchproduct" passHref>
             <div
-              className={mobileNavStyles["mobile-nav-search"]}
+              className={styles["mobile-nav-search"]}
               onClick={toggleDrawer(anchor, false)}
             >
               <IconContext.Provider
-                value={{ className: mobileNavStyles["mobile-nav-search-icon"] }}
+                value={{ className: styles["mobile-nav-search-icon"] }}
               >
                 <ImSearch />
               </IconContext.Provider>
@@ -217,10 +207,10 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
 
           <Link href="/" passHref>
             <div
-              className={mobileNavStyles["mobile-nav-orders"]}
+              className={styles["mobile-nav-orders"]}
               onClick={toggleDrawer(anchor, false)}
             >
-              <div className={mobileNavStyles["mobile-nav-orders-image"]}>
+              <div className={styles["mobile-nav-orders-image"]}>
                 <Image
                   src="/assets/EmptyOrder.png"
                   alt="Box Logo"
@@ -234,20 +224,18 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
 
           <Link href="/" passHref>
             <div
-              className={mobileNavStyles["mobile-nav-favorites"]}
+              className={styles["mobile-nav-favorites"]}
               onClick={toggleDrawer(anchor, false)}
             >
               <div>
                 <IconContext.Provider
                   value={{
-                    className: mobileNavStyles["mobile-nav-favorites-icon"],
+                    className: styles["mobile-nav-favorites-icon"],
                   }}
                 >
                   <BsHeartFill />
                 </IconContext.Provider>
-                <p className={mobileNavStyles["mobile-nav-favorites-count"]}>
-                  0
-                </p>
+                <p className={styles["mobile-nav-favorites-count"]}>0</p>
               </div>
               <p>Favorites</p>
             </div>
@@ -255,11 +243,11 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
 
           <Link href="/cart" passHref>
             <div
-              className={mobileNavStyles["mobile-nav-cart"]}
+              className={styles["mobile-nav-cart"]}
               onClick={toggleDrawer(anchor, false)}
             >
               <div>
-                <div className={mobileNavStyles["mobile-nav-cart-image"]}>
+                <div className={styles["mobile-nav-cart-image"]}>
                   <Image
                     src="/assets/BlackCart.png"
                     alt="cart"
@@ -267,16 +255,16 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                     objectFit="contain"
                   />
                 </div>
-                <p className={mobileNavStyles["mobile-nav-cart-count"]}>0</p>
+                <p className={styles["mobile-nav-cart-count"]}>0</p>
               </div>
               <p>Cart</p>
             </div>
           </Link>
         </div>
 
-        <Divider className={mobileNavStyles["mobile-nav-divider"]} />
+        <Divider className={styles["mobile-nav-divider"]} />
 
-        <div className={mobileNavStyles["mobile-nav-category-links"]}>
+        <div className={styles["mobile-nav-category-links"]}>
           <h1>Shop</h1>
 
           <Link href="/">
@@ -300,10 +288,10 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
         <React.Fragment key={anchor}>
           <div
             onClick={toggleDrawer(anchor, true)}
-            className={mobileNavStyles["hamburger-icon-wrapper"]}
+            className={styles["hamburger-icon-wrapper"]}
           >
             <IconContext.Provider
-              value={{ className: mobileNavStyles["hamburger-icon"] }}
+              value={{ className: styles["hamburger-icon"] }}
             >
               <IconButton size="large">
                 <GiHamburgerMenu />

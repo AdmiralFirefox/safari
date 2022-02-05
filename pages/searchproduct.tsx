@@ -11,7 +11,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Fuse from "fuse.js";
-import searchProductStyles from "../styles/Home.module.scss";
+import styles from "../styles/pages/SearchProduct.module.scss";
 
 const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
   const [searchProduct, setSearchProduct] = useState("");
@@ -34,7 +34,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
 
   return (
     <>
-      <div className={searchProductStyles["search-product-input"]}>
+      <div className={styles["search-product-input"]}>
         <Paper
           sx={{
             p: "0.5em",
@@ -55,7 +55,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
         </Paper>
       </div>
 
-      <div className={searchProductStyles["search-product-results-text"]}>
+      <div className={styles["search-product-results-text"]}>
         {productResults.length !== 0 || searchProduct !== "" ? (
           <p>
             {productResults.length} Search Results for: &ldquo;{searchProduct}
@@ -64,28 +64,19 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
         ) : null}
       </div>
 
-      <div className={searchProductStyles["search-products-wrapper"]}>
+      <div className={styles["search-products-wrapper"]}>
         {productResults.map((product) => {
           return (
-            <div
-              key={product.id}
-              className={searchProductStyles["search-product-item"]}
-            >
+            <div key={product.id} className={styles["search-product-item"]}>
               <div>
-                <div
-                  className={
-                    searchProductStyles["search-product-item-category"]
-                  }
-                >
+                <div className={styles["search-product-item-category"]}>
                   <p>{product.category}</p>
                   <IconButton>
                     <FavoriteBorderIcon fontSize="large" />
                   </IconButton>
                 </div>
                 <Link href="/" passHref>
-                  <div
-                    className={searchProductStyles["search-product-item-image"]}
-                  >
+                  <div className={styles["search-product-item-image"]}>
                     <Image
                       src={product.image}
                       alt=""
@@ -94,7 +85,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                     />
                   </div>
                 </Link>
-                <p className={searchProductStyles["search-product-item-title"]}>
+                <p className={styles["search-product-item-title"]}>
                   {product.title}
                 </p>
                 <Rating
@@ -105,7 +96,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                   size="small"
                   readOnly
                 />
-                <p className={searchProductStyles["search-product-item-price"]}>
+                <p className={styles["search-product-item-price"]}>
                   ${product.price.toFixed(2)}
                 </p>
               </div>

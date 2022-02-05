@@ -1,11 +1,11 @@
 import { FC } from "react";
 import Link from "next/link";
-import footerStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/footer/Footer.module.scss";
 
 const Footer: FC = () => {
   return (
-    <footer className={footerStyles["footer-wrapper"]}>
-      <div className={footerStyles["footer-links"]}>
+    <footer className={styles["footer-wrapper"]}>
+      <div className={styles["footer-links"]}>
         <p>Get to Know Us</p>
         <Link href="/">
           <a>Careeer</a>
@@ -23,7 +23,7 @@ const Footer: FC = () => {
           <a>Safari Devices</a>
         </Link>
       </div>
-      <div className={footerStyles["footer-links"]}>
+      <div className={styles["footer-links"]}>
         <p>Make Money with Us</p>
         <Link href="/">
           <a>Sell products on Safari</a>
@@ -47,7 +47,7 @@ const Footer: FC = () => {
           <a>Host a Safari Hub</a>
         </Link>
       </div>
-      <div className={footerStyles["footer-links"]}>
+      <div className={styles["footer-links"]}>
         <p>Safari Payment Products</p>
         <Link href="/">
           <a>Safari Business Card</a>
@@ -62,7 +62,7 @@ const Footer: FC = () => {
           <a>Safari Currency Converter</a>
         </Link>
       </div>
-      <div className={footerStyles["footer-links"]}>
+      <div className={styles["footer-links"]}>
         <p>Let Us Help You</p>
         <Link href="/">
           <a>Safari and COVID - 19</a>

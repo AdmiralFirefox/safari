@@ -8,7 +8,7 @@ import CancelButton from "../Button/CancelButton";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import { motion, AnimatePresence } from "framer-motion";
-import updateQuantityModalStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/modal/UpdateQuantityModal.module.scss";
 
 interface UpdateQuantityModalProps {
   itemTitle: string;
@@ -56,7 +56,7 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
           <>
             <motion.div
               key="quantitymodalbackdrop"
-              className={updateQuantityModalStyles["quantity-modal-backdrop"]}
+              className={styles["quantity-modal-backdrop"]}
               style={{ width: `${size.width}px`, height: `${size.height}px` }}
               onClick={closeQuantityModal}
               initial={{ opacity: 0 }}
@@ -66,7 +66,7 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
 
             <motion.div
               key="editquantitymodal"
-              className={updateQuantityModalStyles["quantity-modal"]}
+              className={styles["quantity-modal"]}
               style={{ maxHeight: `calc(${size.height!}px - 5vh)` }}
               initial={{
                 opacity: 0,
@@ -81,28 +81,16 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
                 stiffness: 100,
               }}
             >
-              <div
-                className={updateQuantityModalStyles["quantity-modal-header"]}
-              >
+              <div className={styles["quantity-modal-header"]}>
                 <p>Update Quantity</p>
               </div>
 
-              <div
-                className={updateQuantityModalStyles["quantity-modal-content"]}
-              >
-                <p
-                  className={
-                    updateQuantityModalStyles["quantity-modal-item-category"]
-                  }
-                >
+              <div className={styles["quantity-modal-content"]}>
+                <p className={styles["quantity-modal-item-category"]}>
                   {itemCategory}
                 </p>
 
-                <div
-                  className={
-                    updateQuantityModalStyles["quantity-modal-item-image"]
-                  }
-                >
+                <div className={styles["quantity-modal-item-image"]}>
                   <Image
                     src={itemImage}
                     alt="Product Item"
@@ -111,11 +99,7 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
                   />
                 </div>
 
-                <p
-                  className={
-                    updateQuantityModalStyles["quantity-modal-item-title"]
-                  }
-                >
+                <p className={styles["quantity-modal-item-title"]}>
                   {itemTitle}
                 </p>
 
@@ -128,11 +112,7 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
                   readOnly
                 />
 
-                <p
-                  className={
-                    updateQuantityModalStyles["quantity-modal-item-price"]
-                  }
-                >
+                <p className={styles["quantity-modal-item-price"]}>
                   ${itemPrice.toFixed(2)}
                 </p>
 
@@ -158,11 +138,7 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
                   />
                 </Paper>
 
-                <div
-                  className={
-                    updateQuantityModalStyles["quantity-modal-button-wrapper"]
-                  }
-                >
+                <div className={styles["quantity-modal-button-wrapper"]}>
                   <UpdateQuantityButton
                     onButtonClick={updateItemQuantity}
                     disabledButton={disabledButton}

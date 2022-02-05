@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
 import Footer from "../../components/Footer/Footer";
-import categoryStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/pages/Category.module.scss";
 
 type ContextProps = {
   params: {
@@ -65,9 +65,9 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
         />
       </div>
 
-      <div className={categoryStyles["category-title"]}>
+      <div className={styles["category-title"]}>
         <p>{categoryName}</p>
-        <div className={categoryStyles["category-sort-products"]}>
+        <div className={styles["category-sort-products"]}>
           <SortDropdown
             sortValue={sortCategoryProducts}
             onChangeValue={handleSortCategoryProductsChange}
@@ -75,16 +75,16 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
         </div>
       </div>
 
-      <div className={categoryStyles["category-products"]}>
+      <div className={styles["category-products"]}>
         {sortedCategoryProducts.map((product) => {
           return (
             <div
               key={product.id}
-              className={categoryStyles["category-product-item"]}
+              className={styles["category-product-item"]}
             >
               <div>
                 <div
-                  className={categoryStyles["category-product-item-category"]}
+                  className={styles["category-product-item-category"]}
                 >
                   <p>{product.category}</p>
                   <IconButton>
@@ -93,7 +93,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                 </div>
                 <Link href="/" passHref>
                   <div
-                    className={categoryStyles["category-product-item-image"]}
+                    className={styles["category-product-item-image"]}
                   >
                     <Image
                       src={product.image}
@@ -103,7 +103,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                     />
                   </div>
                 </Link>
-                <p className={categoryStyles["category-product-item-title"]}>
+                <p className={styles["category-product-item-title"]}>
                   {product.title}
                 </p>
                 <Rating
@@ -114,7 +114,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                   size="small"
                   readOnly
                 />
-                <p className={categoryStyles["category-product-item-price"]}>
+                <p className={styles["category-product-item-price"]}>
                   ${product.price.toFixed(2)}
                 </p>
               </div>
@@ -126,7 +126,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
         })}
       </div>
 
-      <div className={categoryStyles["category-footer-wrapper"]}>
+      <div className={styles["category-footer-wrapper"]}>
         <Footer />
       </div>
     </>

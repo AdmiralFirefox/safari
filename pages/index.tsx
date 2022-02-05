@@ -16,7 +16,7 @@ import { IconContext } from "react-icons";
 import Footer from "../components/Footer/Footer";
 import { addItemToCart } from "../features/Cart/CartSlice";
 import { useAppDispatch } from "../app/reduxhooks";
-import homeStyles from "../styles/Home.module.scss";
+import styles from "../styles/pages/Home.module.scss";
 
 const Home: NextPage<ProductsProps> = ({ products }) => {
   const [sortProducts, setSortProducts] = useState("default");
@@ -77,27 +77,27 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
   return (
     <>
       <HomeSlider />
-      <div className={homeStyles["home-content-wrapper"]}>
-        <div className={homeStyles["home-sort-products"]}>
+      <div className={styles["home-content-wrapper"]}>
+        <div className={styles["home-sort-products"]}>
           <SortDropdown
             sortValue={sortProducts}
             onChangeValue={handleSortProductChange}
           />
         </div>
 
-        <div className={homeStyles["home-products"]}>
+        <div className={styles["home-products"]}>
           {sortedProducts.slice(0, 8).map((product) => {
             return (
-              <div key={product.id} className={homeStyles["home-product-item"]}>
+              <div key={product.id} className={styles["home-product-item"]}>
                 <div>
-                  <div className={homeStyles["home-product-item-category"]}>
+                  <div className={styles["home-product-item-category"]}>
                     <p>{product.category}</p>
                     <IconButton>
                       <FavoriteBorderIcon fontSize="large" />
                     </IconButton>
                   </div>
                   <Link href="/" passHref>
-                    <div className={homeStyles["home-product-item-image"]}>
+                    <div className={styles["home-product-item-image"]}>
                       <Image
                         src={product.image}
                         alt=""
@@ -106,7 +106,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                       />
                     </div>
                   </Link>
-                  <p className={homeStyles["home-product-item-title"]}>
+                  <p className={styles["home-product-item-title"]}>
                     {product.title}
                   </p>
                   <Rating
@@ -117,7 +117,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                     size="small"
                     readOnly
                   />
-                  <p className={homeStyles["home-product-item-price"]}>
+                  <p className={styles["home-product-item-price"]}>
                     ${product.price.toFixed(2)}
                   </p>
                 </div>
@@ -142,19 +142,19 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
           />
         </div>
 
-        <div className={homeStyles["home-products"]}>
+        <div className={styles["home-products"]}>
           {sortedProducts.slice(8, 16).map((product) => {
             return (
-              <div key={product.id} className={homeStyles["home-product-item"]}>
+              <div key={product.id} className={styles["home-product-item"]}>
                 <div>
-                  <div className={homeStyles["home-product-item-category"]}>
+                  <div className={styles["home-product-item-category"]}>
                     <p>{product.category}</p>
                     <IconButton>
                       <FavoriteBorderIcon fontSize="large" />
                     </IconButton>
                   </div>
                   <Link href="/" passHref>
-                    <div className={homeStyles["home-product-item-image"]}>
+                    <div className={styles["home-product-item-image"]}>
                       <Image
                         src={product.image}
                         alt=""
@@ -163,7 +163,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                       />
                     </div>
                   </Link>
-                  <p className={homeStyles["home-product-item-title"]}>
+                  <p className={styles["home-product-item-title"]}>
                     {product.title}
                   </p>
                   <Rating
@@ -174,7 +174,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                     size="small"
                     readOnly
                   />
-                  <p className={homeStyles["home-product-item-price"]}>
+                  <p className={styles["home-product-item-price"]}>
                     ${product.price.toFixed(2)}
                   </p>
                 </div>
@@ -199,23 +199,20 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
           />
         </div>
 
-        <div className={homeStyles["home-products-last-batch-wrapper"]}>
-          <div className={homeStyles["home-products-last-batch"]}>
+        <div className={styles["home-products-last-batch-wrapper"]}>
+          <div className={styles["home-products-last-batch"]}>
             {sortedProducts.slice(16, 20).map((product) => {
               return (
-                <div
-                  key={product.id}
-                  className={homeStyles["home-product-item"]}
-                >
+                <div key={product.id} className={styles["home-product-item"]}>
                   <div>
-                    <div className={homeStyles["home-product-item-category"]}>
+                    <div className={styles["home-product-item-category"]}>
                       <p>{product.category}</p>
                       <IconButton>
                         <FavoriteBorderIcon fontSize="large" />
                       </IconButton>
                     </div>
                     <Link href="/" passHref>
-                      <div className={homeStyles["home-product-item-image"]}>
+                      <div className={styles["home-product-item-image"]}>
                         <Image
                           src={product.image}
                           alt=""
@@ -224,7 +221,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                         />
                       </div>
                     </Link>
-                    <p className={homeStyles["home-product-item-title"]}>
+                    <p className={styles["home-product-item-title"]}>
                       {product.title}
                     </p>
                     <Rating
@@ -235,7 +232,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                       size="small"
                       readOnly
                     />
-                    <p className={homeStyles["home-product-item-price"]}>
+                    <p className={styles["home-product-item-price"]}>
                       ${product.price.toFixed(2)}
                     </p>
                   </div>
@@ -251,7 +248,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
         </div>
       </div>
 
-      <div className={homeStyles["home-footer-wrapper"]}>
+      <div className={styles["home-footer-wrapper"]}>
         <Footer />
       </div>
 
@@ -259,8 +256,8 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
         <IconContext.Provider
           value={{
             className: arrowUp
-              ? homeStyles["home-scroll-to-top-active"]
-              : homeStyles["home-scroll-to-top"],
+              ? styles["home-scroll-to-top-active"]
+              : styles["home-scroll-to-top"],
           }}
         >
           <IoArrowUpCircle />

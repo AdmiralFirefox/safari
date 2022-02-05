@@ -5,7 +5,7 @@ import ClearCartButton from "../Button/ClearCartButton";
 import { styled } from "@mui/material/styles";
 import Button, { ButtonProps } from "@mui/material/Button";
 import { motion, AnimatePresence } from "framer-motion";
-import clearCartModalStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/modal/ClearCartModal.module.scss";
 
 interface ClearCartModalProps {
   clearCartModal: boolean;
@@ -36,7 +36,7 @@ const ClearCartModal: FC<ClearCartModalProps> = ({
           <>
             <motion.div
               key="clearcartmodalbackdrop"
-              className={clearCartModalStyles["clear-cart-modal-backdrop"]}
+              className={styles["clear-cart-modal-backdrop"]}
               style={{ width: `${size.width}px`, height: `${size.height}px` }}
               onClick={closeClearCartModal}
               initial={{ opacity: 0 }}
@@ -46,7 +46,7 @@ const ClearCartModal: FC<ClearCartModalProps> = ({
 
             <motion.div
               key="clearcartmodal"
-              className={clearCartModalStyles["clear-cart-modal-wrapper"]}
+              className={styles["clear-cart-modal-wrapper"]}
               initial={{ top: "45%", opacity: 0 }}
               animate={{ top: "50%", opacity: 1 }}
               exit={{ top: "45%", opacity: 0 }}
@@ -57,14 +57,10 @@ const ClearCartModal: FC<ClearCartModalProps> = ({
                 stiffness: 100,
               }}
             >
-              <div className={clearCartModalStyles["clear-cart-modal"]}>
+              <div className={styles["clear-cart-modal"]}>
                 <p>Are you sure you want to clear all items in your Cart?</p>
 
-                <div
-                  className={
-                    clearCartModalStyles["clear-cart-modal-button-wrapper"]
-                  }
-                >
+                <div className={styles["clear-cart-modal-button-wrapper"]}>
                   <ClearCartButton onButtonClick={onCartClear}>
                     Yes
                   </ClearCartButton>

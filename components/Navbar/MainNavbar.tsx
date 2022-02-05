@@ -16,7 +16,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import LocationModal from "../Modal/LocationModal";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { toast, Zoom } from "react-toastify";
-import mainNavStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/navbar/MainNavbar.module.scss";
 
 const MainNavbar: FC = () => {
   const user = useContext(AuthContext);
@@ -93,9 +93,9 @@ const MainNavbar: FC = () => {
     if (!user) {
       return (
         <Link href="/login" passHref>
-          <div className={mainNavStyles["sign-in-text-link"]}>
-            <p className={mainNavStyles["sign-in-text-signin"]}>Sign In,</p>
-            <p className={mainNavStyles["sign-in-text-accounts"]}>
+          <div className={styles["sign-in-text-link"]}>
+            <p className={styles["sign-in-text-signin"]}>Sign In,</p>
+            <p className={styles["sign-in-text-accounts"]}>
               Accounts &amp; Lists
             </p>
           </div>
@@ -105,9 +105,9 @@ const MainNavbar: FC = () => {
       return (
         <>
           {user.photoURL === null ? (
-            <div className={mainNavStyles["user-profile-anonymous-wrapper"]}>
+            <div className={styles["user-profile-anonymous-wrapper"]}>
               <div
-                className={mainNavStyles["user-profile-anonymous"]}
+                className={styles["user-profile-anonymous"]}
                 onClick={openProfileDropDown}
               >
                 <Image
@@ -126,9 +126,9 @@ const MainNavbar: FC = () => {
               />
             </div>
           ) : (
-            <div className={mainNavStyles["user-profile-display-wrapper"]}>
+            <div className={styles["user-profile-display-wrapper"]}>
               <div
-                className={mainNavStyles["user-profile-display"]}
+                className={styles["user-profile-display"]}
                 onClick={openProfileDropDown}
               >
                 <Image
@@ -154,15 +154,15 @@ const MainNavbar: FC = () => {
 
   return (
     <>
-      <div className={mainNavStyles["main-nav-wrapper"]}>
-        <div className={mainNavStyles["nav-left-side"]}>
+      <div className={styles["main-nav-wrapper"]}>
+        <div className={styles["nav-left-side"]}>
           <NavbarMobileContent
             country={country}
             openLocationModal={openLocationModal}
           />
 
           <Link href="/" passHref>
-            <div className={mainNavStyles["web-logo"]}>
+            <div className={styles["web-logo"]}>
               <Image
                 src="/assets/SafariLogoLight.png"
                 alt="Web Logo"
@@ -174,21 +174,19 @@ const MainNavbar: FC = () => {
           </Link>
 
           <div
-            className={mainNavStyles["deliver-location"]}
+            className={styles["deliver-location"]}
             onClick={openLocationModal}
           >
             <div>
               <IconContext.Provider
-                value={{ className: mainNavStyles["location-icon"] }}
+                value={{ className: styles["location-icon"] }}
               >
                 <IoLocationSharp />
               </IconContext.Provider>
             </div>
-            <div className={mainNavStyles["location-text"]}>
-              <p className={mainNavStyles["location-text-title"]}>Deliver to</p>
-              <p className={mainNavStyles["location-text-country"]}>
-                {country}
-              </p>
+            <div className={styles["location-text"]}>
+              <p className={styles["location-text-title"]}>Deliver to</p>
+              <p className={styles["location-text-country"]}>{country}</p>
             </div>
           </div>
         </div>
@@ -199,21 +197,19 @@ const MainNavbar: FC = () => {
           handleCountryChange={handleCountryChange}
         />
 
-        <div className={mainNavStyles["nav-right-side"]}>
+        <div className={styles["nav-right-side"]}>
           <Link href="/searchproduct" passHref>
-            <div className={mainNavStyles["search-products"]}>
+            <div className={styles["search-products"]}>
               <div>
                 <IconContext.Provider
-                  value={{ className: mainNavStyles["search-icon"] }}
+                  value={{ className: styles["search-icon"] }}
                 >
                   <ImSearch />
                 </IconContext.Provider>
               </div>
-              <div className={mainNavStyles["search-products-text"]}>
-                <p className={mainNavStyles["search-products-text-search"]}>
-                  Search
-                </p>
-                <p className={mainNavStyles["search-products-text-product"]}>
+              <div className={styles["search-products-text"]}>
+                <p className={styles["search-products-text-search"]}>Search</p>
+                <p className={styles["search-products-text-product"]}>
                   Products
                 </p>
               </div>
@@ -223,32 +219,28 @@ const MainNavbar: FC = () => {
           {userSignedIn()}
 
           <Link href="/" passHref>
-            <div className={mainNavStyles["orders-text-link"]}>
-              <p className={mainNavStyles["orders-text-link-returns"]}>
-                Returns
-              </p>
-              <p className={mainNavStyles["orders-text-link-orders"]}>
-                &amp; Orders
-              </p>
+            <div className={styles["orders-text-link"]}>
+              <p className={styles["orders-text-link-returns"]}>Returns</p>
+              <p className={styles["orders-text-link-orders"]}>&amp; Orders</p>
             </div>
           </Link>
 
           <Link href="/" passHref>
-            <div className={mainNavStyles["favorites-link"]}>
+            <div className={styles["favorites-link"]}>
               <IconContext.Provider
-                value={{ className: mainNavStyles["favorites-icon"] }}
+                value={{ className: styles["favorites-icon"] }}
               >
                 <BsHeartFill />
               </IconContext.Provider>
-              <div className={mainNavStyles["favorites-count"]}>
+              <div className={styles["favorites-count"]}>
                 <p>0</p>
               </div>
             </div>
           </Link>
 
           <Link href="/cart" passHref>
-            <div className={mainNavStyles["cart-link"]}>
-              <div className={mainNavStyles["cart-icon"]}>
+            <div className={styles["cart-link"]}>
+              <div className={styles["cart-icon"]}>
                 <Image
                   src="/assets/WhiteCart.png"
                   alt="White Cart"
@@ -256,7 +248,7 @@ const MainNavbar: FC = () => {
                   objectFit="contain"
                 />
               </div>
-              <div className={mainNavStyles["cart-link-count"]}>
+              <div className={styles["cart-link-count"]}>
                 <p>0</p>
               </div>
             </div>

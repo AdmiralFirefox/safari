@@ -1,11 +1,11 @@
 import { FC } from "react";
 import Image from "next/image";
-import emptyCartStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/empty/EmptyCart.module.scss";
 
 const EmptyCart: FC = () => {
   return (
-    <div className={emptyCartStyles["empty-cart-placeholder-wrapper"]}>
-      <div className={emptyCartStyles["empty-cart-placeholder"]}>
+    <div className={styles["empty-cart-placeholder-wrapper"]}>
+      <div className={styles["empty-cart-placeholder"]}>
         <div>
           <Image
             src="/assets/EmptyCart.png"
@@ -15,7 +15,7 @@ const EmptyCart: FC = () => {
             objectFit="contain"
           />
         </div>
-        <div className={emptyCartStyles["empty-cart-placeholder-content"]}>
+        <div className={styles["empty-cart-placeholder-content"]}>
           <h1>Your Safari Cart is Empty!</h1>
           <p>Shop today&apos;s deal!</p>
         </div>

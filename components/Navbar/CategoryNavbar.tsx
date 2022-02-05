@@ -1,11 +1,11 @@
 import { FC } from "react";
 import Link from "next/link";
 import categories from "../../data/category.json";
-import categoryNavStyles from "../../styles/Home.module.scss";
+import styles from "../../styles/navbar/CategoryNavbar.module.scss";
 
 const CategoryNavbar: FC = () => {
   return (
-    <div className={categoryNavStyles["category-nav-wrapper"]}>
+    <div className={styles["category-nav-wrapper"]}>
       <Link href="/">
         <a>all</a>
       </Link>

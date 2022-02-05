@@ -26,7 +26,7 @@ import CheckoutButton from "../components/Button/CheckoutButton";
 import EmptyCart from "../components/EmptyPlaceholder/EmptyCart";
 import UpdateQuantityModal from "../components/Modal/UpdateQuantityModal";
 import ClearCartModal from "../components/Modal/ClearCartModal";
-import cartStyles from "../styles/Home.module.scss";
+import styles from "../styles/pages/Cart.module.scss";
 
 const Cart: NextPage = () => {
   const user = useContext(AuthContext);
@@ -108,7 +108,7 @@ const Cart: NextPage = () => {
         }}
       />
 
-      <div className={cartStyles["cart-title"]}>
+      <div className={styles["cart-title"]}>
         <h1>Your Cart:</h1>
         <ClearCartButton onButtonClick={openClearCartModal}>
           Clear Cart
@@ -138,17 +138,17 @@ const Cart: NextPage = () => {
         );
       })}
 
-      <div className={cartStyles["cart-content-wrapper"]}>
+      <div className={styles["cart-content-wrapper"]}>
         {cart.map((item) => {
           return (
-            <div key={item.id} className={cartStyles["cart-content"]}>
-              <div className={cartStyles["cart-item-category"]}>
+            <div key={item.id} className={styles["cart-content"]}>
+              <div className={styles["cart-item-category"]}>
                 <p>{item.category}</p>
               </div>
 
-              <div className={cartStyles["cart-item"]}>
-                <div className={cartStyles["cart-item-content"]}>
-                  <div className={cartStyles["cart-item-image"]}>
+              <div className={styles["cart-item"]}>
+                <div className={styles["cart-item-content"]}>
+                  <div className={styles["cart-item-image"]}>
                     <Image
                       src={item.image}
                       alt=""
@@ -157,7 +157,7 @@ const Cart: NextPage = () => {
                     />
                   </div>
 
-                  <div className={cartStyles["cart-item-info-icon"]}>
+                  <div className={styles["cart-item-info-icon"]}>
                     <IconButton>
                       <InfoIcon
                         sx={{
@@ -172,8 +172,8 @@ const Cart: NextPage = () => {
                     </IconButton>
                   </div>
 
-                  <div className={cartStyles["cart-item-info"]}>
-                    <p className={cartStyles["cart-item-title"]}>
+                  <div className={styles["cart-item-info"]}>
+                    <p className={styles["cart-item-title"]}>
                       {item.title}
                     </p>
                     <Rating
@@ -184,12 +184,12 @@ const Cart: NextPage = () => {
                       size="small"
                       readOnly
                     />
-                    <p className={cartStyles["cart-item-price"]}>
+                    <p className={styles["cart-item-price"]}>
                       ${item.price.toFixed(2)}
                     </p>
                   </div>
 
-                  <div className={cartStyles["cart-item-quantity"]}>
+                  <div className={styles["cart-item-quantity"]}>
                     <div>
                       <ItemQuantityButton
                         onButtonClick={() =>
@@ -221,14 +221,14 @@ const Cart: NextPage = () => {
                     </div>
                   </div>
 
-                  <div className={cartStyles["cart-item-subtotal"]}>
+                  <div className={styles["cart-item-subtotal"]}>
                     <p>Subtotal:</p>
                     <p>${(item.quantity! * item.price).toFixed(2)}</p>
                   </div>
                 </div>
 
                 <div
-                  className={cartStyles["cart-item-remove-icon"]}
+                  className={styles["cart-item-remove-icon"]}
                   onClick={() => dispatch(removeItemFromCart(item.id))}
                 >
                   <IconButton>
@@ -250,8 +250,8 @@ const Cart: NextPage = () => {
         })}
       </div>
 
-      <div className={cartStyles["cart-grandtotal-wrapper"]}>
-        <div className={cartStyles["cart-grandtotal"]}>
+      <div className={styles["cart-grandtotal-wrapper"]}>
+        <div className={styles["cart-grandtotal"]}>
           <p>
             Total &#40;{cart.length} items&#41;: ${getTotalPrice().toFixed(2)}
           </p>
