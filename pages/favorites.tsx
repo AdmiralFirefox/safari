@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,13 +11,43 @@ import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Placeholder from "../components/Placeholder/Placeholder";
+import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
 import styles from "../styles/pages/Favorites.module.scss";
 
 const Favorites: NextPage = () => {
+  const user = useContext(AuthContext);
+
   const favorites = useAppSelector(
     (state: { favorites: Product[] }) => state.favorites
   );
   const dispatch = useAppDispatch();
+
+  //If the user is not logged in
+  if (!user) {
+    return (
+      <Placeholder
+        image="/assets/EmptyFavorites.png"
+        title="Log In to see your Favorites"
+        subtitle="Shop today's deal"
+        imageWidth={150}
+        imageHeight={150}
+      />
+    );
+  }
+
+  //If favorites is empty
+  if (favorites.length === 0 && user) {
+    return (
+      <EmptyPlaceholder
+        image="/assets/EmptyFavorites.png"
+        title="You have no Favorites!"
+        subtitle="Shop today's deal"
+        imageWidth={150}
+        imageHeight={150}
+      />
+    );
+  }
 
   return (
     <>

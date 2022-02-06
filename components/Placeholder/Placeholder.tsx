@@ -4,7 +4,21 @@ import { useRouter } from "next/router";
 import UserButton from "../Button/UserButton";
 import styles from "../../styles/placeholder/CartPlaceholder.module.scss";
 
-const CartPlaceholder: FC = () => {
+interface PlaceholderProps {
+  image: string;
+  title: string;
+  subtitle: string;
+  imageWidth: number;
+  imageHeight: number;
+}
+
+const Placeholder: FC<PlaceholderProps> = ({
+  title,
+  subtitle,
+  image,
+  imageWidth,
+  imageHeight,
+}) => {
   const router = useRouter();
 
   const logInRoute = () => {
@@ -20,16 +34,16 @@ const CartPlaceholder: FC = () => {
       <div className={styles["cart-placeholder"]}>
         <div>
           <Image
-            src="/assets/EmptyCart.png"
+            src={image}
             alt="Cart"
-            width={150}
-            height={150}
+            width={imageWidth}
+            height={imageHeight}
             objectFit="contain"
           />
         </div>
         <div className={styles["cart-placeholder-content"]}>
-          <h1>Log In to see your Cart</h1>
-          <p>Shop today&apos;s deal!</p>
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
           <div className={styles["cart-placeholder-button-wrapper"]}>
             <UserButton changeRoute={logInRoute}>Sign In</UserButton>
             <UserButton changeRoute={createAccountRoute}>
@@ -42,4 +56,4 @@ const CartPlaceholder: FC = () => {
   );
 };
 
-export default CartPlaceholder;
+export default Placeholder;

@@ -2,26 +2,40 @@ import { FC } from "react";
 import Image from "next/image";
 import styles from "../../styles/empty/EmptyCart.module.scss";
 
-const EmptyCart: FC = () => {
+interface EmptyPlaceholderProps {
+  title: string;
+  subtitle: string;
+  image: string;
+  imageWidth: number;
+  imageHeight: number;
+}
+
+const EmptyPlaceholder: FC<EmptyPlaceholderProps> = ({
+  title,
+  subtitle,
+  image,
+  imageWidth,
+  imageHeight,
+}) => {
   return (
     <div className={styles["empty-cart-placeholder-wrapper"]}>
       <div className={styles["empty-cart-placeholder"]}>
         <div>
           <Image
-            src="/assets/EmptyCart.png"
+            src={image}
             alt="Cart"
-            width={150}
-            height={150}
+            width={imageWidth}
+            height={imageHeight}
             objectFit="contain"
           />
         </div>
         <div className={styles["empty-cart-placeholder-content"]}>
-          <h1>Your Safari Cart is Empty!</h1>
-          <p>Shop today&apos;s deal!</p>
+          <h1>{title}</h1>
+          <p>{subtitle}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default EmptyCart;
+export default EmptyPlaceholder;

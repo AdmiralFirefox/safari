@@ -18,12 +18,12 @@ import IconButton from "@mui/material/IconButton";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import CartPlaceholder from "../components/Placeholder/CartPlaceholder";
+import Placeholder from "../components/Placeholder/Placeholder";
 import ClearCartButton from "../components/Button/ClearCartButton";
 import ItemQuantityButton from "../components/Button/ItemQuantityButton";
 import UpdateQuantityButton from "../components/Button/UpdateQuantityButton";
 import CheckoutButton from "../components/Button/CheckoutButton";
-import EmptyCart from "../components/EmptyPlaceholder/EmptyCart";
+import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
 import UpdateQuantityModal from "../components/Modal/UpdateQuantityModal";
 import ClearCartModal from "../components/Modal/ClearCartModal";
 import styles from "../styles/pages/Cart.module.scss";
@@ -89,12 +89,28 @@ const Cart: NextPage = () => {
 
   //If the user is not logged in
   if (!user) {
-    return <CartPlaceholder />;
+    return (
+      <Placeholder
+        image="/assets/EmptyCart.png"
+        title="Log In to see your Cart"
+        subtitle="Shop today's deal"
+        imageWidth={150}
+        imageHeight={150}
+      />
+    );
   }
 
   //If the cart is empty
   if (cart.length === 0 && user) {
-    return <EmptyCart />;
+    return (
+      <EmptyPlaceholder
+        image="/assets/EmptyCart.png"
+        title="Your Safari Cart is Empty!"
+        subtitle="Shop today's deal"
+        imageWidth={150}
+        imageHeight={150}
+      />
+    );
   }
 
   return (
@@ -173,9 +189,7 @@ const Cart: NextPage = () => {
                   </div>
 
                   <div className={styles["cart-item-info"]}>
-                    <p className={styles["cart-item-title"]}>
-                      {item.title}
-                    </p>
+                    <p className={styles["cart-item-title"]}>{item.title}</p>
                     <Rating
                       name="Product Ratings"
                       value={item.rating.rate}
