@@ -49,6 +49,34 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
     }
   };
 
+  const backdropVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
+  const modalVariants = {
+    initial: {
+      opacity: 0,
+      top: isMobile ? "2%" : "45%",
+    },
+    animate: {
+      opacity: 1,
+      top: isMobile ? "5%" : "50%",
+    },
+    exit: {
+      opacity: 0,
+      top: isMobile ? "2%" : "45%",
+    },
+  };
+
+  const transitions = {
+    duration: 0.3,
+    type: "spring",
+    damping: 10,
+    stiffness: 100,
+  };
+
   return (
     <>
       <AnimatePresence initial={false}>
@@ -59,27 +87,21 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
               className={styles["quantity-modal-backdrop"]}
               style={{ width: `${size.width}px`, height: `${size.height}px` }}
               onClick={closeQuantityModal}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={backdropVariants}
             />
 
             <motion.div
               key="editquantitymodal"
               className={styles["quantity-modal"]}
               style={{ maxHeight: `calc(${size.height!}px - 5vh)` }}
-              initial={{
-                opacity: 0,
-                top: isMobile ? "2%" : "45%",
-              }}
-              animate={{ opacity: 1, top: isMobile ? "5%" : "50%" }}
-              exit={{ opacity: 0, top: isMobile ? "2%" : "45%" }}
-              transition={{
-                duration: 0.3,
-                type: "spring",
-                damping: 10,
-                stiffness: 100,
-              }}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={transitions}
+              variants={modalVariants}
             >
               <div className={styles["quantity-modal-header"]}>
                 <p>Update Quantity</p>

@@ -36,6 +36,33 @@ const ProfileDropdown: FC<ProfileDropdownProps> = ({
   const user = useContext(AuthContext);
   const size: Size = useWindowSize();
 
+  const backdropVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
+  const dropdownVariants = {
+    initial: {
+      opacity: 0,
+      y: -10,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+    },
+    exit: {
+      opacity: 0,
+      y: -10,
+    },
+  };
+
+  const transitions = {
+    type: "spring",
+    damping: 10,
+    stiffness: 100,
+  };
+
   return (
     <>
       <AnimatePresence initial={false}>
@@ -46,17 +73,19 @@ const ProfileDropdown: FC<ProfileDropdownProps> = ({
               className={styles["profile-dropdown-invisible-backdrop"]}
               onClick={closeProfileDropDown}
               style={{ width: `${size.width}px`, height: `${size.height}px` }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={backdropVariants}
             />
 
             <motion.div
               key="dropdown"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ type: "spring", damping: 10, stiffness: 100 }}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={transitions}
+              variants={dropdownVariants}
               ref={dropDownRef}
               className={styles["dropdown-wrapper"]}
             >
