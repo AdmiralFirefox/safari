@@ -9,20 +9,31 @@ import { SelectChangeEvent } from "@mui/material/Select";
 import { ProductsProps } from "../types/Products/Products";
 import Rating from "@mui/material/Rating";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
 import { IoArrowUpCircle } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import Footer from "../components/Footer/Footer";
 import { addItemToCart } from "../features/Cart/CartSlice";
-import { useAppDispatch } from "../app/reduxhooks";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../features/Favorites/FavoritesSlice";
+import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
+import { Product } from "../types/Product/Product";
 import styles from "../styles/pages/Home.module.scss";
 
 const Home: NextPage<ProductsProps> = ({ products }) => {
   const [sortProducts, setSortProducts] = useState("default");
   const [arrowUp, setArrowUp] = useState(false);
 
+  const favorites = useAppSelector(
+    (state: { favorites: Product[] }) => state.favorites
+  );
   const dispatch = useAppDispatch();
+
+  const favoriteID = favorites.map((favorite) => favorite.id);
 
   const sortedProducts = products.sort((a, b) =>
     sortProducts === "default"
@@ -92,9 +103,27 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                 <div>
                   <div className={styles["home-product-item-category"]}>
                     <p>{product.category}</p>
-                    <IconButton>
-                      <FavoriteBorderIcon fontSize="large" />
-                    </IconButton>
+                    {favoriteID.includes(product.id) ? (
+                      <IconButton
+                        onClick={() =>
+                          dispatch(removeFromFavorites(product.id))
+                        }
+                      >
+                        <FavoriteIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        onClick={() => dispatch(addToFavorites(product))}
+                      >
+                        <FavoriteBorderIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    )}
                   </div>
                   <Link href="/" passHref>
                     <div className={styles["home-product-item-image"]}>
@@ -149,9 +178,27 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                 <div>
                   <div className={styles["home-product-item-category"]}>
                     <p>{product.category}</p>
-                    <IconButton>
-                      <FavoriteBorderIcon fontSize="large" />
-                    </IconButton>
+                    {favoriteID.includes(product.id) ? (
+                      <IconButton
+                        onClick={() =>
+                          dispatch(removeFromFavorites(product.id))
+                        }
+                      >
+                        <FavoriteIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        onClick={() => dispatch(addToFavorites(product))}
+                      >
+                        <FavoriteBorderIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    )}
                   </div>
                   <Link href="/" passHref>
                     <div className={styles["home-product-item-image"]}>
@@ -207,9 +254,27 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   <div>
                     <div className={styles["home-product-item-category"]}>
                       <p>{product.category}</p>
-                      <IconButton>
-                        <FavoriteBorderIcon fontSize="large" />
-                      </IconButton>
+                      {favoriteID.includes(product.id) ? (
+                        <IconButton
+                          onClick={() =>
+                            dispatch(removeFromFavorites(product.id))
+                          }
+                        >
+                          <FavoriteIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          onClick={() => dispatch(addToFavorites(product))}
+                        >
+                          <FavoriteBorderIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      )}
                     </div>
                     <Link href="/" passHref>
                       <div className={styles["home-product-item-image"]}>

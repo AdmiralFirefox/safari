@@ -225,7 +225,7 @@ const MainNavbar: FC = () => {
             </div>
           </Link>
 
-          <Link href="/" passHref>
+          <Link href="/favorites" passHref>
             <div className={styles["favorites-link"]}>
               <IconContext.Provider
                 value={{ className: styles["favorites-icon"] }}

@@ -8,4 +8,5 @@ export interface Product {
     rate: number;
   };
   quantity?: number;
+  added?: boolean;
 }

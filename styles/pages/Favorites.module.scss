@@ -1,31 +1,21 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
-//Search Input
-.search-product-input {
-  display: flex;
-  justify-content: center;
-  margin-top: 2.3em;
+//Title
+.favorites-title {
+  margin: 1.5em 1.5em 1em 1.5em;
 }
 
-//Search Product Results Text
-.search-product-results-text {
-  color: theme-provider.$black_color;
-  font-weight: 700;
-  font-size: min(max(1rem, 2vw), 1.3rem);
-  margin: 1.3em 1em 0em 0.8em;
-  word-break: break-all;
-}
-
-//Search Products
-.search-products-wrapper {
+//Products
+.favorites {
   @include theme-provider.product-wrapper-mobile();
+  margin: 3em;
 
-  .search-product-item {
+  .favorites-item {
     @include theme-provider.product-item();
 
     div:first-child {
       //Category
-      .search-product-item-category {
+      .favorites-item-category {
         @include theme-provider.product-item-category();
 
         p {
@@ -34,17 +24,17 @@
       }
 
       //Image
-      .search-product-item-image {
+      .favorites-item-image {
         @include theme-provider.product-item-image();
       }
 
       //Title
-      .search-product-item-title {
+      .favorites-item-title {
         @include theme-provider.product-item-title();
       }
 
       //Price
-      .search-product-item-price {
+      .favorites-item-price {
         @include theme-provider.product-item-price();
       }
     }
@@ -56,22 +46,22 @@
 }
 
 @media (min-width: theme-provider.$media_query_tiny_value) {
-  .search-products-wrapper {
+  .favorites {
     @include theme-provider.product-wrapper-tiny-screen();
-    margin-bottom: 4em;
+    margin: 3em 2em;
   }
 }
 
 @media (min-width: theme-provider.$media_query_normal_value) {
-  .search-products-wrapper {
+  .favorites {
     @include theme-provider.product-wrapper-normal-screen();
     grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
-    margin-bottom: 4em;
+    margin: 3em 6em;
   }
 }
 
 @media (min-width: theme-provider.$media_query_big_screen) {
-  .search-products-wrapper {
+  .favorites {
     @include theme-provider.product-wrapper-big-screen();
     grid-template-columns: repeat(4, 1fr);
   }
