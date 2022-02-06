@@ -16,10 +16,16 @@ import ProfileDropdown from "./ProfileDropdown";
 import LocationModal from "../Modal/LocationModal";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { toast, Zoom } from "react-toastify";
+import { useAppSelector } from "../../app/reduxhooks";
+import { Product } from "../../types/Product/Product";
 import styles from "../../styles/navbar/MainNavbar.module.scss";
 
 const MainNavbar: FC = () => {
   const user = useContext(AuthContext);
+  const cart = useAppSelector((state: { cart: Product[] }) => state.cart);
+  const favorites = useAppSelector(
+    (state: { favorites: Product[] }) => state.favorites
+  );
   const dropDownRef = useRef(null);
 
   const [locationModal, setLocationModal] = useState(false);
@@ -69,6 +75,11 @@ const MainNavbar: FC = () => {
   const signOutAccount = async () => {
     await signOut(auth);
     setLockBody(false);
+  };
+
+  //Total Items in the Cart
+  const getTotalItems = () => {
+    return cart.reduce((accumulator, item) => accumulator + item.quantity!, 0);
   };
 
   //Storing Country State in Local Storage
@@ -159,6 +170,8 @@ const MainNavbar: FC = () => {
           <NavbarMobileContent
             country={country}
             openLocationModal={openLocationModal}
+            cartItems={user ? getTotalItems() : 0}
+            favoriteItems={user ? favorites.length : 0}
           />
 
           <Link href="/" passHref>
@@ -233,7 +246,7 @@ const MainNavbar: FC = () => {
                 <BsHeartFill />
               </IconContext.Provider>
               <div className={styles["favorites-count"]}>
-                <p>0</p>
+                <p>{user ? favorites.length : 0}</p>
               </div>
             </div>
           </Link>
@@ -249,7 +262,7 @@ const MainNavbar: FC = () => {
                 />
               </div>
               <div className={styles["cart-link-count"]}>
-                <p>0</p>
+                <p>{user ? getTotalItems() : 0}</p>
               </div>
             </div>
           </Link>

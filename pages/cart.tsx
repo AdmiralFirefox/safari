@@ -77,6 +77,11 @@ const Cart: NextPage = () => {
     setClearCartModal(false);
   };
 
+  //Total Items in the Cart
+  const getTotalItems = () => {
+    return cart.reduce((accumulator, item) => accumulator + item.quantity!, 0);
+  };
+
   //Total Price of all the items in the cart
   const getTotalPrice = () => {
     return cart.reduce(
@@ -267,7 +272,8 @@ const Cart: NextPage = () => {
       <div className={styles["cart-grandtotal-wrapper"]}>
         <div className={styles["cart-grandtotal"]}>
           <p>
-            Total &#40;{cart.length} items&#41;: ${getTotalPrice().toFixed(2)}
+            Total &#40;{getTotalItems()} items&#41;: $
+            {getTotalPrice().toFixed(2)}
           </p>
           <CheckoutButton>Proceed to Checkout</CheckoutButton>
         </div>

@@ -47,11 +47,15 @@ const SignOutButton = styled(Button)<ButtonProps>(() => ({
 interface NavbarMobileProps {
   country: string;
   openLocationModal: () => void;
+  cartItems: number;
+  favoriteItems: number;
 }
 
 const NavbarMobileContent: FC<NavbarMobileProps> = ({
   country,
   openLocationModal,
+  cartItems,
+  favoriteItems,
 }) => {
   const user = useContext(AuthContext);
   const router = useRouter();
@@ -235,7 +239,9 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                 >
                   <BsHeartFill />
                 </IconContext.Provider>
-                <p className={styles["mobile-nav-favorites-count"]}>0</p>
+                <p className={styles["mobile-nav-favorites-count"]}>
+                  {favoriteItems}
+                </p>
               </div>
               <p>Favorites</p>
             </div>
@@ -255,7 +261,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                     objectFit="contain"
                   />
                 </div>
-                <p className={styles["mobile-nav-cart-count"]}>0</p>
+                <p className={styles["mobile-nav-cart-count"]}>{cartItems}</p>
               </div>
               <p>Cart</p>
             </div>
