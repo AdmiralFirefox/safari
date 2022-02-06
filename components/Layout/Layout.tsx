@@ -6,8 +6,12 @@ import { ToastContainer } from "react-toastify";
 import Meta from "./Meta";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
 const queryClient = new QueryClient();
+
+let persistor = persistStore(store);
 
 const Layout: FC = ({ children }) => {
   const { asPath } = useRouter();
@@ -18,10 +22,12 @@ const Layout: FC = ({ children }) => {
       <ToastContainer />
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          {asPath === "/login" ? null : asPath === "/signup" ? null : (
-            <MainNavbar />
-          )}
-          {children}
+          <PersistGate loading={null} persistor={persistor}>
+            {asPath === "/login" ? null : asPath === "/signup" ? null : (
+              <MainNavbar />
+            )}
+            {children}
+          </PersistGate>
         </Provider>
       </QueryClientProvider>
     </>
