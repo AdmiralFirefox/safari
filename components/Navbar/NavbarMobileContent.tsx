@@ -205,7 +205,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
             </div>
           </Link>
 
-          <Link href="/" passHref>
+          <Link href="/orders" passHref>
             <div
               className={styles["mobile-nav-orders"]}
               onClick={toggleDrawer(anchor, false)}

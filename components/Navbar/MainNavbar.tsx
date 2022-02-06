@@ -218,7 +218,7 @@ const MainNavbar: FC = () => {
 
           {userSignedIn()}
 
-          <Link href="/" passHref>
+          <Link href="/orders" passHref>
             <div className={styles["orders-text-link"]}>
               <p className={styles["orders-text-link-returns"]}>Returns</p>
               <p className={styles["orders-text-link-orders"]}>&amp; Orders</p>

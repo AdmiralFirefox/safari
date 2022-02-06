@@ -1,11 +1,11 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
-.cart-placeholder-wrapper {
+.placeholder-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 3em;
 
-  .cart-placeholder {
+  .placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,14 +14,14 @@
     padding: 2em;
     border-radius: 20px;
 
-    .cart-placeholder-content {
+    .placeholder-content {
       display: flex;
       flex-direction: column;
       align-items: center;
 
       h1 {
         text-align: center;
-        line-height: 1em;
+        line-height: 1.2em;
         margin-top: 0.8em;
       }
 
@@ -33,7 +33,7 @@
       }
 
       //Button Wrapper
-      .cart-placeholder-button-wrapper {
+      .placeholder-button-wrapper {
         display: grid;
         margin-top: 1.5em;
         grid-template-columns: repeat(1, 1fr);
@@ -44,11 +44,11 @@
 }
 
 @media (min-width: theme-provider.$media_query_tiny_value) {
-  .cart-placeholder-wrapper {
-    .cart-placeholder {
-      .cart-placeholder-content {
+  .placeholder-wrapper {
+    .placeholder {
+      .placeholder-content {
         //Button Wrapper
-        .cart-placeholder-button-wrapper {
+        .placeholder-button-wrapper {
           margin-top: 1em;
           grid-template-columns: repeat(2, 1fr);
           grid-gap: 1.5em;
@@ -59,12 +59,17 @@
 }
 
 @media (min-width: theme-provider.$media_query_normal_value) {
-  .cart-placeholder-wrapper {
-    .cart-placeholder {
+  .placeholder-wrapper {
+    .placeholder {
       flex-direction: row;
       justify-content: space-around;
 
-      .cart-placeholder-content {
+      //Image
+      div:first-child {
+        margin-right: 1.8em;
+      }
+
+      .placeholder-content {
         align-items: flex-start;
 
         h1 {

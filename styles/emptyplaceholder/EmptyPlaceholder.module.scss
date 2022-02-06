@@ -1,11 +1,11 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
-.empty-cart-placeholder-wrapper {
+.empty-placeholder-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 3em;
 
-  .empty-cart-placeholder {
+  .empty-placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,14 +14,14 @@
     padding: 2em;
     border-radius: 20px;
 
-    .empty-cart-placeholder-content {
+    .empty-placeholder-content {
       display: flex;
       flex-direction: column;
       align-items: center;
 
       h1 {
         text-align: center;
-        line-height: 1em;
+        line-height: 1.2em;
         margin-top: 0.8em;
       }
 
@@ -36,12 +36,17 @@
 }
 
 @media (min-width: theme-provider.$media_query_normal_value) {
-  .empty-cart-placeholder-wrapper {
-    .empty-cart-placeholder {
+  .empty-placeholder-wrapper {
+    .empty-placeholder {
       flex-direction: row;
       justify-content: space-around;
 
-      .empty-cart-placeholder-content {
+      //Image
+      div:first-child {
+        margin-right: 1.7em;
+      }
+
+      .empty-placeholder-content {
         align-items: flex-start;
 
         h1 {

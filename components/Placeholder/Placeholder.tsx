@@ -2,7 +2,7 @@ import { FC } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import UserButton from "../Button/UserButton";
-import styles from "../../styles/placeholder/CartPlaceholder.module.scss";
+import styles from "../../styles/placeholder/Placeholder.module.scss";
 
 interface PlaceholderProps {
   image: string;
@@ -30,21 +30,21 @@ const Placeholder: FC<PlaceholderProps> = ({
   };
 
   return (
-    <div className={styles["cart-placeholder-wrapper"]}>
-      <div className={styles["cart-placeholder"]}>
+    <div className={styles["placeholder-wrapper"]}>
+      <div className={styles["placeholder"]}>
         <div>
           <Image
             src={image}
-            alt="Cart"
+            alt="Placeholder Image"
             width={imageWidth}
             height={imageHeight}
             objectFit="contain"
           />
         </div>
-        <div className={styles["cart-placeholder-content"]}>
+        <div className={styles["placeholder-content"]}>
           <h1>{title}</h1>
           <p>{subtitle}</p>
-          <div className={styles["cart-placeholder-button-wrapper"]}>
+          <div className={styles["placeholder-button-wrapper"]}>
             <UserButton changeRoute={logInRoute}>Sign In</UserButton>
             <UserButton changeRoute={createAccountRoute}>
               Create Account
