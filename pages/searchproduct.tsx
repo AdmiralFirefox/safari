@@ -1,19 +1,31 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useContext } from "react";
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { AuthContext } from "../context/AuthContext";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import { SearchProductProps } from "../types/SearchProduct/SearchProduct";
 import Rating from "@mui/material/Rating";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Fuse from "fuse.js";
+import { addItemToCart } from "../features/Cart/CartSlice";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../features/Favorites/FavoritesSlice";
+import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
+import { Product } from "../types/Product/Product";
 import styles from "../styles/pages/SearchProduct.module.scss";
 
 const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
+  const user = useContext(AuthContext);
+  const router = useRouter();
   const [searchProduct, setSearchProduct] = useState("");
 
   const fuse = new Fuse(searchProducts, {
@@ -25,6 +37,13 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
   const results = fuse.search(searchProduct);
 
   const productResults = results.map((result) => result.item);
+
+  const favorites = useAppSelector(
+    (state: { favorites: Product[] }) => state.favorites
+  );
+  const dispatch = useAppDispatch();
+
+  const favoriteID = favorites.map((favorite) => favorite.id);
 
   const handleSearchProductChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -71,9 +90,32 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
               <div>
                 <div className={styles["search-product-item-category"]}>
                   <p>{product.category}</p>
-                  <IconButton>
-                    <FavoriteBorderIcon fontSize="large" />
-                  </IconButton>
+                  {favoriteID.includes(product.id) && user ? (
+                    <IconButton
+                      onClick={() => dispatch(removeFromFavorites(product.id))}
+                    >
+                      <FavoriteIcon
+                        fontSize="large"
+                        sx={{ color: "#fd5da8" }}
+                      />
+                    </IconButton>
+                  ) : !user ? (
+                    <IconButton onClick={() => router.push("/login")}>
+                      <FavoriteBorderIcon
+                        fontSize="large"
+                        sx={{ color: "#fd5da8" }}
+                      />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={() => dispatch(addToFavorites(product))}
+                    >
+                      <FavoriteBorderIcon
+                        fontSize="large"
+                        sx={{ color: "#fd5da8" }}
+                      />
+                    </IconButton>
+                  )}
                 </div>
                 <Link href="/" passHref>
                   <div className={styles["search-product-item-image"]}>
@@ -101,7 +143,13 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                 </p>
               </div>
               <div>
-                <AddtoCartButton onButtonClick={() => console.log("Cliked")} />
+                <AddtoCartButton
+                  onButtonClick={() =>
+                    user
+                      ? dispatch(addItemToCart(product))
+                      : router.push("/login")
+                  }
+                />
               </div>
             </div>
           );

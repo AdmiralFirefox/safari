@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { GetStaticProps } from "next";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import { AuthContext } from "../context/AuthContext";
 import HomeSlider from "../components/Slider/HomeSlider";
 import SortDropdown from "../components/SortDropdown/SortDropdown";
 import { SelectChangeEvent } from "@mui/material/Select";
@@ -25,6 +27,9 @@ import { Product } from "../types/Product/Product";
 import styles from "../styles/pages/Home.module.scss";
 
 const Home: NextPage<ProductsProps> = ({ products }) => {
+  const user = useContext(AuthContext);
+  const router = useRouter();
+
   const [sortProducts, setSortProducts] = useState("default");
   const [arrowUp, setArrowUp] = useState(false);
 
@@ -103,13 +108,20 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                 <div>
                   <div className={styles["home-product-item-category"]}>
                     <p>{product.category}</p>
-                    {favoriteID.includes(product.id) ? (
+                    {favoriteID.includes(product.id) && user ? (
                       <IconButton
                         onClick={() =>
                           dispatch(removeFromFavorites(product.id))
                         }
                       >
                         <FavoriteIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    ) : !user ? (
+                      <IconButton onClick={() => router.push("/login")}>
+                        <FavoriteBorderIcon
                           fontSize="large"
                           sx={{ color: "#fd5da8" }}
                         />
@@ -152,7 +164,11 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                 </div>
                 <div>
                   <AddtoCartButton
-                    onButtonClick={() => dispatch(addItemToCart(product))}
+                    onButtonClick={() =>
+                      user
+                        ? dispatch(addItemToCart(product))
+                        : router.push("/login")
+                    }
                   />
                 </div>
               </div>
@@ -178,13 +194,20 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                 <div>
                   <div className={styles["home-product-item-category"]}>
                     <p>{product.category}</p>
-                    {favoriteID.includes(product.id) ? (
+                    {favoriteID.includes(product.id) && user ? (
                       <IconButton
                         onClick={() =>
                           dispatch(removeFromFavorites(product.id))
                         }
                       >
                         <FavoriteIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    ) : !user ? (
+                      <IconButton onClick={() => router.push("/login")}>
+                        <FavoriteBorderIcon
                           fontSize="large"
                           sx={{ color: "#fd5da8" }}
                         />
@@ -227,7 +250,11 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                 </div>
                 <div>
                   <AddtoCartButton
-                    onButtonClick={() => dispatch(addItemToCart(product))}
+                    onButtonClick={() =>
+                      user
+                        ? dispatch(addItemToCart(product))
+                        : router.push("/login")
+                    }
                   />
                 </div>
               </div>
@@ -254,13 +281,20 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   <div>
                     <div className={styles["home-product-item-category"]}>
                       <p>{product.category}</p>
-                      {favoriteID.includes(product.id) ? (
+                      {favoriteID.includes(product.id) && user ? (
                         <IconButton
                           onClick={() =>
                             dispatch(removeFromFavorites(product.id))
                           }
                         >
                           <FavoriteIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      ) : !user ? (
+                        <IconButton onClick={() => router.push("/login")}>
+                          <FavoriteBorderIcon
                             fontSize="large"
                             sx={{ color: "#fd5da8" }}
                           />
@@ -303,7 +337,11 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   </div>
                   <div>
                     <AddtoCartButton
-                      onButtonClick={() => dispatch(addItemToCart(product))}
+                      onButtonClick={() =>
+                        user
+                          ? dispatch(addItemToCart(product))
+                          : router.push("/login")
+                      }
                     />
                   </div>
                 </div>

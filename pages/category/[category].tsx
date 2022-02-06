@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { AuthContext } from "../../context/AuthContext";
 import { CategoryProps } from "../../types/Category/Category";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { SelectChangeEvent } from "@mui/material/Select";
 import SortDropdown from "../../components/SortDropdown/SortDropdown";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -11,6 +13,13 @@ import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
 import Footer from "../../components/Footer/Footer";
+import { Product } from "../../types/Product/Product";
+import { useAppSelector, useAppDispatch } from "../../app/reduxhooks";
+import { addItemToCart } from "../../features/Cart/CartSlice";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../features/Favorites/FavoritesSlice";
 import styles from "../../styles/pages/Category.module.scss";
 
 type ContextProps = {
@@ -20,9 +29,18 @@ type ContextProps = {
 };
 
 const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
+  const user = useContext(AuthContext);
   const [sortCategoryProducts, setSortCategoryProducts] = useState("default");
   const router = useRouter();
   const categoryName = router.query.category;
+
+  const favorites = useAppSelector(
+    (state: { favorites: Product[] }) => state.favorites
+  );
+
+  const dispatch = useAppDispatch();
+
+  const favoriteID = favorites.map((favorite) => favorite.id);
 
   const sortedCategoryProducts = categoryProducts.sort((a, b) =>
     sortCategoryProducts === "default"
@@ -78,23 +96,39 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
       <div className={styles["category-products"]}>
         {sortedCategoryProducts.map((product) => {
           return (
-            <div
-              key={product.id}
-              className={styles["category-product-item"]}
-            >
+            <div key={product.id} className={styles["category-product-item"]}>
               <div>
-                <div
-                  className={styles["category-product-item-category"]}
-                >
+                <div className={styles["category-product-item-category"]}>
                   <p>{product.category}</p>
-                  <IconButton>
-                    <FavoriteBorderIcon fontSize="large" />
-                  </IconButton>
+                  {favoriteID.includes(product.id) && user ? (
+                    <IconButton
+                      onClick={() => dispatch(removeFromFavorites(product.id))}
+                    >
+                      <FavoriteIcon
+                        fontSize="large"
+                        sx={{ color: "#fd5da8" }}
+                      />
+                    </IconButton>
+                  ) : !user ? (
+                    <IconButton onClick={() => router.push("/login")}>
+                      <FavoriteBorderIcon
+                        fontSize="large"
+                        sx={{ color: "#fd5da8" }}
+                      />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={() => dispatch(addToFavorites(product))}
+                    >
+                      <FavoriteBorderIcon
+                        fontSize="large"
+                        sx={{ color: "#fd5da8" }}
+                      />
+                    </IconButton>
+                  )}
                 </div>
                 <Link href="/" passHref>
-                  <div
-                    className={styles["category-product-item-image"]}
-                  >
+                  <div className={styles["category-product-item-image"]}>
                     <Image
                       src={product.image}
                       alt=""
@@ -119,7 +153,13 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                 </p>
               </div>
               <div>
-                <AddtoCartButton onButtonClick={() => console.log("Cliked")} />
+                <AddtoCartButton
+                  onButtonClick={() =>
+                    user
+                      ? dispatch(addItemToCart(product))
+                      : router.push("/login")
+                  }
+                />
               </div>
             </div>
           );
