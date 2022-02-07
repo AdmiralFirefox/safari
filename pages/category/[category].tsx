@@ -42,29 +42,32 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
 
   const favoriteID = favorites.map((favorite) => favorite.id);
 
-  const sortedCategoryProducts = categoryProducts.sort((a, b) =>
-    sortCategoryProducts === "default"
-      ? a.id > b.id
-        ? 1
-        : -1
-      : sortCategoryProducts === "price-desc"
-      ? b.price > a.price
-        ? 1
-        : -1
-      : sortCategoryProducts === "price-asc"
-      ? a.price > b.price
-        ? 1
-        : -1
-      : sortCategoryProducts === "ratings-desc"
-      ? b.rating.rate > a.rating.rate
-        ? 1
-        : -1
-      : sortCategoryProducts === "ratings-asc"
-      ? a.rating.rate > b.rating.rate
-        ? 1
-        : -1
-      : 0
-  );
+  const newProducts: CategoryProps["categoryProducts"] = [];
+  const sortedCategoryProducts = newProducts
+    .concat(categoryProducts)
+    .sort((a, b) =>
+      sortCategoryProducts === "default"
+        ? a.id > b.id
+          ? 1
+          : -1
+        : sortCategoryProducts === "price-desc"
+        ? b.price > a.price
+          ? 1
+          : -1
+        : sortCategoryProducts === "price-asc"
+        ? a.price > b.price
+          ? 1
+          : -1
+        : sortCategoryProducts === "ratings-desc"
+        ? b.rating.rate > a.rating.rate
+          ? 1
+          : -1
+        : sortCategoryProducts === "ratings-asc"
+        ? a.rating.rate > b.rating.rate
+          ? 1
+          : -1
+        : 0
+    );
 
   const handleSortCategoryProductsChange = (e: SelectChangeEvent) => {
     setSortCategoryProducts(e.target.value);

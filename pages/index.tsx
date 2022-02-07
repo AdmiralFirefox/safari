@@ -30,6 +30,8 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
   const user = useContext(AuthContext);
   const router = useRouter();
 
+  console.log("This is an alternate branch");
+
   const [sortProducts, setSortProducts] = useState("default");
   const [arrowUp, setArrowUp] = useState(false);
 
