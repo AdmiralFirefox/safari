@@ -56,6 +56,14 @@ const LocationModal: FC<LocationModalProps> = ({
     }
   );
 
+  const countriesData = countries?.data;
+
+  //Sort Countries Alphabetically
+  const newCountries: Countries["data"] = [];
+  const sortedCountries = newCountries
+    .concat(countriesData as Countries["data"])
+    .sort((a, b) => (a.name.common > b.name.common ? 1 : -1));
+
   const backdropVariants = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -142,21 +150,13 @@ const LocationModal: FC<LocationModalProps> = ({
                     ) : isError ? (
                       <MenuItem value="">Error Loading Countries...</MenuItem>
                     ) : (
-                      countries?.data
-                        .sort((a, b) =>
-                          a.name.common > b.name.common
-                            ? 1
-                            : b.name.common > a.name.common
-                            ? -1
-                            : 0
-                        )
-                        .map((country, i) => {
-                          return (
-                            <MenuItem value={country.name.common} key={i}>
-                              {country.name.common}
-                            </MenuItem>
-                          );
-                        })
+                      sortedCountries.map((country, i) => {
+                        return (
+                          <MenuItem value={country.name.common} key={i}>
+                            {country.name.common}
+                          </MenuItem>
+                        );
+                      })
                     )}
                   </Select>
                 </FormControl>
