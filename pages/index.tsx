@@ -40,29 +40,32 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
 
   const favoriteID = favorites.map((favorite) => favorite.id);
 
-  const sortedProducts = products.sort((a, b) =>
-    sortProducts === "default"
-      ? a.id > b.id
-        ? 1
-        : -1
-      : sortProducts === "price-desc"
-      ? b.price > a.price
-        ? 1
-        : -1
-      : sortProducts === "price-asc"
-      ? a.price > b.price
-        ? 1
-        : -1
-      : sortProducts === "ratings-desc"
-      ? b.rating.rate > a.rating.rate
-        ? 1
-        : -1
-      : sortProducts === "ratings-asc"
-      ? a.rating.rate > b.rating.rate
-        ? 1
-        : -1
-      : 0
-  );
+  const newProducts: ProductsProps["products"] = [];
+  const sortedProducts = newProducts
+    .concat(products)
+    .sort((a, b) =>
+      sortProducts === "default"
+        ? a.id > b.id
+          ? 1
+          : -1
+        : sortProducts === "price-desc"
+        ? b.price > a.price
+          ? 1
+          : -1
+        : sortProducts === "price-asc"
+        ? a.price > b.price
+          ? 1
+          : -1
+        : sortProducts === "ratings-desc"
+        ? b.rating.rate > a.rating.rate
+          ? 1
+          : -1
+        : sortProducts === "ratings-asc"
+        ? a.rating.rate > b.rating.rate
+          ? 1
+          : -1
+        : 0
+    );
 
   const handleSortProductChange = (e: SelectChangeEvent) => {
     setSortProducts(e.target.value);
