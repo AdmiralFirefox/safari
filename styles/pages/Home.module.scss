@@ -1,5 +1,11 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
+.home-page-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 130em;
+}
+
 .home-content-wrapper {
   position: relative;
   bottom: 5em;
@@ -124,8 +130,13 @@
 }
 
 //Home Footer
-.home-footer-wrapper {
-  margin-top: -2em;
+.home-footer-container {
+  background: #232f3e;
+  width: 100%;
+
+  .home-footer-wrapper {
+    margin-top: -2em;
+  }
 }
 
 //Scroll To Top Icon Inactive
@@ -175,8 +186,10 @@
     }
   }
 
-  .home-footer-wrapper {
-    margin-top: -8em;
+  .home-footer-container {
+    .home-footer-wrapper {
+      margin-top: -8em;
+    }
   }
 
   .home-scroll-to-top {

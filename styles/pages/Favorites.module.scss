@@ -1,5 +1,11 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
+.favorites-page-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 130em;
+}
+
 //Title
 .favorites-title {
   margin: 1.5em 1.5em 1em 1.5em;

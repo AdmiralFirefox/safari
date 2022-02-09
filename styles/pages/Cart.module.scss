@@ -1,11 +1,17 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
 //Cart Title
-.cart-title {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 1.5em 1.5em 1em 1.5em;
+.cart-title-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 130em;
+
+  .cart-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 1.5em 1.5em 1em 1.5em;
+  }
 }
 
 .cart-content-wrapper {
@@ -139,10 +145,12 @@
 
 @media (min-width: theme-provider.$media_query_normal_value) {
   //Cart Title
-  .cart-title {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  .cart-title-container {
+    .cart-title {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   .cart-content-wrapper {

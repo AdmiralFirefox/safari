@@ -8,7 +8,6 @@ import { AuthContext } from "../context/AuthContext";
 import HomeSlider from "../components/Slider/HomeSlider";
 import SortDropdown from "../components/SortDropdown/SortDropdown";
 import { SelectChangeEvent } from "@mui/material/Select";
-import Box from "@mui/material/Box";
 import { ProductsProps } from "../types/Products/Products";
 import Rating from "@mui/material/Rating";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -96,13 +95,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          width: "100%",
-          margin: "0 auto",
-          maxWidth: "130em",
-        }}
-      >
+      <div className={styles["home-page-container"]}>
         <HomeSlider />
         <div className={styles["home-content-wrapper"]}>
           <div className={styles["home-sort-products"]}>
@@ -361,18 +354,13 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
             </div>
           </div>
         </div>
-      </Box>
+      </div>
 
-      <Box
-        sx={{
-          background: "#232f3e",
-          width: "100%",
-        }}
-      >
+      <div className={styles["home-footer-container"]}>
         <div className={styles["home-footer-wrapper"]}>
           <Footer />
         </div>
-      </Box>
+      </div>
 
       <div onClick={scrollToTopPage}>
         <IconContext.Provider

@@ -11,7 +11,6 @@ import SortDropdown from "../../components/SortDropdown/SortDropdown";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
-import Box from "@mui/material/Box";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
 import Footer from "../../components/Footer/Footer";
 import { Product } from "../../types/Product/Product";
@@ -81,21 +80,11 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: `${size.height}px`,
-        }}
+      <div
+        className={styles["category-page-container"]}
+        style={{ height: `${size.height}px` }}
       >
-        <Box
-          sx={{
-            width: "100%",
-            margin: "0 auto",
-            maxWidth: "130em",
-          }}
-        >
+        <div className={styles["category-page-content"]}>
           <div>
             <Image
               src="/assets/CategoryBanner.gif"
@@ -194,18 +183,12 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
               );
             })}
           </div>
-        </Box>
+        </div>
 
-        <Box
-          sx={{
-            background: "#232f3e",
-            width: "100%",
-            marginTop: "4em",
-          }}
-        >
+        <div className={styles["category-footer"]}>
           <Footer />
-        </Box>
-      </Box>
+        </div>
+      </div>
     </>
   );
 };

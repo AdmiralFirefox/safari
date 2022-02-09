@@ -1,5 +1,11 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
+.searchproduct-page-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 130em;
+}
+
 //Search Input
 .search-product-input {
   display: flex;

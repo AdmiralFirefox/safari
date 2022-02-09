@@ -12,7 +12,6 @@ import Rating from "@mui/material/Rating";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
-import Box from "@mui/material/Box";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Fuse from "fuse.js";
 import { addItemToCart } from "../features/Cart/CartSlice";
@@ -54,13 +53,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
 
   return (
     <>
-      <Box
-        sx={{
-          width: "100%",
-          margin: "0 auto",
-          maxWidth: "130em",
-        }}
-      >
+      <div className={styles["searchproduct-page-container"]}>
         <div className={styles["search-product-input"]}>
           <Paper
             sx={{
@@ -165,7 +158,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
             );
           })}
         </div>
-      </Box>
+      </div>
     </>
   );
 };

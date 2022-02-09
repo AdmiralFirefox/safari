@@ -11,7 +11,6 @@ import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import Box from "@mui/material/Box";
 import Placeholder from "../components/Placeholder/Placeholder";
 import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
 import styles from "../styles/pages/Favorites.module.scss";
@@ -52,13 +51,7 @@ const Favorites: NextPage = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          width: "100%",
-          margin: "0 auto",
-          maxWidth: "130em",
-        }}
-      >
+      <div className={styles["favorites-page-container"]}>
         <div className={styles["favorites-title"]}>
           <h1>Your Favorites: </h1>
         </div>
@@ -112,7 +105,7 @@ const Favorites: NextPage = () => {
             );
           })}
         </div>
-      </Box>
+      </div>
     </>
   );
 };
