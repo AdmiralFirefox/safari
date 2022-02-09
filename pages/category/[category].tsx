@@ -15,6 +15,8 @@ import Box from "@mui/material/Box";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
 import Footer from "../../components/Footer/Footer";
 import { Product } from "../../types/Product/Product";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { Size } from "../../types/WindowSize/WindowSize";
 import { useAppSelector, useAppDispatch } from "../../app/reduxhooks";
 import { addItemToCart } from "../../features/Cart/CartSlice";
 import {
@@ -32,6 +34,9 @@ type ContextProps = {
 const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
   const user = useContext(AuthContext);
   const [sortCategoryProducts, setSortCategoryProducts] = useState("default");
+
+  const size: Size = useWindowSize();
+
   const router = useRouter();
   const categoryName = router.query.category;
 
@@ -81,7 +86,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          height: "100vh",
+          height: `${size.height}px`,
         }}
       >
         <Box
