@@ -18,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import Box from "@mui/material/Box";
 import Placeholder from "../components/Placeholder/Placeholder";
 import ClearCartButton from "../components/Button/ClearCartButton";
 import ItemQuantityButton from "../components/Button/ItemQuantityButton";
@@ -129,12 +130,14 @@ const Cart: NextPage = () => {
         }}
       />
 
-      <div className={styles["cart-title"]}>
-        <h1>Your Cart:</h1>
-        <ClearCartButton onButtonClick={openClearCartModal}>
-          Clear Cart
-        </ClearCartButton>
-      </div>
+      <Box sx={{ width: "100%", margin: "0 auto", maxWidth: "130em" }}>
+        <div className={styles["cart-title"]}>
+          <h1>Your Cart:</h1>
+          <ClearCartButton onButtonClick={openClearCartModal}>
+            Clear Cart
+          </ClearCartButton>
+        </div>
+      </Box>
 
       {cart.map((item) => {
         return (

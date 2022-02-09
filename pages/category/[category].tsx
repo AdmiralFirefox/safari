@@ -11,6 +11,7 @@ import SortDropdown from "../../components/SortDropdown/SortDropdown";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
+import Box from "@mui/material/Box";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
 import Footer from "../../components/Footer/Footer";
 import { Product } from "../../types/Product/Product";
@@ -75,103 +76,131 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
 
   return (
     <>
-      <div>
-        <Image
-          src="/assets/CategoryBanner.gif"
-          alt=""
-          width="100%"
-          height="10%"
-          layout="responsive"
-          objectFit="cover"
-        />
-      </div>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100vh",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            margin: "0 auto",
+            maxWidth: "130em",
+          }}
+        >
+          <div>
+            <Image
+              src="/assets/CategoryBanner.gif"
+              alt=""
+              width="100%"
+              height="10%"
+              layout="responsive"
+              objectFit="cover"
+            />
+          </div>
 
-      <div className={styles["category-title"]}>
-        <p>{categoryName}</p>
-        <div className={styles["category-sort-products"]}>
-          <SortDropdown
-            sortValue={sortCategoryProducts}
-            onChangeValue={handleSortCategoryProductsChange}
-          />
-        </div>
-      </div>
+          <div className={styles["category-title"]}>
+            <p>{categoryName}</p>
+            <div className={styles["category-sort-products"]}>
+              <SortDropdown
+                sortValue={sortCategoryProducts}
+                onChangeValue={handleSortCategoryProductsChange}
+              />
+            </div>
+          </div>
 
-      <div className={styles["category-products"]}>
-        {sortedCategoryProducts.map((product) => {
-          return (
-            <div key={product.id} className={styles["category-product-item"]}>
-              <div>
-                <div className={styles["category-product-item-category"]}>
-                  <p>{product.category}</p>
-                  {favoriteID.includes(product.id) && user ? (
-                    <IconButton
-                      onClick={() => dispatch(removeFromFavorites(product.id))}
-                    >
-                      <FavoriteIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  ) : !user ? (
-                    <IconButton onClick={() => router.push("/login")}>
-                      <FavoriteBorderIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      onClick={() => dispatch(addToFavorites(product))}
-                    >
-                      <FavoriteBorderIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  )}
-                </div>
-                <Link href="/" passHref>
-                  <div className={styles["category-product-item-image"]}>
-                    <Image
-                      src={product.image}
-                      alt=""
-                      layout="fill"
-                      objectFit="contain"
+          <div className={styles["category-products"]}>
+            {sortedCategoryProducts.map((product) => {
+              return (
+                <div
+                  key={product.id}
+                  className={styles["category-product-item"]}
+                >
+                  <div>
+                    <div className={styles["category-product-item-category"]}>
+                      <p>{product.category}</p>
+                      {favoriteID.includes(product.id) && user ? (
+                        <IconButton
+                          onClick={() =>
+                            dispatch(removeFromFavorites(product.id))
+                          }
+                        >
+                          <FavoriteIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      ) : !user ? (
+                        <IconButton onClick={() => router.push("/login")}>
+                          <FavoriteBorderIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          onClick={() => dispatch(addToFavorites(product))}
+                        >
+                          <FavoriteBorderIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      )}
+                    </div>
+                    <Link href="/" passHref>
+                      <div className={styles["category-product-item-image"]}>
+                        <Image
+                          src={product.image}
+                          alt=""
+                          layout="fill"
+                          objectFit="contain"
+                        />
+                      </div>
+                    </Link>
+                    <p className={styles["category-product-item-title"]}>
+                      {product.title}
+                    </p>
+                    <Rating
+                      name="Product Ratings"
+                      value={product.rating.rate}
+                      precision={0.5}
+                      sx={{ margin: "0.5em 0em" }}
+                      size="small"
+                      readOnly
+                    />
+                    <p className={styles["category-product-item-price"]}>
+                      ${product.price.toFixed(2)}
+                    </p>
+                  </div>
+                  <div>
+                    <AddtoCartButton
+                      onButtonClick={() =>
+                        user
+                          ? dispatch(addItemToCart(product))
+                          : router.push("/login")
+                      }
                     />
                   </div>
-                </Link>
-                <p className={styles["category-product-item-title"]}>
-                  {product.title}
-                </p>
-                <Rating
-                  name="Product Ratings"
-                  value={product.rating.rate}
-                  precision={0.5}
-                  sx={{ margin: "0.5em 0em" }}
-                  size="small"
-                  readOnly
-                />
-                <p className={styles["category-product-item-price"]}>
-                  ${product.price.toFixed(2)}
-                </p>
-              </div>
-              <div>
-                <AddtoCartButton
-                  onButtonClick={() =>
-                    user
-                      ? dispatch(addItemToCart(product))
-                      : router.push("/login")
-                  }
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+                </div>
+              );
+            })}
+          </div>
+        </Box>
 
-      <div className={styles["category-footer-wrapper"]}>
-        <Footer />
-      </div>
+        <Box
+          sx={{
+            background: "#232f3e",
+            width: "100%",
+            marginTop: "4em",
+          }}
+        >
+          <Footer />
+        </Box>
+      </Box>
     </>
   );
 };

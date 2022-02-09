@@ -1,11 +1,13 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
 .footer-wrapper {
-  background: theme-provider.$category_nav_background;
   padding: 4em 1em 4em 3em;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 2em;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 120em;
 
   .footer-links {
     display: flex;

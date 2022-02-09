@@ -12,6 +12,7 @@ import Rating from "@mui/material/Rating";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Fuse from "fuse.js";
 import { addItemToCart } from "../features/Cart/CartSlice";
@@ -53,108 +54,118 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
 
   return (
     <>
-      <div className={styles["search-product-input"]}>
-        <Paper
-          sx={{
-            p: "0.5em",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "min(85%, 30em)",
-            background: "#EAEDED",
-            boxShadow: "none",
-          }}
-        >
-          <InputBase
-            placeholder="Search Products"
-            inputProps={{ "aria-label": "search products" }}
-            sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
-            onChange={handleSearchProductChange}
-          />
-        </Paper>
-      </div>
+      <Box
+        sx={{
+          width: "100%",
+          margin: "0 auto",
+          maxWidth: "130em",
+        }}
+      >
+        <div className={styles["search-product-input"]}>
+          <Paper
+            sx={{
+              p: "0.5em",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "min(85%, 30em)",
+              background: "#EAEDED",
+              boxShadow: "none",
+            }}
+          >
+            <InputBase
+              placeholder="Search Products"
+              inputProps={{ "aria-label": "search products" }}
+              sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
+              onChange={handleSearchProductChange}
+            />
+          </Paper>
+        </div>
 
-      <div className={styles["search-product-results-text"]}>
-        {productResults.length !== 0 || searchProduct !== "" ? (
-          <p>
-            {productResults.length} Search Results for: &ldquo;{searchProduct}
-            &rdquo;
-          </p>
-        ) : null}
-      </div>
+        <div className={styles["search-product-results-text"]}>
+          {productResults.length !== 0 || searchProduct !== "" ? (
+            <p>
+              {productResults.length} Search Results for: &ldquo;{searchProduct}
+              &rdquo;
+            </p>
+          ) : null}
+        </div>
 
-      <div className={styles["search-products-wrapper"]}>
-        {productResults.map((product) => {
-          return (
-            <div key={product.id} className={styles["search-product-item"]}>
-              <div>
-                <div className={styles["search-product-item-category"]}>
-                  <p>{product.category}</p>
-                  {favoriteID.includes(product.id) && user ? (
-                    <IconButton
-                      onClick={() => dispatch(removeFromFavorites(product.id))}
-                    >
-                      <FavoriteIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  ) : !user ? (
-                    <IconButton onClick={() => router.push("/login")}>
-                      <FavoriteBorderIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      onClick={() => dispatch(addToFavorites(product))}
-                    >
-                      <FavoriteBorderIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  )}
-                </div>
-                <Link href="/" passHref>
-                  <div className={styles["search-product-item-image"]}>
-                    <Image
-                      src={product.image}
-                      alt=""
-                      layout="fill"
-                      objectFit="contain"
-                    />
+        <div className={styles["search-products-wrapper"]}>
+          {productResults.map((product) => {
+            return (
+              <div key={product.id} className={styles["search-product-item"]}>
+                <div>
+                  <div className={styles["search-product-item-category"]}>
+                    <p>{product.category}</p>
+                    {favoriteID.includes(product.id) && user ? (
+                      <IconButton
+                        onClick={() =>
+                          dispatch(removeFromFavorites(product.id))
+                        }
+                      >
+                        <FavoriteIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    ) : !user ? (
+                      <IconButton onClick={() => router.push("/login")}>
+                        <FavoriteBorderIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        onClick={() => dispatch(addToFavorites(product))}
+                      >
+                        <FavoriteBorderIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    )}
                   </div>
-                </Link>
-                <p className={styles["search-product-item-title"]}>
-                  {product.title}
-                </p>
-                <Rating
-                  name="Product Ratings"
-                  value={product.rating.rate}
-                  precision={0.5}
-                  sx={{ margin: "0.5em 0em" }}
-                  size="small"
-                  readOnly
-                />
-                <p className={styles["search-product-item-price"]}>
-                  ${product.price.toFixed(2)}
-                </p>
+                  <Link href="/" passHref>
+                    <div className={styles["search-product-item-image"]}>
+                      <Image
+                        src={product.image}
+                        alt=""
+                        layout="fill"
+                        objectFit="contain"
+                      />
+                    </div>
+                  </Link>
+                  <p className={styles["search-product-item-title"]}>
+                    {product.title}
+                  </p>
+                  <Rating
+                    name="Product Ratings"
+                    value={product.rating.rate}
+                    precision={0.5}
+                    sx={{ margin: "0.5em 0em" }}
+                    size="small"
+                    readOnly
+                  />
+                  <p className={styles["search-product-item-price"]}>
+                    ${product.price.toFixed(2)}
+                  </p>
+                </div>
+                <div>
+                  <AddtoCartButton
+                    onButtonClick={() =>
+                      user
+                        ? dispatch(addItemToCart(product))
+                        : router.push("/login")
+                    }
+                  />
+                </div>
               </div>
-              <div>
-                <AddtoCartButton
-                  onButtonClick={() =>
-                    user
-                      ? dispatch(addItemToCart(product))
-                      : router.push("/login")
-                  }
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </Box>
     </>
   );
 };
