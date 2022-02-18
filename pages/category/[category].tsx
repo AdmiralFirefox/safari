@@ -145,7 +145,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                         </IconButton>
                       )}
                     </div>
-                    <Link href="/" passHref>
+                    <Link href={`/product/${product.id}`} passHref>
                       <div className={styles["category-product-item-image"]}>
                         <Image
                           src={product.image}

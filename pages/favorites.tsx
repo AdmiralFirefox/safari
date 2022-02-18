@@ -73,7 +73,7 @@ const Favorites: NextPage = () => {
                       />
                     </IconButton>
                   </div>
-                  <Link href="/" passHref>
+                  <Link href={`/product/${item.id}`} passHref>
                     <div className={styles["favorites-item-image"]}>
                       <Image
                         src={item.image}

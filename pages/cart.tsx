@@ -1,5 +1,7 @@
 import { useState, useContext, ChangeEvent } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { AuthContext } from "../context/AuthContext";
 import type { NextPage } from "next";
 import {
@@ -30,6 +32,7 @@ import styles from "../styles/pages/Cart.module.scss";
 
 const Cart: NextPage = () => {
   const user = useContext(AuthContext);
+  const router = useRouter();
   const cart = useAppSelector((state: { cart: Product[] }) => state.cart);
   const dispatch = useAppDispatch();
 
@@ -180,7 +183,10 @@ const Cart: NextPage = () => {
                     />
                   </div>
 
-                  <div className={styles["cart-item-info-icon"]}>
+                  <div
+                    className={styles["cart-item-info-icon"]}
+                    onClick={() => router.push(`/product/${item.id}`)}
+                  >
                     <IconButton>
                       <InfoIcon
                         sx={{

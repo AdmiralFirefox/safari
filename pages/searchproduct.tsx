@@ -120,7 +120,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                       </IconButton>
                     )}
                   </div>
-                  <Link href="/" passHref>
+                  <Link href={`/product/${product.id}`} passHref>
                     <div className={styles["search-product-item-image"]}>
                       <Image
                         src={product.image}
