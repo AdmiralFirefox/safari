@@ -37,16 +37,14 @@ const cartSlice = createSlice({
       const itemExists = state.find((item) => item.id === action.payload.id);
       if (itemExists) {
         //Setting the Limit to 50
+        const limit = itemExists.quantity! + action.payload.quantity!;
+
         if (itemExists.quantity! >= 50) {
+          itemExists.quantity = 50;
+        } else if (limit >= 50) {
           itemExists.quantity = 50;
         } else {
           itemExists.quantity! += action.payload.quantity!;
-        }
-
-        const limit = itemExists.quantity! + action.payload.quantity!;
-
-        if (limit >= 50) {
-          itemExists.quantity = 50;
         }
       } else {
         state.push({ ...action.payload, quantity: action.payload.quantity });
