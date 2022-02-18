@@ -32,6 +32,27 @@ const cartSlice = createSlice({
       }
     },
 
+    //Custom Quantity to add on the Cart
+    addProductQuantity: (state, action: PayloadAction<Product>) => {
+      const itemExists = state.find((item) => item.id === action.payload.id);
+      if (itemExists) {
+        //Setting the Limit to 50
+        if (itemExists.quantity! >= 50) {
+          itemExists.quantity = 50;
+        } else {
+          itemExists.quantity! += action.payload.quantity!;
+        }
+
+        const limit = itemExists.quantity! + action.payload.quantity!;
+
+        if (limit >= 50) {
+          itemExists.quantity = 50;
+        }
+      } else {
+        state.push({ ...action.payload, quantity: action.payload.quantity });
+      }
+    },
+
     //Incrementing Quantity from Cart
     incrementQuantity: (state, action: PayloadAction<number>) => {
       const item = state.find((item) => item.id === action.payload);
@@ -70,6 +91,7 @@ const cartSlice = createSlice({
 export const {
   addItemToCart,
   setQuantity,
+  addProductQuantity,
   incrementQuantity,
   decrementQuantity,
   clearCart,

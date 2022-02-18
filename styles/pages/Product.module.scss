@@ -69,6 +69,27 @@
       div:first-child {
         display: flex;
         align-items: center;
+
+        input {
+          width: 4em;
+          margin: 0em 1em;
+          height: 2.5em;
+          padding: 0.4em;
+          border: 3px solid theme-provider.$dark_gray_color;
+          border-radius: 5px;
+          outline: none;
+          transition: border 0.3s ease-in-out;
+
+          &[type="text"] {
+            color: theme-provider.$black_color;
+            font-size: 1rem;
+            font-weight: 700;
+          }
+
+          &[type="text"]:focus {
+            border: 3px solid theme-provider.$black_color;
+          }
+        }
       }
 
       //Add to Cart Button

@@ -1,4 +1,7 @@
+import { useState, useContext, ChangeEvent } from "react";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { AuthContext } from "../../context/AuthContext";
 import { GlassMagnifier } from "react-image-magnifiers";
 import { Product } from "../../types/Product/Product";
 import { ProductItem } from "../../types/Product/ProductItem";
@@ -6,12 +9,17 @@ import Divider from "@mui/material/Divider";
 import Rating from "@mui/material/Rating";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import ItemQuantityButton from "../../components/Button/ItemQuantityButton";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
+import { useAppSelector, useAppDispatch } from "../../app/reduxhooks";
+import { addProductQuantity } from "../../features/Cart/CartSlice";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../features/Favorites/FavoritesSlice";
 import styles from "../../styles/pages/Product.module.scss";
 
 type ContextProps = {
@@ -21,6 +29,48 @@ type ContextProps = {
 };
 
 const Product: NextPage<ProductItem> = ({ product }) => {
+  const [productQuantity, setProductQuantity] = useState(1);
+
+  const user = useContext(AuthContext);
+  const router = useRouter();
+
+  const favorites = useAppSelector(
+    (state: { favorites: Product[] }) => state.favorites
+  );
+
+  const dispatch = useAppDispatch();
+
+  const favoriteID = favorites.map((favorite) => favorite.id);
+
+  const incrementProductQuantity = () => {
+    if (productQuantity >= 50) {
+      setProductQuantity(50);
+    } else {
+      setProductQuantity((prevQuantityCount) => prevQuantityCount + 1);
+    }
+  };
+
+  const decrementProductQuantity = () => {
+    if (productQuantity <= 0) {
+      setProductQuantity(0);
+    } else {
+      setProductQuantity((prevQuantityCount) => prevQuantityCount - 1);
+    }
+  };
+
+  //Handling Quantity Changes
+  const handleQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let { value, min, max } = e.target;
+    let numValue = Number(value);
+
+    numValue = Math.max(
+      Number(min),
+      Math.min(Number(max), Number(value.replace(/\D/, "")))
+    );
+
+    setProductQuantity(numValue);
+  };
+
   return (
     <div className={styles["product-wrapper"]}>
       <div className={styles["product-image-wrapper"]}>
@@ -34,14 +84,28 @@ const Product: NextPage<ProductItem> = ({ product }) => {
           magnifierBorderColor="rgba(255, 255, 255, .5)"
           square={true}
         />
-        <IconButton sx={{ marginTop: "0.6em" }}>
-          <FavoriteIcon
-            fontSize="large"
-            sx={{
-              color: "#fd5da8",
-            }}
-          />
-        </IconButton>
+        {favoriteID.includes(product.id) && user ? (
+          <IconButton
+            sx={{ marginTop: "0.6em" }}
+            onClick={() => dispatch(removeFromFavorites(product.id))}
+          >
+            <FavoriteIcon fontSize="large" sx={{ color: "#fd5da8" }} />
+          </IconButton>
+        ) : !user ? (
+          <IconButton
+            sx={{ marginTop: "0.6em" }}
+            onClick={() => router.push("/login")}
+          >
+            <FavoriteBorderIcon fontSize="large" sx={{ color: "#fd5da8" }} />
+          </IconButton>
+        ) : (
+          <IconButton
+            sx={{ marginTop: "0.6em" }}
+            onClick={() => dispatch(addToFavorites(product))}
+          >
+            <FavoriteBorderIcon fontSize="large" sx={{ color: "#fd5da8" }} />
+          </IconButton>
+        )}
       </div>
       <div>
         <p className={styles["product-title"]}>{product.title}</p>
@@ -79,35 +143,35 @@ const Product: NextPage<ProductItem> = ({ product }) => {
         />
         <div className={styles["product-quantity-wrapper"]}>
           <div>
-            <ItemQuantityButton onButtonClick={() => console.log("Updated")}>
+            <ItemQuantityButton
+              onButtonClick={incrementProductQuantity}
+              disabledButton={productQuantity >= 50}
+            >
               <AddIcon />
             </ItemQuantityButton>
-            <Paper
-              sx={{
-                p: "0.3em",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "6em",
-                margin: "0em 1em",
-                background: "#EAEDED",
-                boxShadow: "none",
-              }}
-            >
-              <InputBase
-                placeholder="Input Quantity"
-                inputProps={{ "aria-label": "search products" }}
-                sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
-              />
-            </Paper>
 
-            <ItemQuantityButton onButtonClick={() => console.log("Updated")}>
+            <input
+              type="text"
+              onChange={handleQuantityChange}
+              value={productQuantity}
+              min="0"
+              max="50"
+            />
+
+            <ItemQuantityButton
+              onButtonClick={decrementProductQuantity}
+              disabledButton={productQuantity <= 1}
+            >
               <RemoveIcon />
             </ItemQuantityButton>
           </div>
           <div className={styles["add-to-cart-button-wrapper"]}>
             <AddtoCartButton
-              onButtonClick={() => console.log("Added to Cart")}
+              onButtonClick={() =>
+                dispatch(
+                  addProductQuantity({ ...product, quantity: productQuantity })
+                )
+              }
             />
           </div>
         </div>
