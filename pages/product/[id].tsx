@@ -168,9 +168,14 @@ const Product: NextPage<ProductItem> = ({ product }) => {
           <div className={styles["add-to-cart-button-wrapper"]}>
             <AddtoCartButton
               onButtonClick={() =>
-                dispatch(
-                  addProductQuantity({ ...product, quantity: productQuantity })
-                )
+                user
+                  ? dispatch(
+                      addProductQuantity({
+                        ...product,
+                        quantity: productQuantity,
+                      })
+                    )
+                  : router.push("/login")
               }
             />
           </div>
