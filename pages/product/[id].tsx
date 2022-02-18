@@ -8,6 +8,8 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import IconButton from "@mui/material/IconButton";
 import ItemQuantityButton from "../../components/Button/ItemQuantityButton";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
 import styles from "../../styles/pages/Product.module.scss";
@@ -32,6 +34,14 @@ const Product: NextPage<ProductItem> = ({ product }) => {
           magnifierBorderColor="rgba(255, 255, 255, .5)"
           square={true}
         />
+        <IconButton sx={{ marginTop: "0.6em" }}>
+          <FavoriteIcon
+            fontSize="large"
+            sx={{
+              color: "#fd5da8",
+            }}
+          />
+        </IconButton>
       </div>
       <div>
         <p className={styles["product-title"]}>{product.title}</p>
