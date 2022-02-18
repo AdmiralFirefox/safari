@@ -1,0 +1,110 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+.product-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3em 2em;
+
+  //Image Wrapper
+  .product-image-wrapper {
+    .product-image {
+      width: 10em;
+    }
+  }
+
+  div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    //Title
+    .product-title {
+      font-size: 1.5rem;
+      text-align: center;
+      color: theme-provider.$black_color;
+      font-weight: 700;
+      line-height: 1.3em;
+      margin-top: 1em;
+    }
+
+    //Price
+    .product-price {
+      color: theme-provider.$slightly_light_gray_color;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    //Description Title
+    .product-description-title {
+      color: theme-provider.$black_color;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    //Decription
+    .product-description {
+      color: theme-provider.$black_color;
+      margin-top: 0.7em;
+      text-align: center;
+      font-weight: 500;
+      line-height: 1.5em;
+    }
+
+    //Category
+    .product-category {
+      margin-top: 1em;
+      color: theme-provider.$slightly_light_gray_color;
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    .product-quantity-wrapper {
+      margin-top: 0.5em;
+
+      div:first-child {
+        display: flex;
+        align-items: center;
+      }
+
+      //Add to Cart Button
+      .add-to-cart-button-wrapper {
+        margin-top: 1.5em;
+        width: min(100%, 10em);
+      }
+    }
+  }
+}
+
+@media (min-width: theme-provider.$media_query_normal_value) {
+  .product-wrapper {
+    flex-direction: row;
+    justify-content: center;
+
+    //Image Wrapper
+    .product-image-wrapper {
+      align-self: flex-start;
+      margin-right: 1.5em;
+
+      .product-image {
+        width: 15em;
+      }
+    }
+
+    div:last-child {
+      align-items: flex-start;
+      width: min(80%, 43em);
+
+      //Title
+      .product-title {
+        text-align: left;
+        margin-top: 0em;
+      }
+
+      //Decription
+      .product-description {
+        text-align: left;
+      }
+    }
+  }
+}

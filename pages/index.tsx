@@ -141,7 +141,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                         </IconButton>
                       )}
                     </div>
-                    <Link href="/" passHref>
+                    <Link href={`/product/${product.id}`} passHref>
                       <div className={styles["home-product-item-image"]}>
                         <Image
                           src={product.image}
@@ -227,7 +227,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                         </IconButton>
                       )}
                     </div>
-                    <Link href="/" passHref>
+                    <Link href={`/product/${product.id}`} passHref>
                       <div className={styles["home-product-item-image"]}>
                         <Image
                           src={product.image}
@@ -314,7 +314,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                           </IconButton>
                         )}
                       </div>
-                      <Link href="/" passHref>
+                      <Link href={`/product/${product.id}`} passHref>
                         <div className={styles["home-product-item-image"]}>
                           <Image
                             src={product.image}
