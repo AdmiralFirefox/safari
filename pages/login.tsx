@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
+import { toast, Zoom } from "react-toastify";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -45,10 +46,29 @@ const LogIn: NextPage = () => {
         passwordRef.current!.value
       );
       setLoading(false);
+      toast.success("Signed In Successfully!", {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     } catch (error) {
       console.error(error);
-      alert(error);
       setLoading(false);
+      toast.error(`${error}`, {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     }
   };
 
@@ -60,9 +80,28 @@ const LogIn: NextPage = () => {
 
     try {
       await signInWithPopup(auth, provider);
+      toast.success("Signed In Successfully!", {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     } catch (err) {
       console.log(err);
-      alert(err);
+      toast.error(`${err}`, {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     }
   };
 
@@ -72,9 +111,29 @@ const LogIn: NextPage = () => {
     try {
       await signInAnonymously(auth);
       setLoading(false);
+      toast.success("Signed In Successfully!", {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     } catch (err) {
       console.log(err);
       setLoading(false);
+      toast.error(`${err}`, {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     }
   };
 

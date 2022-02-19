@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import { toast, Zoom } from "react-toastify";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -43,10 +44,29 @@ const SignUp: NextPage = () => {
         passwordRef.current!.value
       );
       setLoading(false);
+      toast.success("Created Account Successfully!", {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     } catch (error) {
       console.error(error);
-      alert(error);
       setLoading(false);
+      toast.error(`${error}`, {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     }
   };
 
