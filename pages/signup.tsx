@@ -99,13 +99,17 @@ const SignUp: NextPage = () => {
       {!user ? (
         <>
           <div className={styles["signup-web-logo"]}>
-            <Image
-              src="/assets/SafariLogoDark.png"
-              alt="Web Logo"
-              width={200}
-              height={70}
-              objectFit="cover"
-            />
+            <Link href="/">
+              <a>
+                <Image
+                  src="/assets/SafariLogoDark.png"
+                  alt="Web Logo"
+                  width={200}
+                  height={70}
+                  objectFit="cover"
+                />
+              </a>
+            </Link>
           </div>
 
           <div className={styles["signup-wrapper"]}>

@@ -172,14 +172,19 @@ const LogIn: NextPage = () => {
       {!user && (
         <>
           <div className={styles["login-web-logo"]}>
-            <Image
-              src="/assets/SafariLogoDark.png"
-              alt="Web Logo"
-              width={200}
-              height={70}
-              objectFit="cover"
-            />
+            <Link href="/">
+              <a>
+                <Image
+                  src="/assets/SafariLogoDark.png"
+                  alt="Web Logo"
+                  width={200}
+                  height={70}
+                  objectFit="cover"
+                />
+              </a>
+            </Link>
           </div>
+
           <div className={styles["login-wrapper"]}>
             <div className={styles["login-content"]}>
               <h1 className={styles["login-title"]}>Log In</h1>
