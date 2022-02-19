@@ -79,7 +79,7 @@ const LogIn: NextPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  const loadingInfo = () => {
+  const loadingInfo = (): JSX.Element => {
     if (loading) {
       return (
         <CircularProgress size={45} sx={{ color: "#000", marginTop: "1em" }} />
