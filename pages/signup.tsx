@@ -209,7 +209,7 @@ const SignUp: NextPage = () => {
                         value === password.current || "Passwords do not match",
                     })}
                     type="password"
-                    placeholder="Enter Password"
+                    placeholder="Confirm Password"
                     inputProps={{ "aria-label": "password" }}
                     sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
                   />
