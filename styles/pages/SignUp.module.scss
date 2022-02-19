@@ -38,6 +38,14 @@
       font-size: 1.2rem;
     }
 
+    //Form Alert
+    .signup-form-alert {
+      color: theme-provider.$orange_color;
+      text-align: left;
+      font-weight: 700;
+      margin-top: 0.3em;
+    }
+
     //Conditions
     .signup-conditions {
       color: theme-provider.$black_color;
@@ -52,6 +60,14 @@
           text-decoration: underline;
         }
       }
+    }
+
+    //Circular Progress Wrapper
+    .circular-wrapper {
+      margin-top: 1em;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
     //Button Wrapper

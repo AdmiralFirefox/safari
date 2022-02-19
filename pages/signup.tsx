@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -20,6 +21,17 @@ const SignUp: NextPage = () => {
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
+
+  //Watching if both passwords inputed are the same
+  const password = useRef({});
+  password.current = watch("password", "");
 
   //Create Account
   const createAccount = async () => {
@@ -49,14 +61,14 @@ const SignUp: NextPage = () => {
   const loadingInfo = (): JSX.Element => {
     if (loading) {
       return (
-        <CircularProgress size={45} sx={{ color: "#000", marginTop: "1em" }} />
+        <div className={styles["circular-wrapper"]}>
+          <CircularProgress size={45} sx={{ color: "#000" }} />
+        </div>
       );
     } else {
       return (
         <div className={styles["signup-button-wrapper"]}>
-          <AccountButton onButtonClick={createAccount}>
-            Create Account
-          </AccountButton>
+          <AccountButton>Create Account</AccountButton>
         </div>
       );
     }
@@ -80,85 +92,127 @@ const SignUp: NextPage = () => {
             <div className={styles["signup-content"]}>
               <h1 className={styles["signup-title"]}>Sign Up</h1>
 
-              <p className={styles["signup-form-label"]}>Email</p>
-              <Paper
-                sx={{
-                  p: "0.5em",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  background: "#EAEDED",
-                  boxShadow: "none",
-                }}
-              >
-                <InputBase
-                  inputRef={emailRef}
-                  type="email"
-                  placeholder="Enter Email"
-                  inputProps={{ "aria-label": "email" }}
-                  sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
-                />
-              </Paper>
+              <form onSubmit={handleSubmit(createAccount)}>
+                <p className={styles["signup-form-label"]}>Email</p>
+                <Paper
+                  sx={{
+                    p: "0.5em",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    background: "#EAEDED",
+                    boxShadow: "none",
+                  }}
+                >
+                  <InputBase
+                    inputRef={emailRef}
+                    type="email"
+                    id="email"
+                    aria-invalid={errors.email ? "true" : "false"}
+                    {...register("email", {
+                      required: "required",
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Please enter a valid email",
+                      },
+                    })}
+                    placeholder="Enter Email"
+                    inputProps={{ "aria-label": "email" }}
+                    sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
+                  />
+                </Paper>
+                {errors.email && (
+                  <p role="alert" className={styles["signup-form-alert"]}>
+                    {errors.email.message}
+                  </p>
+                )}
 
-              <p className={styles["signup-form-label"]}>Password</p>
-              <Paper
-                sx={{
-                  p: "0.5em",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  background: "#EAEDED",
-                  boxShadow: "none",
-                }}
-              >
-                <InputBase
-                  inputRef={passwordRef}
-                  type="password"
-                  placeholder="Enter Password"
-                  inputProps={{ "aria-label": "password" }}
-                  sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
-                />
-              </Paper>
+                <p className={styles["signup-form-label"]}>Password</p>
+                <Paper
+                  sx={{
+                    p: "0.5em",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    background: "#EAEDED",
+                    boxShadow: "none",
+                  }}
+                >
+                  <InputBase
+                    inputRef={passwordRef}
+                    type="password"
+                    id="password"
+                    aria-invalid={errors.password ? "true" : "false"}
+                    {...register("password", {
+                      required: "required",
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters",
+                      },
+                    })}
+                    placeholder="Enter Password"
+                    inputProps={{ "aria-label": "password" }}
+                    sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
+                  />
+                </Paper>
+                {errors.password && (
+                  <p role="alert" className={styles["signup-form-alert"]}>
+                    {errors.password.message}
+                  </p>
+                )}
 
-              <p className={styles["signup-form-label"]}>Confirm Password</p>
-              <Paper
-                sx={{
-                  p: "0.5em",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  background: "#EAEDED",
-                  boxShadow: "none",
-                }}
-              >
-                <InputBase
-                  inputRef={passwordRef}
-                  type="password"
-                  placeholder="Enter Password"
-                  inputProps={{ "aria-label": "password" }}
-                  sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
-                />
-              </Paper>
+                <p className={styles["signup-form-label"]}>Confirm Password</p>
+                <Paper
+                  sx={{
+                    p: "0.5em",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    background: "#EAEDED",
+                    boxShadow: "none",
+                  }}
+                >
+                  <InputBase
+                    inputRef={passwordRef}
+                    id="confirmPassword"
+                    aria-invalid={errors.password ? "true" : "false"}
+                    {...register("confirmPassword", {
+                      required: "Please re-enter your password",
+                      validate: (value) =>
+                        value === password.current || "Passwords do not match",
+                    })}
+                    type="password"
+                    placeholder="Enter Password"
+                    inputProps={{ "aria-label": "password" }}
+                    sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
+                  />
+                </Paper>
+                {errors.confirmPassword && (
+                  <p role="alert" className={styles["signup-form-alert"]}>
+                    {errors.confirmPassword.message}
+                  </p>
+                )}
 
-              <p className={styles["signup-conditions"]}>
-                By Logging in, you agree to Safari&apos;s{" "}
-                <Link href="/login">
-                  <a className={styles["signup-conditions-highlights"]}>
-                    Conditions of Use
-                  </a>
-                </Link>{" "}
-                and{" "}
-                <Link href="/login">
-                  <a className={styles["signup-conditions-highlights"]}>
-                    Privacy Notice
-                  </a>
-                </Link>
-              </p>
+                <p className={styles["signup-conditions"]}>
+                  By Logging in, you agree to Safari&apos;s{" "}
+                  <Link href="/login">
+                    <a className={styles["signup-conditions-highlights"]}>
+                      Conditions of Use
+                    </a>
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/login">
+                    <a className={styles["signup-conditions-highlights"]}>
+                      Privacy Notice
+                    </a>
+                  </Link>
+                </p>
 
-              {loadingInfo()}
+                {loadingInfo()}
+              </form>
 
               <div className={styles["login-redirect"]}>
                 <p>Already have an Account?</p>

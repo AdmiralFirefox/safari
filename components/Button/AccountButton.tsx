@@ -13,13 +13,9 @@ const ButtonAccount = styled(Button)<ButtonProps>(() => ({
   },
 }));
 
-interface AccountButtonProps {
-  onButtonClick: () => Promise<void>;
-}
-
-const AccountButton: FC<AccountButtonProps> = ({ children, onButtonClick }) => {
+const AccountButton: FC = ({ children }) => {
   return (
-    <ButtonAccount variant="contained" onClick={onButtonClick}>
+    <ButtonAccount variant="contained" type="submit">
       {children}
     </ButtonAccount>
   );
