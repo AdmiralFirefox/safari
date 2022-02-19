@@ -1,0 +1,103 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+//Web Logo
+.login-web-logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5em;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2em 0em 4em 0em;
+
+  //Log In Content
+  .login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: min(80%, 30em);
+    background: theme-provider.$white_background;
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.5);
+    padding: 2em;
+
+    //Title
+    .login-title {
+      text-align: left;
+      align-self: flex-start;
+      color: theme-provider.$black_color;
+    }
+
+    //Form Label
+    .login-form-label {
+      color: theme-provider.$black_color;
+      text-align: left;
+      align-self: flex-start;
+      margin: 1.1em 0em 0.3em 0em;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    //Conditions
+    .login-conditions {
+      color: theme-provider.$black_color;
+      margin-top: 1.2em;
+      font-size: 1rem;
+      font-weight: 700;
+
+      .login-conditions-highlights {
+        color: theme-provider.$blue_color;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    //Button Wrapper
+    .login-button-wrapper {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 1em;
+      margin-top: 1.5em;
+      width: 100%;
+    }
+
+    //Sign Up Redirect
+    .signup-redirect {
+      margin-top: 1.8em;
+      width: 100%;
+      text-align: center;
+
+      //Link Title
+      p {
+        color: theme-provider.$black_color;
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+
+      //Link
+      a {
+        color: theme-provider.$blue_color;
+        font-weight: 700;
+        font-size: 1.1rem;
+        text-decoration: underline;
+        transition: color 0.3s ease-in-out;
+
+        &:hover {
+          color: theme-provider.$blue_color_hover;
+        }
+      }
+    }
+  }
+}
+
+// @media (min-width: theme-provider.$media_query_small_value) {
+//   .login-wrapper {
+//     //Log In Content
+//     .login-content {
+
+//     }
+//   }
+// }
