@@ -200,7 +200,6 @@ const SignUp: NextPage = () => {
                   }}
                 >
                   <InputBase
-                    inputRef={passwordRef}
                     id="confirmPassword"
                     aria-invalid={errors.password ? "true" : "false"}
                     {...register("confirmPassword", {
