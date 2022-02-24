@@ -11,9 +11,18 @@ const CheckoutItemsButton = styled(Button)<ButtonProps>(() => ({
   },
 }));
 
-const CheckoutButton: FC = ({ children }) => {
+interface CheckoutButtonProps {
+  onButtonClick: () => Promise<void>;
+}
+
+const CheckoutButton: FC<CheckoutButtonProps> = ({
+  children,
+  onButtonClick,
+}) => {
   return (
-    <CheckoutItemsButton variant="contained">{children}</CheckoutItemsButton>
+    <CheckoutItemsButton variant="contained" onClick={onButtonClick}>
+      {children}
+    </CheckoutItemsButton>
   );
 };
 

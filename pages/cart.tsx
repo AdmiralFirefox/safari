@@ -1,7 +1,8 @@
 import { useState, useContext, ChangeEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import Axios from "axios";
+import { loadStripe } from "@stripe/stripe-js";
 import { AuthContext } from "../context/AuthContext";
 import type { NextPage } from "next";
 import {
@@ -42,6 +43,7 @@ const Cart: NextPage = () => {
   >(false);
   const [clearCartModal, setClearCartModal] = useState(false);
   const [lockBody, setLockBody] = useState(false);
+  const [loadingCheckout, setLoadingCheckout] = useState(false);
 
   //Handling Quantity Changes
   const handleQuantityChange = (
@@ -94,6 +96,29 @@ const Cart: NextPage = () => {
   };
 
   useLockedBody(lockBody);
+
+  //Stripe Set-up
+  const publishableKey = `${process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}`;
+  const stripePromise = loadStripe(publishableKey);
+
+  const createCheckoutSession = async () => {
+    setLoadingCheckout(true);
+
+    const stripe = await stripePromise;
+
+    //Passing the cart items on the checkout session on the api server
+    const checkoutSession = await Axios.post("/api/checkout/session", cart);
+
+    const result = await stripe!.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    });
+
+    if (result.error) {
+      console.log(result.error.message);
+    }
+
+    setLoadingCheckout(false);
+  };
 
   //If the user is not logged in
   if (!user) {
@@ -283,7 +308,9 @@ const Cart: NextPage = () => {
             Total &#40;{getTotalItems()} items&#41;: $
             {getTotalPrice().toFixed(2)}
           </p>
-          <CheckoutButton>Proceed to Checkout</CheckoutButton>
+          <CheckoutButton onButtonClick={createCheckoutSession}>
+            {loadingCheckout ? "Processing..." : "Proceed to Checkout"}
+          </CheckoutButton>
         </div>
       </div>
     </>
