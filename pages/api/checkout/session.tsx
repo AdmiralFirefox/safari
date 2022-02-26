@@ -37,7 +37,7 @@ export default async function handler(
         }),
         mode: "payment",
         success_url: `${req.headers.origin}/results?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/`,
+        cancel_url: `${req.headers.origin}/cart`,
       });
 
       res.json({ id: session.id });
