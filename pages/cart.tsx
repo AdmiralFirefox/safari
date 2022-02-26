@@ -13,6 +13,7 @@ import {
   setQuantity,
 } from "../features/Cart/CartSlice";
 import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
+import { toast, Zoom } from "react-toastify";
 import { useLockedBody } from "../hooks/useLockedBody";
 import Rating from "@mui/material/Rating";
 import { Product } from "../types/Product/Product";
@@ -115,6 +116,16 @@ const Cart: NextPage = () => {
 
     if (result.error) {
       console.log(result.error.message);
+      toast.error(`${result.error.message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
     }
 
     setLoadingCheckout(false);
