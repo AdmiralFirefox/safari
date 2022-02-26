@@ -100,7 +100,8 @@ const Results: NextPage = () => {
         );
       })}
 
-      {isLoading ? null : (
+      {products?.data.line_items.data.map((item) => item.quantity) ===
+      undefined ? null : (
         <h1>
           Total &#40;{getTotalItems()} items&#41;: $
           {getTotalPrice()!.toFixed(2)}
