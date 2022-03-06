@@ -1,0 +1,121 @@
+@use "../themeprovider/themeprovider" as theme_provider;
+
+.orders-title {
+  margin: 1em 0em 0em 1.2em;
+}
+
+.orders-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 2em 0em;
+
+  .orders-container {
+    width: min(90%, 65em);
+
+    //Product Item
+    .order-item {
+      border: 3px solid theme_provider.$black_color;
+      margin-bottom: 2em;
+      padding: 1.5em;
+
+      //Date
+      .order-date {
+        color: theme_provider.$slightly_light_gray_color;
+        font-weight: 700;
+        font-style: italic;
+        font-size: 1rem;
+        margin-bottom: 1.5em;
+      }
+
+      //Order Information
+      .order-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.2em;
+
+        div:last-child {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          //Title
+          .order-title {
+            color: theme_provider.$black_color;
+            font-weight: 700;
+            font-size: 1.3rem;
+            line-height: 1.2em;
+            margin-bottom: 0.8em;
+            margin-top: 0.5em;
+            text-align: center;
+          }
+
+          //Description
+          .order-description {
+            color: theme_provider.$black_color;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+          }
+        }
+      }
+
+      //Amount Informaiton
+      .amount-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p {
+          color: theme_provider.$black_color;
+          font-weight: 700;
+          font-size: 1.1rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: theme_provider.$media_query_normal_value) {
+  .orders-wrapper {
+    .orders-container {
+      //Product Item
+      .order-item {
+        //Order Information
+        .order-info {
+          flex-direction: row;
+
+          div:last-child {
+            width: 90%;
+            margin-left: 1em;
+            align-items: flex-start;
+
+            //Title
+            .order-title {
+              text-align: left;
+              margin-top: 0em;
+            }
+
+            //Description
+            .order-description {
+              text-align: left;
+            }
+          }
+        }
+
+        //Amount Informaiton
+        .amount-info {
+          flex-direction: row;
+          justify-content: flex-start;
+
+          p {
+            margin-right: 1.25em;
+            text-align: start;
+          }
+        }
+      }
+    }
+  }
+}
