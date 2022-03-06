@@ -9,20 +9,8 @@ import Placeholder from "../components/Placeholder/Placeholder";
 import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
 import dayjs from "dayjs";
 import Loading from "../components/Loading/Loading";
+import { OrderProps } from "../types/Orders/Orders";
 import styles from "../styles/pages/Orders.module.scss";
-
-interface OrderProps {
-  id: string;
-  createdAt?: {
-    seconds: number;
-  };
-  image?: string;
-  title?: string;
-  description?: string;
-  rating?: number;
-  quantity?: number;
-  price?: number;
-}
 
 const Orders: NextPage = () => {
   const [orders, setOrders] = useState<OrderProps[]>([]);
