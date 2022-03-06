@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { UserInfo } from "../types/Auth/UserInfo";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import AuthLoading from "../components/Loading/AuthLoading";
 
 export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState<UserInfo | null>(null);
@@ -25,12 +26,7 @@ export const AuthProvider: FC = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (initializing)
-    return (
-      <div>
-        <h1>Loading...</h1>
-      </div>
-    );
+  if (initializing) return <AuthLoading />;
 
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };
