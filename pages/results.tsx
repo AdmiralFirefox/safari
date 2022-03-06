@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import type { NextPage } from "next";
+import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
@@ -21,6 +22,7 @@ const fetchDataItems = async (sessionId: string | string[] | undefined) => {
 };
 
 const Results: NextPage = () => {
+  const user = useContext(AuthContext);
   const router = useRouter();
   const sessionId = router.query.session_id;
 
@@ -70,13 +72,14 @@ const Results: NextPage = () => {
           rating: item.rating.rate,
           quantity: item.quantity,
           subtotal: item.quantity! * item.price,
+          owner: user!.uid,
         });
       });
 
       //Clearing Cart when payment is successful
       setTimeout(() => dispatch(clearCart()), 100);
     }
-  }, [cart, dispatch, products?.data.payment_intent.status]);
+  }, [cart, dispatch, products?.data.payment_intent.status, user]);
 
   //When the payment status is loading
   if (isLoading) {

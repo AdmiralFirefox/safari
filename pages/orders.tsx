@@ -2,7 +2,13 @@ import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import type { NextPage } from "next";
 import { db } from "../firebase/firebase";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  where,
+} from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import Rating from "@mui/material/Rating";
 import Placeholder from "../components/Placeholder/Placeholder";
@@ -20,16 +26,22 @@ const Orders: NextPage = () => {
   //Getting Orders from the collection
   useEffect(() => {
     setLoadingOrders(true);
-    const ordersRef = collection(db, "orders");
-    const q = query(ordersRef, orderBy("createdAt", "desc"));
+    if (user) {
+      const ordersRef = collection(db, "orders");
+      const q = query(
+        ordersRef,
+        orderBy("createdAt", "desc"),
+        where("owner", "==", user!.uid)
+      );
 
-    const unsub = onSnapshot(q, (snapshot) => {
-      setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      setLoadingOrders(false);
-    });
+      const unsub = onSnapshot(q, (snapshot) => {
+        setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        setLoadingOrders(false);
+      });
 
-    return () => unsub();
-  }, []);
+      return () => unsub();
+    }
+  }, [user]);
 
   //If the user is not logged in
   if (!user) {
