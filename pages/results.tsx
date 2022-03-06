@@ -1,14 +1,20 @@
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 import type { NextPage } from "next";
 import { db } from "../firebase/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
 import { Product } from "../types/Product/Product";
 import { ProductResults } from "../types/Results/ProductResults";
-import { useRouter } from "next/router";
 import Axios from "axios";
 import { useQuery, UseQueryResult } from "react-query";
 import { clearCart } from "../features/Cart/CartSlice";
+import dayjs from "dayjs";
+import UserButton from "../components/Button/UserButton";
+import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
+import Loading from "../components/Loading/Loading";
+import styles from "../styles/pages/Results.module.scss";
 
 const fetchDataItems = async (sessionId: string | string[] | undefined) => {
   return await Axios.get(`/api/checkout/${sessionId}`);
@@ -74,40 +80,82 @@ const Results: NextPage = () => {
 
   //When the payment status is loading
   if (isLoading) {
-    return <h1>Almost there...</h1>;
+    return <Loading title="Confirming your Payment..." />;
   }
 
   //When the payment status errors
   if (isError) {
-    return <h1>Something went wrong...</h1>;
+    return (
+      <EmptyPlaceholder
+        image="/assets/EmptyCart.png"
+        title="Something unexpected happened!"
+        subtitle="Please try again later..."
+        imageWidth={150}
+        imageHeight={150}
+      />
+    );
   }
 
   return (
-    <div>
-      {products?.data.line_items.data.map((product) => {
-        return (
-          <div key={product.id}>
-            <p>{product.description}</p>
-            <p>Quantity: {product.quantity}</p>
-            <p>Price: ${(product.price.unit_amount / 100).toFixed(2)}</p>
-            <p>
-              Subtotal: $
-              {((product.price.unit_amount / 100) * product.quantity).toFixed(
-                2
-              )}
-            </p>
-          </div>
-        );
-      })}
+    <>
+      <div className={styles["result-product-wrapper"]}>
+        <div className={styles["result-product-container"]}>
+          {products?.data.line_items.data.map((product) => {
+            return (
+              <div key={product.id} className={styles["result-product"]}>
+                <p className={styles["result-date"]}>
+                  {dayjs().format("MM/DD/YYYY, h:mm:ss a")}
+                </p>
+                <p className={styles["result-description"]}>
+                  {product.description}
+                </p>
+                <div className={styles["result-product-amount-info"]}>
+                  <p>Quantity: {product.quantity}</p>
+                  <p>Price: ${(product.price.unit_amount / 100).toFixed(2)}</p>
+                  <p>
+                    Subtotal: $
+                    {(
+                      (product.price.unit_amount / 100) *
+                      product.quantity
+                    ).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
-      {products?.data.line_items.data.map((item) => item.quantity) ===
-      undefined ? null : (
-        <h1>
-          Total &#40;{getTotalItems()} items&#41;: $
-          {getTotalPrice()!.toFixed(2)}
-        </h1>
-      )}
-    </div>
+      <div className={styles["result-grand-total-wrapper"]}>
+        <div className={styles["result-grand-total-content"]}>
+          {products?.data.line_items.data.map((item) => item.quantity) ===
+          undefined ? null : (
+            <p>
+              Total &#40;{getTotalItems()} items&#41;: $
+              {getTotalPrice()!.toFixed(2)}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className={styles["cart-cleared-info-wrapper"]}>
+        <div className={styles["cart-cleared-info-content"]}>
+          <div>
+            <p>Cart Cleared</p>
+            <Image
+              src="/assets/EmptyCart.png"
+              alt=""
+              width={75}
+              height={75}
+              objectFit="contain"
+            />
+          </div>
+          <UserButton changeRoute={() => router.push("/orders")}>
+            Go to My Orders
+          </UserButton>
+        </div>
+      </div>
+    </>
   );
 };
 
