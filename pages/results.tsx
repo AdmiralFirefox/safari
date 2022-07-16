@@ -107,7 +107,9 @@ const Results: NextPage = () => {
             return (
               <div key={product.id} className={styles["result-product"]}>
                 <p className={styles["result-date"]}>
-                  {dayjs().format("MM/DD/YYYY, h:mm:ss a")}
+                  {dayjs(product.price.created * 1000).format(
+                    "MM/DD/YYYY, h:mm:ss a"
+                  )}
                 </p>
                 <p className={styles["result-description"]}>
                   {product.description}
