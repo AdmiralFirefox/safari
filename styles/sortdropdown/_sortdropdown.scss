@@ -4,3 +4,18 @@
 .MuiSelect-icon {
   color: theme-provider.$black_color !important;
 }
+
+//Focused Menu
+.Mui-focusVisible {
+  background: hsl(0, 0%, 85%) !important;
+}
+
+//Select Text Label when Active
+.MuiFormLabel-root {
+  color: theme-provider.$black_color !important;
+}
+
+//Select Border when Active
+.MuiFilledInput-root:after {
+  border-bottom: none !important;
+}
