@@ -19,7 +19,7 @@ const Layout: FC = ({ children }) => {
   return (
     <>
       <Meta />
-      <ToastContainer />
+      <ToastContainer limit={3} />
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
