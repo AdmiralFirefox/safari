@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { AuthContext } from "../context/AuthContext";
-const HomeSlider = dynamic(() => import("../components/Slider/HomeSlider"));
+import HomeSlider from "../components/Slider/HomeSlider";
 const Footer = dynamic(() => import("../components/Footer/Footer"));
 import SortDropdown from "../components/SortDropdown/SortDropdown";
 import { SelectChangeEvent } from "@mui/material/Select";
