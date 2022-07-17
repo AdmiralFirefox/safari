@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
@@ -11,8 +12,12 @@ import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import Placeholder from "../components/Placeholder/Placeholder";
-import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
+const Placeholder = dynamic(
+  () => import("../components/Placeholder/Placeholder")
+);
+const EmptyPlaceholder = dynamic(
+  () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
+);
 import styles from "../styles/pages/Favorites.module.scss";
 
 const Favorites: NextPage = () => {

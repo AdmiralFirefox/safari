@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -12,7 +13,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
-import Footer from "../../components/Footer/Footer";
+const Footer = dynamic(() => import("../../components/Footer/Footer"));
 import { Product } from "../../types/Product/Product";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";

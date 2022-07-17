@@ -1,6 +1,7 @@
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
@@ -13,8 +14,10 @@ import { useQuery, UseQueryResult } from "react-query";
 import { clearCart } from "../features/Cart/CartSlice";
 import dayjs from "dayjs";
 import UserButton from "../components/Button/UserButton";
-import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
-import Loading from "../components/Loading/Loading";
+const EmptyPlaceholder = dynamic(
+  () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
+);
+const Loading = dynamic(() => import("../components/Loading/Loading"));
 import styles from "../styles/pages/Results.module.scss";
 
 const fetchDataItems = async (sessionId: string | string[] | undefined) => {

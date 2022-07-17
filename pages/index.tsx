@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { GetStaticProps } from "next";
+import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { AuthContext } from "../context/AuthContext";
-import HomeSlider from "../components/Slider/HomeSlider";
+const HomeSlider = dynamic(() => import("../components/Slider/HomeSlider"));
+const Footer = dynamic(() => import("../components/Footer/Footer"));
 import SortDropdown from "../components/SortDropdown/SortDropdown";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { ProductsProps } from "../types/Products/Products";
@@ -16,7 +18,6 @@ import IconButton from "@mui/material/IconButton";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
 import { IoArrowUpCircle } from "react-icons/io5";
 import { IconContext } from "react-icons";
-import Footer from "../components/Footer/Footer";
 import { addItemToCart } from "../features/Cart/CartSlice";
 import {
   addToFavorites,

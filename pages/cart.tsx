@@ -1,6 +1,7 @@
 import { useState, useContext, ChangeEvent } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import Axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import { AuthContext } from "../context/AuthContext";
@@ -22,14 +23,22 @@ import IconButton from "@mui/material/IconButton";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import Placeholder from "../components/Placeholder/Placeholder";
+const Placeholder = dynamic(
+  () => import("../components/Placeholder/Placeholder")
+);
+const EmptyPlaceholder = dynamic(
+  () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
+);
+const UpdateQuantityModal = dynamic(
+  () => import("../components/Modal/UpdateQuantityModal")
+);
+const ClearCartModal = dynamic(
+  () => import("../components/Modal/ClearCartModal")
+);
 import ClearCartButton from "../components/Button/ClearCartButton";
 import ItemQuantityButton from "../components/Button/ItemQuantityButton";
 import UpdateQuantityButton from "../components/Button/UpdateQuantityButton";
 import CheckoutButton from "../components/Button/CheckoutButton";
-import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
-import UpdateQuantityModal from "../components/Modal/UpdateQuantityModal";
-import ClearCartModal from "../components/Modal/ClearCartModal";
 import styles from "../styles/pages/Cart.module.scss";
 
 const Cart: NextPage = () => {

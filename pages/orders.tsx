@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import type { NextPage } from "next";
+import dynamic from "next/dynamic";
 import { db } from "../firebase/firebase";
 import {
   collection,
@@ -11,10 +12,14 @@ import {
 } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import Rating from "@mui/material/Rating";
-import Placeholder from "../components/Placeholder/Placeholder";
-import EmptyPlaceholder from "../components/EmptyPlaceholder/EmptyPlaceholder";
+const Placeholder = dynamic(
+  () => import("../components/Placeholder/Placeholder")
+);
+const EmptyPlaceholder = dynamic(
+  () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
+);
+const Loading = dynamic(() => import("../components/Loading/Loading"));
 import dayjs from "dayjs";
-import Loading from "../components/Loading/Loading";
 import { OrderProps } from "../types/Orders/Orders";
 import styles from "../styles/pages/Orders.module.scss";
 
