@@ -3,7 +3,7 @@ import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";
-import styles from "../../styles/Loading/AuthLoading.module.scss";
+import styles from "../../styles/loading/AuthLoading.module.scss";
 
 const AuthLoading: FC = () => {
   const size: Size = useWindowSize();
