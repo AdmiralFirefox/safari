@@ -11,7 +11,7 @@ const AuthLoading: FC = () => {
   return (
     <div
       className={styles["auth-loading-wrapper"]}
-      style={{ height: `${size.height}px` }}
+      style={{ height: `calc(${size.height}px - 5vh)` }}
     >
       <Image
         src="/assets/SafariLogoDark.png"
