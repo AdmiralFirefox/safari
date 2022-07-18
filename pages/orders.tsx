@@ -19,6 +19,7 @@ const EmptyPlaceholder = dynamic(
   () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
 );
 const Loading = dynamic(() => import("../components/Loading/Loading"));
+import ReactPaginate from "react-paginate";
 import dayjs from "dayjs";
 import { OrderProps } from "../types/Orders/Orders";
 import styles from "../styles/pages/Orders.module.scss";
@@ -26,7 +27,20 @@ import styles from "../styles/pages/Orders.module.scss";
 const Orders: NextPage = () => {
   const [orders, setOrders] = useState<OrderProps[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+
   const user = useContext(AuthContext);
+
+  const datumPerPage = 5;
+  const pagesVisited = pageNumber * datumPerPage;
+
+  const displayOrders = orders.slice(pagesVisited, pagesVisited + datumPerPage);
+
+  const pageCount = Math.ceil(orders.length / datumPerPage);
+
+  const changePage = ({ selected }: { selected: number }) => {
+    setPageNumber(selected);
+  };
 
   //Getting Orders from the collection
   useEffect(() => {
@@ -86,7 +100,7 @@ const Orders: NextPage = () => {
 
       <div className={styles["orders-wrapper"]}>
         <div className={styles["orders-container"]}>
-          {orders.map((order) => {
+          {displayOrders.map((order) => {
             return (
               <div key={order.id} className={styles["order-item"]}>
                 <p className={styles["order-date"]}>
@@ -133,6 +147,22 @@ const Orders: NextPage = () => {
           })}
         </div>
       </div>
+
+      {orders.length > 5 ? (
+        <ReactPaginate
+          pageCount={pageCount}
+          onPageChange={changePage}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          containerClassName={"pagination-buttons-container"}
+          previousLinkClassName={"previous-button"}
+          nextLinkClassName={"next-button"}
+          disabledClassName={"disabled-button"}
+          activeClassName={"active-button"}
+        />
+      ) : null}
     </>
   );
 };

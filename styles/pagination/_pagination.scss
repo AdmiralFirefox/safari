@@ -1,0 +1,52 @@
+@use "../themeprovider/themeprovider" as theme-provider;
+
+.pagination-buttons-container {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 2.5em;
+  -webkit-tap-highlight-color: transparent;
+  font-size: 1rem;
+  line-height: 5em;
+
+  a {
+    border: 3px solid theme-provider.$black_color;
+    color: theme-provider.$black_color;
+    border-radius: 5px;
+    padding: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    margin: 0em 0.25em;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
+    &:hover {
+      color: theme-provider.$white_color;
+      background-color: theme-provider.$black_color;
+    }
+  }
+}
+
+.active-button a {
+  color: theme-provider.$white_color;
+  background-color: theme-provider.$black_color;
+  cursor: pointer;
+}
+
+.disabled-button a {
+  color: theme-provider.$white_color;
+  background-color: theme-provider.$dark_gray_color;
+  border: 3px solid theme-provider.$dark_gray_color;
+  cursor: pointer;
+
+  &:hover {
+    color: theme-provider.$white_color;
+    background-color: theme-provider.$dark_gray_color;
+    border: 3px solid theme-provider.$dark_gray_color;
+    cursor: pointer;
+  }
+}
