@@ -48,6 +48,10 @@ const SortDropdown: FC<SortDropdownProps> = ({ sortValue, onChangeValue }) => {
             },
             "&& .Mui-selected": {
               background: "hsl(0, 0%, 85%)",
+
+              "&:hover": {
+                backgroundColor: "hsl(0, 0%, 85%)",
+              },
             },
             ".MuiMenuItem-root": {
               color: "#000",
