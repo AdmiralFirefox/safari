@@ -127,6 +127,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                         alt=""
                         layout="fill"
                         objectFit="contain"
+                        unoptimized={true}
                       />
                     </div>
                   </Link>

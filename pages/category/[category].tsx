@@ -94,6 +94,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
               height="10%"
               layout="responsive"
               objectFit="cover"
+              priority
             />
           </div>
 
@@ -153,6 +154,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                           alt=""
                           layout="fill"
                           objectFit="contain"
+                          unoptimized={true}
                         />
                       </div>
                     </Link>
