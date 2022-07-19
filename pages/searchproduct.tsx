@@ -31,7 +31,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
   const fuse = new Fuse(searchProducts, {
     keys: ["title", "price", "category"],
     includeScore: true,
-    threshold: 0.3,
+    threshold: 0.6,
   });
 
   const results = fuse.search(searchProduct);
