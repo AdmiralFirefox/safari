@@ -4,7 +4,7 @@
          <p>An e-commerce website inspired by <a href="https://www.amazon.com/">Amazon</a></p>
     </strong>
     <strong>
-         <a href="safari-commerce.vercel.app">You can view the live site here »</a>
+         <a href="https://safari-commerce.vercel.app/">You can view the live site here »</a>
     </strong>
 </div>
 
