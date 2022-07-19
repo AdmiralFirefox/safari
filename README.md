@@ -11,17 +11,13 @@
 <br />
 <br />
 
-<strong align="center">
-     <p>Desktop View:</p>
-</strong>
+<h2 align="center">Desktop View:</h2>
 
 https://user-images.githubusercontent.com/79429518/179728229-e5010a3a-28c6-4eb5-926b-e63daf5d4d88.mp4
 
 <br />
 
-<strong align="center">
-     <p>Mobile View:</p>
-</strong>
+<h2 align="center">Mobile View:</h2>
 
 https://user-images.githubusercontent.com/79429518/179728442-920aa5ae-5301-470f-9c85-18bfe732edd1.mp4
 
@@ -126,7 +122,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_XXXXXXXXXXXXXXX
 STRIPE_SECRET_KEY=sk_test_XXXXXXXXXXXXXXX
 ```
 
-5. Go to your Webhooks settings and get your Webhook Secret Key
+5. Go to your Webhooks settings and get your Webhook Secret Key. Add them to your .env.local file
 
 ```bash
 STRIPE_WEBHOOK_SECRET=whsec_XXXXXXXXXXXXXXX
