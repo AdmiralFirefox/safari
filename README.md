@@ -11,15 +11,15 @@
 <br />
 <br />
 
-<h2 align="center">Desktop View:</h2>
+<h3 align="center">Desktop View:</h3>
 
 https://user-images.githubusercontent.com/79429518/179728229-e5010a3a-28c6-4eb5-926b-e63daf5d4d88.mp4
 
 <br />
 
-<h2 align="center">Mobile View:</h2>
+<h3 align="center">Mobile View:</h3>
 
-https://user-images.githubusercontent.com/79429518/179728442-920aa5ae-5301-470f-9c85-18bfe732edd1.mp4
+https://user-images.githubusercontent.com/79429518/179766763-8a2b3092-408f-49f5-8f7e-ef03f900058b.mp4
 
 <br />
 
