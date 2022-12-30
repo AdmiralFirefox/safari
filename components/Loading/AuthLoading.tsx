@@ -19,6 +19,7 @@ const AuthLoading: FC = () => {
         width={200}
         height={70}
         objectFit="cover"
+        priority
       />
       <CircularProgress
         size={45}
