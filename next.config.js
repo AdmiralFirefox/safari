@@ -8,6 +8,5 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   images: {
     domains: ["fakestoreapi.com", "lh3.googleusercontent.com"],
-    minimumCacheTTL: 31536000,
   },
 });
