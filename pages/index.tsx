@@ -149,7 +149,6 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                           alt=""
                           layout="fill"
                           objectFit="contain"
-                          unoptimized={true}
                           priority
                         />
                       </div>
@@ -237,7 +236,6 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                           alt=""
                           layout="fill"
                           objectFit="contain"
-                          unoptimized={true}
                           priority
                         />
                       </div>
@@ -326,7 +324,6 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                             alt=""
                             layout="fill"
                             objectFit="contain"
-                            unoptimized={true}
                             priority
                           />
                         </div>
