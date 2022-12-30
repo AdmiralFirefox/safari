@@ -154,6 +154,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                           alt=""
                           layout="fill"
                           objectFit="contain"
+                          unoptimized={true}
                           priority
                         />
                       </div>
