@@ -118,6 +118,7 @@ const Orders: NextPage = () => {
                       height={150}
                       objectFit="contain"
                       unoptimized={true}
+                      priority
                     />
                   </div>
                   <div>
