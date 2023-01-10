@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import { AuthContext } from "../context/AuthContext";

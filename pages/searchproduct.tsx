@@ -2,7 +2,7 @@ import { ChangeEvent, useState, useContext } from "react";
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import Paper from "@mui/material/Paper";
@@ -51,116 +51,118 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
     setSearchProduct(e.target.value);
   };
 
-  return <>
-    <div className={styles["searchproduct-page-container"]}>
-      <div className={styles["search-product-input"]}>
-        <Paper
-          sx={{
-            p: "0.5em",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "min(85%, 30em)",
-            background: "#EAEDED",
-            boxShadow: "none",
-          }}
-        >
-          <InputBase
-            placeholder="Search Products"
-            inputProps={{ "aria-label": "search products" }}
-            sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
-            onChange={handleSearchProductChange}
-          />
-        </Paper>
-      </div>
+  return (
+    <>
+      <div className={styles["searchproduct-page-container"]}>
+        <div className={styles["search-product-input"]}>
+          <Paper
+            sx={{
+              p: "0.5em",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "min(85%, 30em)",
+              background: "#EAEDED",
+              boxShadow: "none",
+            }}
+          >
+            <InputBase
+              placeholder="Search Products"
+              inputProps={{ "aria-label": "search products" }}
+              sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
+              onChange={handleSearchProductChange}
+            />
+          </Paper>
+        </div>
 
-      <div className={styles["search-product-results-text"]}>
-        {productResults.length !== 0 || searchProduct !== "" ? (
-          <p>
-            {productResults.length} Search Results for: &ldquo;{searchProduct}
-            &rdquo;
-          </p>
-        ) : null}
-      </div>
+        <div className={styles["search-product-results-text"]}>
+          {productResults.length !== 0 || searchProduct !== "" ? (
+            <p>
+              {productResults.length} Search Results for: &ldquo;{searchProduct}
+              &rdquo;
+            </p>
+          ) : null}
+        </div>
 
-      <div className={styles["search-products-wrapper"]}>
-        {productResults.map((product) => {
-          return (
-            <div key={product.id} className={styles["search-product-item"]}>
-              <div>
-                <div className={styles["search-product-item-category"]}>
-                  <p>{product.category}</p>
-                  {favoriteID.includes(product.id) && user ? (
-                    <IconButton
-                      onClick={() =>
-                        dispatch(removeFromFavorites(product.id))
-                      }
-                    >
-                      <FavoriteIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  ) : !user ? (
-                    <IconButton onClick={() => router.push("/login")}>
-                      <FavoriteBorderIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      onClick={() => dispatch(addToFavorites(product))}
-                    >
-                      <FavoriteBorderIcon
-                        fontSize="large"
-                        sx={{ color: "#fd5da8" }}
-                      />
-                    </IconButton>
-                  )}
-                </div>
-                <Link href={`/product/${product.id}`} passHref legacyBehavior>
-                  <div className={styles["search-product-item-image"]}>
-                    <Image
-                      src={product.image}
-                      alt=""
-                      layout="fill"
-                      objectFit="contain"
-                      unoptimized={true}
-                      priority
-                    />
+        <div className={styles["search-products-wrapper"]}>
+          {productResults.map((product) => {
+            return (
+              <div key={product.id} className={styles["search-product-item"]}>
+                <div>
+                  <div className={styles["search-product-item-category"]}>
+                    <p>{product.category}</p>
+                    {favoriteID.includes(product.id) && user ? (
+                      <IconButton
+                        onClick={() =>
+                          dispatch(removeFromFavorites(product.id))
+                        }
+                      >
+                        <FavoriteIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    ) : !user ? (
+                      <IconButton onClick={() => router.push("/login")}>
+                        <FavoriteBorderIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        onClick={() => dispatch(addToFavorites(product))}
+                      >
+                        <FavoriteBorderIcon
+                          fontSize="large"
+                          sx={{ color: "#fd5da8" }}
+                        />
+                      </IconButton>
+                    )}
                   </div>
-                </Link>
-                <p className={styles["search-product-item-title"]}>
-                  {product.title}
-                </p>
-                <Rating
-                  name="Product Ratings"
-                  value={product.rating.rate}
-                  precision={0.5}
-                  sx={{ margin: "0.5em 0em" }}
-                  size="small"
-                  readOnly
-                />
-                <p className={styles["search-product-item-price"]}>
-                  ${product.price.toFixed(2)}
-                </p>
+                  <Link href={`/product/${product.id}`} passHref legacyBehavior>
+                    <div className={styles["search-product-item-image"]}>
+                      <Image
+                        src={product.image}
+                        alt=""
+                        layout="fill"
+                        objectFit="contain"
+                        unoptimized={true}
+                        priority
+                      />
+                    </div>
+                  </Link>
+                  <p className={styles["search-product-item-title"]}>
+                    {product.title}
+                  </p>
+                  <Rating
+                    name="Product Ratings"
+                    value={product.rating.rate}
+                    precision={0.5}
+                    sx={{ margin: "0.5em 0em" }}
+                    size="small"
+                    readOnly
+                  />
+                  <p className={styles["search-product-item-price"]}>
+                    ${product.price.toFixed(2)}
+                  </p>
+                </div>
+                <div>
+                  <AddtoCartButton
+                    onButtonClick={() =>
+                      user
+                        ? dispatch(addItemToCart(product))
+                        : router.push("/login")
+                    }
+                  />
+                </div>
               </div>
-              <div>
-                <AddtoCartButton
-                  onButtonClick={() =>
-                    user
-                      ? dispatch(addItemToCart(product))
-                      : router.push("/login")
-                  }
-                />
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
-  </>;
+    </>
+  );
 };
 
 export default SearchProduct;

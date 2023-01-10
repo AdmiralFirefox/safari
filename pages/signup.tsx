@@ -1,7 +1,7 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast, Zoom } from "react-toastify";
@@ -100,7 +100,6 @@ const SignUp: NextPage = () => {
         <>
           <div className={styles["signup-web-logo"]}>
             <Link href="/">
-
               <Image
                 src="/assets/SafariLogoDark.png"
                 alt="Web Logo"
@@ -108,7 +107,6 @@ const SignUp: NextPage = () => {
                 height={70}
                 objectFit="cover"
               />
-
             </Link>
           </div>
 
@@ -221,16 +219,18 @@ const SignUp: NextPage = () => {
 
                 <p className={styles["signup-conditions"]}>
                   By Logging in, you agree to Safari&apos;s{" "}
-                  <Link href="/login" className={styles["signup-conditions-highlights"]}>
-                    
-                      Conditions of Use
-                    
+                  <Link
+                    href="/login"
+                    className={styles["signup-conditions-highlights"]}
+                  >
+                    Conditions of Use
                   </Link>{" "}
                   and{" "}
-                  <Link href="/login" className={styles["signup-conditions-highlights"]}>
-                    
-                      Privacy Notice
-                    
+                  <Link
+                    href="/login"
+                    className={styles["signup-conditions-highlights"]}
+                  >
+                    Privacy Notice
                   </Link>
                 </p>
 
@@ -239,9 +239,7 @@ const SignUp: NextPage = () => {
 
               <div className={styles["login-redirect"]}>
                 <p>Already have an Account?</p>
-                <Link href="/login">
-                  Log In
-                </Link>
+                <Link href="/login">Log In</Link>
               </div>
             </div>
           </div>

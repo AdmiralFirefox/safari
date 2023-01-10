@@ -1,7 +1,7 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import { toast, Zoom } from "react-toastify";
@@ -167,127 +167,127 @@ const LogIn: NextPage = () => {
     }
   };
 
-  return <>
-    {!user && (
-      <>
-        <div className={styles["login-web-logo"]}>
-          <Link href="/">
+  return (
+    <>
+      {!user && (
+        <>
+          <div className={styles["login-web-logo"]}>
+            <Link href="/">
+              <Image
+                src="/assets/SafariLogoDark.png"
+                alt="Web Logo"
+                width={200}
+                height={70}
+                objectFit="cover"
+              />
+            </Link>
+          </div>
 
-            <Image
-              src="/assets/SafariLogoDark.png"
-              alt="Web Logo"
-              width={200}
-              height={70}
-              objectFit="cover"
-            />
+          <div className={styles["login-wrapper"]}>
+            <div className={styles["login-content"]}>
+              <h1 className={styles["login-title"]}>Log In</h1>
 
-          </Link>
-        </div>
+              <form onSubmit={handleSubmit(signIn)}>
+                <p className={styles["login-form-label"]}>Email</p>
+                <Paper
+                  sx={{
+                    p: "0.5em",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    background: "#EAEDED",
+                    boxShadow: "none",
+                  }}
+                >
+                  <InputBase
+                    inputRef={emailRef}
+                    type="email"
+                    id="email"
+                    aria-invalid={errors.email ? "true" : "false"}
+                    {...register("email", {
+                      required: "required",
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Please enter a valid email",
+                      },
+                    })}
+                    placeholder="Enter Email"
+                    inputProps={{ "aria-label": "email" }}
+                    sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
+                  />
+                </Paper>
+                {errors.email && (
+                  <p role="alert" className={styles["login-form-alert"]}>
+                    {errors.email.message}
+                  </p>
+                )}
 
-        <div className={styles["login-wrapper"]}>
-          <div className={styles["login-content"]}>
-            <h1 className={styles["login-title"]}>Log In</h1>
+                <p className={styles["login-form-label"]}>Password</p>
+                <Paper
+                  sx={{
+                    p: "0.5em",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    background: "#EAEDED",
+                    boxShadow: "none",
+                  }}
+                >
+                  <InputBase
+                    inputRef={passwordRef}
+                    type="password"
+                    id="password"
+                    aria-invalid={errors.passward ? "true" : "false"}
+                    {...register("password", {
+                      required: "required",
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters",
+                      },
+                    })}
+                    placeholder="Enter Password"
+                    inputProps={{ "aria-label": "password" }}
+                    sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
+                  />
+                </Paper>
+                {errors.password && (
+                  <p role="alert" className={styles["login-form-alert"]}>
+                    {errors.password.message}
+                  </p>
+                )}
 
-            <form onSubmit={handleSubmit(signIn)}>
-              <p className={styles["login-form-label"]}>Email</p>
-              <Paper
-                sx={{
-                  p: "0.5em",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  background: "#EAEDED",
-                  boxShadow: "none",
-                }}
-              >
-                <InputBase
-                  inputRef={emailRef}
-                  type="email"
-                  id="email"
-                  aria-invalid={errors.email ? "true" : "false"}
-                  {...register("email", {
-                    required: "required",
-                    pattern: {
-                      value: /\S+@\S+\.\S+/,
-                      message: "Please enter a valid email",
-                    },
-                  })}
-                  placeholder="Enter Email"
-                  inputProps={{ "aria-label": "email" }}
-                  sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
-                />
-              </Paper>
-              {errors.email && (
-                <p role="alert" className={styles["login-form-alert"]}>
-                  {errors.email.message}
-                </p>
-              )}
-
-              <p className={styles["login-form-label"]}>Password</p>
-              <Paper
-                sx={{
-                  p: "0.5em",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "100%",
-                  background: "#EAEDED",
-                  boxShadow: "none",
-                }}
-              >
-                <InputBase
-                  inputRef={passwordRef}
-                  type="password"
-                  id="password"
-                  aria-invalid={errors.passward ? "true" : "false"}
-                  {...register("password", {
-                    required: "required",
-                    minLength: {
-                      value: 8,
-                      message: "Password must be at least 8 characters",
-                    },
-                  })}
-                  placeholder="Enter Password"
-                  inputProps={{ "aria-label": "password" }}
-                  sx={{ ml: 1, flex: 1, color: "#000", fontWeight: "700" }}
-                />
-              </Paper>
-              {errors.password && (
-                <p role="alert" className={styles["login-form-alert"]}>
-                  {errors.password.message}
-                </p>
-              )}
-
-              <p className={styles["login-conditions"]}>
-                By Logging in, you agree to Safari&apos;s{" "}
-                <Link href="/login" className={styles["login-conditions-highlights"]}>
-                  
+                <p className={styles["login-conditions"]}>
+                  By Logging in, you agree to Safari&apos;s{" "}
+                  <Link
+                    href="/login"
+                    className={styles["login-conditions-highlights"]}
+                  >
                     Conditions of Use
-                  
-                </Link>{" "}
-                and{" "}
-                <Link href="/login" className={styles["login-conditions-highlights"]}>
-                  
+                  </Link>{" "}
+                  and{" "}
+                  <Link
+                    href="/login"
+                    className={styles["login-conditions-highlights"]}
+                  >
                     Privacy Notice
-                  
-                </Link>
-              </p>
+                  </Link>
+                </p>
 
-              {loadingInfo()}
-            </form>
+                {loadingInfo()}
+              </form>
 
-            <div className={styles["signup-redirect"]}>
-              <p>New to Safari?</p>
-              <Link href="/signup">
-                Create Safari Account
-              </Link>
+              <div className={styles["signup-redirect"]}>
+                <p>New to Safari?</p>
+                <Link href="/signup">Create Safari Account</Link>
+              </div>
             </div>
           </div>
-        </div>
-      </>
-    )}
-  </>;
+        </>
+      )}
+    </>
+  );
 };
 
 export default LogIn;

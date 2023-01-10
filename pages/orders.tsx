@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { db } from "../firebase/firebase";

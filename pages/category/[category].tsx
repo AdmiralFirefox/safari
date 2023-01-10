@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context/AuthContext";
 import { CategoryProps } from "../../types/Category/Category";
@@ -79,120 +79,128 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
     setSortCategoryProducts(e.target.value);
   };
 
-  return <>
-    <div
-      className={styles["category-page-container"]}
-      style={{ height: `${size.height}px` }}
-    >
-      <div className={styles["category-page-content"]}>
-        <div>
-          <Image
-            src="/assets/CategoryBanner.gif"
-            alt=""
-            width="100%"
-            height="10%"
-            layout="responsive"
-            objectFit="cover"
-            priority
-          />
-        </div>
-
-        <div className={styles["category-title"]}>
-          <p>{categoryName}</p>
-          <div className={styles["category-sort-products"]}>
-            <SortDropdown
-              sortValue={sortCategoryProducts}
-              onChangeValue={handleSortCategoryProductsChange}
+  return (
+    <>
+      <div
+        className={styles["category-page-container"]}
+        style={{ height: `${size.height}px` }}
+      >
+        <div className={styles["category-page-content"]}>
+          <div>
+            <Image
+              src="/assets/CategoryBanner.gif"
+              alt=""
+              style={{
+                width: "100%",
+                height: "10%",
+              }}
+              layout="responsive"
+              objectFit="cover"
+              priority
             />
+          </div>
+
+          <div className={styles["category-title"]}>
+            <p>{categoryName}</p>
+            <div className={styles["category-sort-products"]}>
+              <SortDropdown
+                sortValue={sortCategoryProducts}
+                onChangeValue={handleSortCategoryProductsChange}
+              />
+            </div>
+          </div>
+
+          <div className={styles["category-products"]}>
+            {sortedCategoryProducts.map((product) => {
+              return (
+                <div
+                  key={product.id}
+                  className={styles["category-product-item"]}
+                >
+                  <div>
+                    <div className={styles["category-product-item-category"]}>
+                      <p>{product.category}</p>
+                      {favoriteID.includes(product.id) && user ? (
+                        <IconButton
+                          onClick={() =>
+                            dispatch(removeFromFavorites(product.id))
+                          }
+                        >
+                          <FavoriteIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      ) : !user ? (
+                        <IconButton onClick={() => router.push("/login")}>
+                          <FavoriteBorderIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          onClick={() => dispatch(addToFavorites(product))}
+                        >
+                          <FavoriteBorderIcon
+                            fontSize="large"
+                            sx={{ color: "#fd5da8" }}
+                          />
+                        </IconButton>
+                      )}
+                    </div>
+                    <Link
+                      href={`/product/${product.id}`}
+                      passHref
+                      legacyBehavior
+                    >
+                      <div className={styles["category-product-item-image"]}>
+                        <Image
+                          src={product.image}
+                          alt=""
+                          layout="fill"
+                          objectFit="contain"
+                          unoptimized={true}
+                          priority
+                        />
+                      </div>
+                    </Link>
+                    <p className={styles["category-product-item-title"]}>
+                      {product.title}
+                    </p>
+                    <Rating
+                      name="Product Ratings"
+                      value={product.rating.rate}
+                      precision={0.5}
+                      sx={{ margin: "0.5em 0em" }}
+                      size="small"
+                      readOnly
+                    />
+                    <p className={styles["category-product-item-price"]}>
+                      ${product.price.toFixed(2)}
+                    </p>
+                  </div>
+                  <div>
+                    <AddtoCartButton
+                      onButtonClick={() =>
+                        user
+                          ? dispatch(addItemToCart(product))
+                          : router.push("/login")
+                      }
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        <div className={styles["category-products"]}>
-          {sortedCategoryProducts.map((product) => {
-            return (
-              <div
-                key={product.id}
-                className={styles["category-product-item"]}
-              >
-                <div>
-                  <div className={styles["category-product-item-category"]}>
-                    <p>{product.category}</p>
-                    {favoriteID.includes(product.id) && user ? (
-                      <IconButton
-                        onClick={() =>
-                          dispatch(removeFromFavorites(product.id))
-                        }
-                      >
-                        <FavoriteIcon
-                          fontSize="large"
-                          sx={{ color: "#fd5da8" }}
-                        />
-                      </IconButton>
-                    ) : !user ? (
-                      <IconButton onClick={() => router.push("/login")}>
-                        <FavoriteBorderIcon
-                          fontSize="large"
-                          sx={{ color: "#fd5da8" }}
-                        />
-                      </IconButton>
-                    ) : (
-                      <IconButton
-                        onClick={() => dispatch(addToFavorites(product))}
-                      >
-                        <FavoriteBorderIcon
-                          fontSize="large"
-                          sx={{ color: "#fd5da8" }}
-                        />
-                      </IconButton>
-                    )}
-                  </div>
-                  <Link href={`/product/${product.id}`} passHref legacyBehavior>
-                    <div className={styles["category-product-item-image"]}>
-                      <Image
-                        src={product.image}
-                        alt=""
-                        layout="fill"
-                        objectFit="contain"
-                        unoptimized={true}
-                        priority
-                      />
-                    </div>
-                  </Link>
-                  <p className={styles["category-product-item-title"]}>
-                    {product.title}
-                  </p>
-                  <Rating
-                    name="Product Ratings"
-                    value={product.rating.rate}
-                    precision={0.5}
-                    sx={{ margin: "0.5em 0em" }}
-                    size="small"
-                    readOnly
-                  />
-                  <p className={styles["category-product-item-price"]}>
-                    ${product.price.toFixed(2)}
-                  </p>
-                </div>
-                <div>
-                  <AddtoCartButton
-                    onButtonClick={() =>
-                      user
-                        ? dispatch(addItemToCart(product))
-                        : router.push("/login")
-                    }
-                  />
-                </div>
-              </div>
-            );
-          })}
+        <div className={styles["category-footer"]}>
+          <Footer />
         </div>
       </div>
-
-      <div className={styles["category-footer"]}>
-        <Footer />
-      </div>
-    </div>
-  </>;
+    </>
+  );
 };
 
 export default Category;
