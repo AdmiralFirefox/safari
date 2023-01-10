@@ -1,6 +1,6 @@
 import React, { FC, useState, useContext } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import categories from "../../data/category.json";
 import { AuthContext } from "../../context/AuthContext";

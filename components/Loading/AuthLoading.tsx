@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";

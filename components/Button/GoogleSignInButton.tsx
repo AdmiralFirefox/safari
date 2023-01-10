@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { styled } from "@mui/material/styles";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Button, { ButtonProps } from "@mui/material/Button";
 
 const SignInGoogleButton = styled(Button)<ButtonProps>(() => ({

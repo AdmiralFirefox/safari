@@ -4,7 +4,7 @@ import { useLockedBody } from "../../hooks/useLockedBody";
 import { auth } from "../../firebase/firebase";
 import { AuthContext } from "../../context/AuthContext";
 import { signOut } from "firebase/auth";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import { IoLocationSharp } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";

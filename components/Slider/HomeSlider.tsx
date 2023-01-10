@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 
@@ -22,8 +22,10 @@ const HomeSlider: FC = () => {
             <Image
               src="/assets/SliderOne.jpg"
               alt="Slider Image"
-              width="100%"
-              height="40%"
+              style={{
+                width: "100%",
+                height: "40%",
+              }}
               layout="responsive"
               objectFit="cover"
               priority
@@ -34,8 +36,10 @@ const HomeSlider: FC = () => {
           <Image
             src="/assets/SliderTwo.jpg"
             alt="Slider Image"
-            width="100%"
-            height="40%"
+            style={{
+              width: "100%",
+              height: "40%",
+            }}
             layout="responsive"
             objectFit="cover"
             priority
@@ -45,8 +49,10 @@ const HomeSlider: FC = () => {
           <Image
             src="/assets/SliderThree.jpg"
             alt="Slider Image"
-            width="100%"
-            height="40%"
+            style={{
+              width: "100%",
+              height: "40%",
+            }}
             layout="responsive"
             objectFit="cover"
             priority
@@ -56,8 +62,10 @@ const HomeSlider: FC = () => {
           <Image
             src="/assets/SliderFour.jpg"
             alt="Slider Image"
-            width="100%"
-            height="40%"
+            style={{
+              width: "100%",
+              height: "40%",
+            }}
             layout="responsive"
             objectFit="cover"
             priority
@@ -67,8 +75,10 @@ const HomeSlider: FC = () => {
           <Image
             src="/assets/SliderFive.jpg"
             alt="Slider Image"
-            width="100%"
-            height="40%"
+            style={{
+              width: "100%",
+              height: "40%",
+            }}
             layout="responsive"
             objectFit="cover"
             priority

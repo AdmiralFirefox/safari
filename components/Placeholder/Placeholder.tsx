@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import UserButton from "../Button/UserButton";
 import styles from "../../styles/placeholder/Placeholder.module.scss";

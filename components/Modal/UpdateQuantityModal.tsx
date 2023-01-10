@@ -1,7 +1,7 @@
 import { FC, ChangeEvent, KeyboardEvent } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Rating from "@mui/material/Rating";
 import UpdateQuantityButton from "../Button/UpdateQuantityButton";
 import CancelButton from "../Button/CancelButton";
