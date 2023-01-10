@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Autoplay } from "swiper";
 
@@ -22,13 +22,13 @@ const HomeSlider: FC = () => {
             <Image
               src="/assets/SliderOne.jpg"
               alt="Slider Image"
+              priority
+              sizes="100vw"
               style={{
                 width: "100%",
                 height: "40%",
+                objectFit: "cover",
               }}
-              layout="responsive"
-              objectFit="cover"
-              priority
             />
           </div>
         </SwiperSlide>
@@ -36,52 +36,52 @@ const HomeSlider: FC = () => {
           <Image
             src="/assets/SliderTwo.jpg"
             alt="Slider Image"
+            priority
+            sizes="100vw"
             style={{
               width: "100%",
               height: "40%",
+              objectFit: "cover",
             }}
-            layout="responsive"
-            objectFit="cover"
-            priority
           />
         </SwiperSlide>
         <SwiperSlide>
           <Image
             src="/assets/SliderThree.jpg"
             alt="Slider Image"
+            priority
+            sizes="100vw"
             style={{
               width: "100%",
               height: "40%",
+              objectFit: "cover",
             }}
-            layout="responsive"
-            objectFit="cover"
-            priority
           />
         </SwiperSlide>
         <SwiperSlide>
           <Image
             src="/assets/SliderFour.jpg"
             alt="Slider Image"
+            priority
+            sizes="100vw"
             style={{
               width: "100%",
               height: "40%",
+              objectFit: "cover",
             }}
-            layout="responsive"
-            objectFit="cover"
-            priority
           />
         </SwiperSlide>
         <SwiperSlide>
           <Image
             src="/assets/SliderFive.jpg"
             alt="Slider Image"
+            priority
+            sizes="100vw"
             style={{
               width: "100%",
               height: "40%",
+              objectFit: "cover",
             }}
-            layout="responsive"
-            objectFit="cover"
-            priority
           />
         </SwiperSlide>
       </Swiper>
