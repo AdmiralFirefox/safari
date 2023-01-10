@@ -61,13 +61,13 @@ MyDocument.getInitialProps = async (ctx) => {
   ctx.renderPage = () =>
     originalRenderPage({
       enhanceApp: (App) =>
-        function EnhanceApp(props) {
+        (function EnhanceApp(props) {
           return (
             <CacheProvider value={cache}>
               <App {...props} />
             </CacheProvider>
           );
-        },
+        }),
     });
 
   const initialProps = await Document.getInitialProps(ctx);

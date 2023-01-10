@@ -100,15 +100,15 @@ const SignUp: NextPage = () => {
         <>
           <div className={styles["signup-web-logo"]}>
             <Link href="/">
-              <a>
-                <Image
-                  src="/assets/SafariLogoDark.png"
-                  alt="Web Logo"
-                  width={200}
-                  height={70}
-                  objectFit="cover"
-                />
-              </a>
+
+              <Image
+                src="/assets/SafariLogoDark.png"
+                alt="Web Logo"
+                width={200}
+                height={70}
+                objectFit="cover"
+              />
+
             </Link>
           </div>
 
@@ -221,16 +221,16 @@ const SignUp: NextPage = () => {
 
                 <p className={styles["signup-conditions"]}>
                   By Logging in, you agree to Safari&apos;s{" "}
-                  <Link href="/login">
-                    <a className={styles["signup-conditions-highlights"]}>
+                  <Link href="/login" className={styles["signup-conditions-highlights"]}>
+                    
                       Conditions of Use
-                    </a>
+                    
                   </Link>{" "}
                   and{" "}
-                  <Link href="/login">
-                    <a className={styles["signup-conditions-highlights"]}>
+                  <Link href="/login" className={styles["signup-conditions-highlights"]}>
+                    
                       Privacy Notice
-                    </a>
+                    
                   </Link>
                 </p>
 
@@ -240,7 +240,7 @@ const SignUp: NextPage = () => {
               <div className={styles["login-redirect"]}>
                 <p>Already have an Account?</p>
                 <Link href="/login">
-                  <a>Log In</a>
+                  Log In
                 </Link>
               </div>
             </div>
