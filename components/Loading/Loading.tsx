@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import styles from "../../styles/loading/Loading.module.scss";
 
 interface LoadingProps {
@@ -14,9 +14,12 @@ const Loading: FC<LoadingProps> = ({ title }) => {
         src="/assets/DeliveryTruck.gif"
         width={375}
         height={300}
-        objectFit="contain"
         alt=""
-      />
+        style={{
+          maxWidth: "100%",
+          height: "auto",
+          objectFit: "contain"
+        }} />
     </div>
   );
 };

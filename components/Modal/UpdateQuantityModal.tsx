@@ -1,7 +1,7 @@
 import { FC, ChangeEvent, KeyboardEvent } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Rating from "@mui/material/Rating";
 import UpdateQuantityButton from "../Button/UpdateQuantityButton";
 import CancelButton from "../Button/CancelButton";
@@ -116,8 +116,11 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
                   <Image
                     src={itemImage}
                     alt="Product Item"
-                    layout="fill"
-                    objectFit="contain"
+                    fill
+                    sizes="100vw"
+                    style={{
+                      objectFit: "contain",
+                    }}
                   />
                 </div>
 

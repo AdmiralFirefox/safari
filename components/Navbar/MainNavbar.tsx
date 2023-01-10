@@ -4,7 +4,7 @@ import { useLockedBody } from "../../hooks/useLockedBody";
 import { auth } from "../../firebase/firebase";
 import { AuthContext } from "../../context/AuthContext";
 import { signOut } from "firebase/auth";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { IoLocationSharp } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
@@ -126,7 +126,11 @@ const MainNavbar: FC = () => {
                   alt="Anonymous user"
                   width={70}
                   height={70}
-                  objectFit="contain"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                  }}
                 />
               </div>
               <ProfileDropdown
@@ -147,7 +151,11 @@ const MainNavbar: FC = () => {
                   alt="User Photo"
                   width={65}
                   height={65}
-                  objectFit="contain"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                  }}
                 />
               </div>
               <ProfileDropdown
@@ -163,113 +171,121 @@ const MainNavbar: FC = () => {
     }
   };
 
-  return <>
-    <div className={styles["main-nav-wrapper"]}>
-      <div className={styles["nav-left-side"]}>
-        <NavbarMobileContent
-          country={country}
-          openLocationModal={openLocationModal}
-          cartItems={user ? getTotalItems() : 0}
-          favoriteItems={user ? favorites.length : 0}
+  return (
+    <>
+      <div className={styles["main-nav-wrapper"]}>
+        <div className={styles["nav-left-side"]}>
+          <NavbarMobileContent
+            country={country}
+            openLocationModal={openLocationModal}
+            cartItems={user ? getTotalItems() : 0}
+            favoriteItems={user ? favorites.length : 0}
+          />
+
+          <Link href="/" passHref legacyBehavior>
+            <div className={styles["web-logo"]}>
+              <Image
+                src="/assets/SafariLogoLight.png"
+                alt="Web Logo"
+                priority
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+          </Link>
+
+          <div
+            className={styles["deliver-location"]}
+            onClick={openLocationModal}
+          >
+            <div>
+              <IconContext.Provider
+                value={{ className: styles["location-icon"] }}
+              >
+                <IoLocationSharp />
+              </IconContext.Provider>
+            </div>
+            <div className={styles["location-text"]}>
+              <p className={styles["location-text-title"]}>Deliver to</p>
+              <p className={styles["location-text-country"]}>{country}</p>
+            </div>
+          </div>
+        </div>
+
+        <LocationModal
+          closeLocationModal={closeLocationModal}
+          locationModal={locationModal}
+          handleCountryChange={handleCountryChange}
         />
 
-        <Link href="/" passHref legacyBehavior>
-          <div className={styles["web-logo"]}>
-            <Image
-              src="/assets/SafariLogoLight.png"
-              alt="Web Logo"
-              layout="fill"
-              objectFit="contain"
-              priority
-            />
-          </div>
-        </Link>
+        <div className={styles["nav-right-side"]}>
+          <Link href="/searchproduct" passHref legacyBehavior>
+            <div className={styles["search-products"]}>
+              <div>
+                <IconContext.Provider
+                  value={{ className: styles["search-icon"] }}
+                >
+                  <ImSearch />
+                </IconContext.Provider>
+              </div>
+              <div className={styles["search-products-text"]}>
+                <p className={styles["search-products-text-search"]}>Search</p>
+                <p className={styles["search-products-text-product"]}>
+                  Products
+                </p>
+              </div>
+            </div>
+          </Link>
 
-        <div
-          className={styles["deliver-location"]}
-          onClick={openLocationModal}
-        >
-          <div>
-            <IconContext.Provider
-              value={{ className: styles["location-icon"] }}
-            >
-              <IoLocationSharp />
-            </IconContext.Provider>
-          </div>
-          <div className={styles["location-text"]}>
-            <p className={styles["location-text-title"]}>Deliver to</p>
-            <p className={styles["location-text-country"]}>{country}</p>
-          </div>
+          {userSignedIn()}
+
+          <Link href="/orders" passHref legacyBehavior>
+            <div className={styles["orders-text-link"]}>
+              <p className={styles["orders-text-link-returns"]}>Returns</p>
+              <p className={styles["orders-text-link-orders"]}>&amp; Orders</p>
+            </div>
+          </Link>
+
+          <Link href="/favorites" passHref legacyBehavior>
+            <div className={styles["favorites-link"]}>
+              <IconContext.Provider
+                value={{ className: styles["favorites-icon"] }}
+              >
+                <BsHeartFill />
+              </IconContext.Provider>
+              <div className={styles["favorites-count"]}>
+                <p>{user ? favorites.length : 0}</p>
+              </div>
+            </div>
+          </Link>
+
+          <Link href="/cart" passHref legacyBehavior>
+            <div className={styles["cart-link"]}>
+              <div className={styles["cart-icon"]}>
+                <Image
+                  src="/assets/WhiteCart.png"
+                  alt="White Cart"
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
+              <div className={styles["cart-link-count"]}>
+                <p>{user ? getTotalItems() : 0}</p>
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
 
-      <LocationModal
-        closeLocationModal={closeLocationModal}
-        locationModal={locationModal}
-        handleCountryChange={handleCountryChange}
-      />
-
-      <div className={styles["nav-right-side"]}>
-        <Link href="/searchproduct" passHref legacyBehavior>
-          <div className={styles["search-products"]}>
-            <div>
-              <IconContext.Provider
-                value={{ className: styles["search-icon"] }}
-              >
-                <ImSearch />
-              </IconContext.Provider>
-            </div>
-            <div className={styles["search-products-text"]}>
-              <p className={styles["search-products-text-search"]}>Search</p>
-              <p className={styles["search-products-text-product"]}>
-                Products
-              </p>
-            </div>
-          </div>
-        </Link>
-
-        {userSignedIn()}
-
-        <Link href="/orders" passHref legacyBehavior>
-          <div className={styles["orders-text-link"]}>
-            <p className={styles["orders-text-link-returns"]}>Returns</p>
-            <p className={styles["orders-text-link-orders"]}>&amp; Orders</p>
-          </div>
-        </Link>
-
-        <Link href="/favorites" passHref legacyBehavior>
-          <div className={styles["favorites-link"]}>
-            <IconContext.Provider
-              value={{ className: styles["favorites-icon"] }}
-            >
-              <BsHeartFill />
-            </IconContext.Provider>
-            <div className={styles["favorites-count"]}>
-              <p>{user ? favorites.length : 0}</p>
-            </div>
-          </div>
-        </Link>
-
-        <Link href="/cart" passHref legacyBehavior>
-          <div className={styles["cart-link"]}>
-            <div className={styles["cart-icon"]}>
-              <Image
-                src="/assets/WhiteCart.png"
-                alt="White Cart"
-                layout="fill"
-                objectFit="contain"
-              />
-            </div>
-            <div className={styles["cart-link-count"]}>
-              <p>{user ? getTotalItems() : 0}</p>
-            </div>
-          </div>
-        </Link>
-      </div>
-    </div>
-
-    <CategoryNavbar />
-  </>;
+      <CategoryNavbar />
+    </>
+  );
 };
 
 export default MainNavbar;

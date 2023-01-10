@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import UserButton from "../Button/UserButton";
 import styles from "../../styles/placeholder/Placeholder.module.scss";
@@ -38,7 +38,11 @@ const Placeholder: FC<PlaceholderProps> = ({
             alt="Placeholder Image"
             width={imageWidth}
             height={imageHeight}
-            objectFit="contain"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              objectFit: "contain",
+            }}
           />
         </div>
         <div className={styles["placeholder-content"]}>

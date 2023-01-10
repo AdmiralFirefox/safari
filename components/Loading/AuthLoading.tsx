@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";
@@ -18,9 +18,12 @@ const AuthLoading: FC = () => {
         alt="Web Logo"
         width={200}
         height={70}
-        objectFit="cover"
         priority
-      />
+        style={{
+          maxWidth: "100%",
+          height: "auto",
+          objectFit: "cover"
+        }} />
       <CircularProgress
         size={45}
         sx={{ color: "hsl(36, 100%, 60%)", marginTop: "1.6em" }}

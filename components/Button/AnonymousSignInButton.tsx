@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { styled } from "@mui/material/styles";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Button, { ButtonProps } from "@mui/material/Button";
 
 const SignInAnonymousButton = styled(Button)<ButtonProps>(() => ({
@@ -31,8 +31,11 @@ const AnonymousSignInButton: FC<AnonymousSignInButtonProps> = ({
           alt="Google Logo"
           width={30}
           height={30}
-          objectFit="cover"
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+            objectFit: "cover"
+          }} />
       }
       onClick={onButtonClick}
     >

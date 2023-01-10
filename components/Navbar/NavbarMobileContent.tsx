@@ -1,6 +1,6 @@
 import React, { FC, useState, useContext } from "react";
 import { useRouter } from "next/router";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import categories from "../../data/category.json";
 import { AuthContext } from "../../context/AuthContext";
@@ -112,7 +112,11 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                   alt="User Photo"
                   width={51}
                   height={51}
-                  objectFit="contain"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                  }}
                 />
               </div>
               <div>
@@ -141,7 +145,11 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                   alt="User Photo"
                   width={48}
                   height={48}
-                  objectFit="contain"
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                  }}
                 />
               </div>
               <div>
@@ -218,8 +226,11 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                 <Image
                   src="/assets/EmptyOrder.png"
                   alt="Box Logo"
-                  layout="fill"
-                  objectFit="contain"
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: "contain",
+                  }}
                 />
               </div>
               <p>Returns &amp; Orders</p>
@@ -257,8 +268,11 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                   <Image
                     src="/assets/BlackCart.png"
                     alt="cart"
-                    layout="fill"
-                    objectFit="contain"
+                    fill
+                    sizes="100vw"
+                    style={{
+                      objectFit: "contain",
+                    }}
                   />
                 </div>
                 <p className={styles["mobile-nav-cart-count"]}>{cartItems}</p>
@@ -281,7 +295,8 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
               <Link
                 href={`/category/${category}`}
                 key={i}
-                onClick={toggleDrawer(anchor, false)}>
+                onClick={toggleDrawer(anchor, false)}
+              >
                 {category}
               </Link>
             );

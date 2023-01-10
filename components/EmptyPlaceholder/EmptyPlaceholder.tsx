@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import styles from "../../styles/emptyplaceholder/EmptyPlaceholder.module.scss";
 
 interface EmptyPlaceholderProps {
@@ -26,8 +26,11 @@ const EmptyPlaceholder: FC<EmptyPlaceholderProps> = ({
             alt="Empty Placeholder Image"
             width={imageWidth}
             height={imageHeight}
-            objectFit="contain"
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              objectFit: "contain"
+            }} />
         </div>
         <div className={styles["empty-placeholder-content"]}>
           <h1>{title}</h1>
