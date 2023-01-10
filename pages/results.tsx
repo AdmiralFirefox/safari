@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import { AuthContext } from "../context/AuthContext";
@@ -155,7 +155,11 @@ const Results: NextPage = () => {
               alt=""
               width={75}
               height={75}
-              objectFit="contain"
+              style={{
+                maxWidth: "100%",
+                height: "auto",
+                objectFit: "contain",
+              }}
             />
           </div>
           <UserButton changeRoute={() => router.push("/orders")}>

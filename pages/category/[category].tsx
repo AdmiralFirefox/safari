@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context/AuthContext";
 import { CategoryProps } from "../../types/Category/Category";
@@ -90,13 +90,13 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
             <Image
               src="/assets/CategoryBanner.gif"
               alt=""
+              priority
+              sizes="100vw"
               style={{
                 width: "100%",
                 height: "10%",
+                objectFit: "cover",
               }}
-              layout="responsive"
-              objectFit="cover"
-              priority
             />
           </div>
 
@@ -158,10 +158,13 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                         <Image
                           src={product.image}
                           alt=""
-                          layout="fill"
-                          objectFit="contain"
                           unoptimized={true}
                           priority
+                          fill
+                          sizes="100vw"
+                          style={{
+                            objectFit: "contain",
+                          }}
                         />
                       </div>
                     </Link>

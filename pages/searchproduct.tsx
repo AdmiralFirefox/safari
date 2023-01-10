@@ -2,7 +2,7 @@ import { ChangeEvent, useState, useContext } from "react";
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import Paper from "@mui/material/Paper";
@@ -125,10 +125,13 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                       <Image
                         src={product.image}
                         alt=""
-                        layout="fill"
-                        objectFit="contain"
                         unoptimized={true}
                         priority
+                        fill
+                        sizes="100vw"
+                        style={{
+                          objectFit: "contain",
+                        }}
                       />
                     </div>
                   </Link>

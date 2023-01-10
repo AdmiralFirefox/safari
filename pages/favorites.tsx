@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
 import { addItemToCart } from "../features/Cart/CartSlice";
 import { Product } from "../types/Product/Product";
@@ -83,8 +83,11 @@ const Favorites: NextPage = () => {
                       <Image
                         src={item.image}
                         alt=""
-                        layout="fill"
-                        objectFit="contain"
+                        fill
+                        sizes="100vw"
+                        style={{
+                          objectFit: "contain",
+                        }}
                       />
                     </div>
                   </Link>

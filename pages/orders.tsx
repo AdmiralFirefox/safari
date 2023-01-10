@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { db } from "../firebase/firebase";
@@ -116,9 +116,13 @@ const Orders: NextPage = () => {
                       alt=""
                       width={150}
                       height={150}
-                      objectFit="contain"
                       unoptimized={true}
                       priority
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto",
+                        objectFit: "contain",
+                      }}
                     />
                   </div>
                   <div>

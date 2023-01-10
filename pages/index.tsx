@@ -3,7 +3,7 @@ import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from "next/link";
 import { AuthContext } from "../context/AuthContext";
 import HomeSlider from "../components/Slider/HomeSlider";
@@ -151,10 +151,13 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                         <Image
                           src={product.image}
                           alt=""
-                          layout="fill"
-                          objectFit="contain"
                           unoptimized={true}
                           priority
+                          fill
+                          sizes="100vw"
+                          style={{
+                            objectFit: "contain",
+                          }}
                         />
                       </div>
                     </Link>
@@ -191,12 +194,12 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
             <Image
               src="/assets/AdEcho.jpg"
               alt=""
+              sizes="100vw"
               style={{
                 width: "100%",
                 height: "20%",
+                objectFit: "cover",
               }}
-              layout="responsive"
-              objectFit="cover"
             />
           </div>
 
@@ -245,10 +248,13 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                         <Image
                           src={product.image}
                           alt=""
-                          layout="fill"
-                          objectFit="contain"
                           unoptimized={true}
                           priority
+                          fill
+                          sizes="100vw"
+                          style={{
+                            objectFit: "contain",
+                          }}
                         />
                       </div>
                     </Link>
@@ -285,12 +291,12 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
             <Image
               src="/assets/AdEnjoy.jpg"
               alt=""
+              sizes="100vw"
               style={{
                 width: "100%",
                 height: "20%",
+                objectFit: "cover",
               }}
-              layout="responsive"
-              objectFit="cover"
             />
           </div>
 
@@ -340,10 +346,13 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                           <Image
                             src={product.image}
                             alt=""
-                            layout="fill"
-                            objectFit="contain"
                             unoptimized={true}
                             priority
+                            fill
+                            sizes="100vw"
+                            style={{
+                              objectFit: "contain",
+                            }}
                           />
                         </div>
                       </Link>

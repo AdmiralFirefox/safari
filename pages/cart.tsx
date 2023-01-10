@@ -1,5 +1,5 @@
 import { useState, useContext, ChangeEvent } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import Axios from "axios";
@@ -223,8 +223,11 @@ const Cart: NextPage = () => {
                     <Image
                       src={item.image}
                       alt=""
-                      layout="fill"
-                      objectFit="contain"
+                      fill
+                      sizes="100vw"
+                      style={{
+                        objectFit: "contain",
+                      }}
                     />
                   </div>
 

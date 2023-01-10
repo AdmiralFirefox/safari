@@ -1,7 +1,7 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../context/AuthContext";
 import { toast, Zoom } from "react-toastify";
@@ -178,7 +178,11 @@ const LogIn: NextPage = () => {
                 alt="Web Logo"
                 width={200}
                 height={70}
-                objectFit="cover"
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                  objectFit: "cover",
+                }}
               />
             </Link>
           </div>
