@@ -37,7 +37,7 @@ https://user-images.githubusercontent.com/79429518/179766763-8a2b3092-408f-49f5-
 ## About the Project 
 I have created this project to expand my knowledge with React and Next JS, as well as structuring a mid-level complexity project integrating Redux logic and Stripe. It is an e-commerce website inspired by [Amazon](https://www.amazon.com/) which you can choose to buy items/products and add them to your cart. This project uses Stripe as a payment service provider that accepts credit cards, digital wallets and many other payment methods. Right after working with [Filmflix,](https://github.com/AdmiralFirefox/filmflix) I'm thinking for an e-commerce site to work with and I choose Amazon as an inspiration. Like Filmflix, this project also took me months to finish, while also focusing on my college studies. From time to time, I'm updating this project whenever a certain package package has an update, as well as adding minor features, bug fixes and performance improvements.
 
-Go and try my project. Let me know if there are any improvements 💖.
+Go and try my project. Let me know if there are any improvements. 💖
 
 ### Built With...
 * [Next Js](https://nextjs.org/)
