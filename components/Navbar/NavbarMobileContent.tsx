@@ -195,7 +195,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
             <p>Deliver to {country}</p>
           </div>
 
-          <Link href="/searchproduct" passHref>
+          <Link href="/searchproduct" passHref legacyBehavior>
             <div
               className={styles["mobile-nav-search"]}
               onClick={toggleDrawer(anchor, false)}
@@ -209,7 +209,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
             </div>
           </Link>
 
-          <Link href="/orders" passHref>
+          <Link href="/orders" passHref legacyBehavior>
             <div
               className={styles["mobile-nav-orders"]}
               onClick={toggleDrawer(anchor, false)}
@@ -226,7 +226,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
             </div>
           </Link>
 
-          <Link href="/favorites" passHref>
+          <Link href="/favorites" passHref legacyBehavior>
             <div
               className={styles["mobile-nav-favorites"]}
               onClick={toggleDrawer(anchor, false)}
@@ -247,7 +247,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
             </div>
           </Link>
 
-          <Link href="/cart" passHref>
+          <Link href="/cart" passHref legacyBehavior>
             <div
               className={styles["mobile-nav-cart"]}
               onClick={toggleDrawer(anchor, false)}
@@ -273,13 +273,16 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
         <div className={styles["mobile-nav-category-links"]}>
           <h1>Shop</h1>
 
-          <Link href="/">
-            <a onClick={toggleDrawer(anchor, false)}>all</a>
+          <Link href="/" onClick={toggleDrawer(anchor, false)}>
+            all
           </Link>
           {categories.map((category, i) => {
             return (
-              <Link href={`/category/${category}`} key={i}>
-                <a onClick={toggleDrawer(anchor, false)}>{category}</a>
+              <Link
+                href={`/category/${category}`}
+                key={i}
+                onClick={toggleDrawer(anchor, false)}>
+                {category}
               </Link>
             );
           })}

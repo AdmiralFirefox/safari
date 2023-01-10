@@ -7,12 +7,12 @@ const CategoryNavbar: FC = () => {
   return (
     <div className={styles["category-nav-wrapper"]}>
       <Link href="/">
-        <a>all</a>
+        all
       </Link>
       {categories.map((category, i) => {
         return (
           <Link key={i} href={`/category/${category}`}>
-            <a>{category}</a>
+            {category}
           </Link>
         );
       })}

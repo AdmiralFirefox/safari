@@ -8,94 +8,85 @@ const Footer: FC = () => {
       <div className={styles["footer-links"]}>
         <p>Get to Know Us</p>
         <Link href="/">
-          <a>Careeer</a>
+          Careeer
         </Link>
         <Link href="/">
-          <a>Blog</a>
+          Blog
         </Link>
         <Link href="/">
-          <a>About Safari</a>
+          About Safari
         </Link>
         <Link href="/">
-          <a>Investor Relations</a>
+          Investor Relations
         </Link>
         <Link href="/">
-          <a>Safari Devices</a>
+          Safari Devices
         </Link>
       </div>
       <div className={styles["footer-links"]}>
         <p>Make Money with Us</p>
         <Link href="/">
-          <a>Sell products on Safari</a>
+          Sell products on Safari
         </Link>
         <Link href="/">
-          <a>Sell on Safari Business</a>
+          Sell on Safari Business
         </Link>
         <Link href="/">
-          <a>Sell apps on Safari</a>
+          Sell apps on Safari
         </Link>
         <Link href="/">
-          <a>Become an Affiliate</a>
+          Become an Affiliate
         </Link>
         <Link href="/">
-          <a>Advertise your Products</a>
+          Advertise your Products
         </Link>
         <Link href="/">
-          <a>Self-Publish with us</a>
+          Self-Publish with us
         </Link>
         <Link href="/">
-          <a>Host a Safari Hub</a>
+          Host a Safari Hub
         </Link>
       </div>
       <div className={styles["footer-links"]}>
         <p>Safari Payment Products</p>
         <Link href="/">
-          <a>Safari Business Card</a>
+          Safari Business Card
         </Link>
         <Link href="/">
-          <a>Shop with points</a>
+          Shop with points
         </Link>
         <Link href="/">
-          <a>Reload Your Balance</a>
+          Reload Your Balance
         </Link>
         <Link href="/">
-          <a>Safari Currency Converter</a>
+          Safari Currency Converter
         </Link>
       </div>
       <div className={styles["footer-links"]}>
         <p>Let Us Help You</p>
         <Link href="/">
-          <a>Safari and COVID - 19</a>
+          Safari and COVID - 19
         </Link>
         <Link href="/">
-          <a>Your Account</a>
+          Your Account
         </Link>
         <Link href="/">
-          <a>Your Orders</a>
+          Your Orders
         </Link>
         <Link href="/">
-          <a>
-            Shipping Rates &amp;
-            <br /> Policies
-          </a>
+          Shipping Rates &<br />Policies
         </Link>
         <Link href="/">
-          <a>
-            Returns
-            <br /> &amp; Replacements
-          </a>
+          Returns<br />& Replacements
         </Link>
         <Link href="/">
-          <a>
-            Manage Your
-            <br /> Content and Devices
-          </a>
+          Manage Your<br />Content and Devices
         </Link>
         <Link href="/">
-          <a>Safari Assistant</a>
+          Safari Assistant
         </Link>
         <Link href="/">
-          <a>Help</a>
+          Help
         </Link>
       </div>
     </footer>
