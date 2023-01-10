@@ -195,6 +195,8 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
               src="/assets/AdEcho.jpg"
               alt=""
               sizes="100vw"
+              width={100}
+              height={100}
               style={{
                 width: "100%",
                 height: "20%",
@@ -292,6 +294,8 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
               src="/assets/AdEnjoy.jpg"
               alt=""
               sizes="100vw"
+              width={100}
+              height={100}
               style={{
                 width: "100%",
                 height: "20%",

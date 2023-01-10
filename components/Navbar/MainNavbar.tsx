@@ -189,7 +189,9 @@ const MainNavbar: FC = () => {
                 alt="Web Logo"
                 priority
                 fill
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw,
+                (max-width: 1200px) 50vw,
+                33vw"
                 style={{
                   objectFit: "contain",
                 }}
@@ -269,7 +271,9 @@ const MainNavbar: FC = () => {
                   src="/assets/WhiteCart.png"
                   alt="White Cart"
                   fill
-                  sizes="100vw"
+                  sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
                   style={{
                     objectFit: "contain",
                   }}

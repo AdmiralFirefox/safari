@@ -92,6 +92,8 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
               alt=""
               priority
               sizes="100vw"
+              width={100}
+              height={100}
               style={{
                 width: "100%",
                 height: "10%",

@@ -15,11 +15,13 @@ const Loading: FC<LoadingProps> = ({ title }) => {
         width={375}
         height={300}
         alt=""
+        priority
         style={{
           maxWidth: "100%",
           height: "auto",
-          objectFit: "contain"
-        }} />
+          objectFit: "contain",
+        }}
+      />
     </div>
   );
 };

@@ -24,65 +24,58 @@ const HomeSlider: FC = () => {
               alt="Slider Image"
               priority
               sizes="100vw"
-              style={{
-                width: "100%",
-                height: "40%",
-                objectFit: "cover",
-              }}
+              width={100}
+              height={100}
             />
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image
-            src="/assets/SliderTwo.jpg"
-            alt="Slider Image"
-            priority
-            sizes="100vw"
-            style={{
-              width: "100%",
-              height: "40%",
-              objectFit: "cover",
-            }}
-          />
+          <div className="slider-image">
+            <Image
+              src="/assets/SliderTwo.jpg"
+              alt="Slider Image"
+              priority
+              sizes="100vw"
+              width={100}
+              height={100}
+            />
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image
-            src="/assets/SliderThree.jpg"
-            alt="Slider Image"
-            priority
-            sizes="100vw"
-            style={{
-              width: "100%",
-              height: "40%",
-              objectFit: "cover",
-            }}
-          />
+          <div className="slider-image">
+            <Image
+              src="/assets/SliderThree.jpg"
+              alt="Slider Image"
+              priority
+              sizes="100vw"
+              width={100}
+              height={100}
+            />
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image
-            src="/assets/SliderFour.jpg"
-            alt="Slider Image"
-            priority
-            sizes="100vw"
-            style={{
-              width: "100%",
-              height: "40%",
-              objectFit: "cover",
-            }}
-          />
+          <div className="slider-image">
+            <Image
+              src="/assets/SliderFour.jpg"
+              alt="Slider Image"
+              priority
+              sizes="100vw"
+              width={100}
+              height={100}
+            />
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Image
-            src="/assets/SliderFive.jpg"
-            alt="Slider Image"
-            priority
-            sizes="100vw"
-            style={{
-              width: "100%",
-              height: "40%",
-              objectFit: "cover",
-            }}
-          />
+          <div className="slider-image">
+            <Image
+              src="/assets/SliderFive.jpg"
+              alt="Slider Image"
+              priority
+              sizes="100vw"
+              width={100}
+              height={100}
+            />
+          </div>
         </SwiperSlide>
       </Swiper>
       <div className="carousel-gradient-shadow" />

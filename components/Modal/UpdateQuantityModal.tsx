@@ -117,7 +117,10 @@ const UpdateQuantityModal: FC<UpdateQuantityModalProps> = ({
                     src={itemImage}
                     alt="Product Item"
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    33vw"
+                    priority
                     style={{
                       objectFit: "contain",
                     }}

@@ -22,8 +22,9 @@ const AuthLoading: FC = () => {
         style={{
           maxWidth: "100%",
           height: "auto",
-          objectFit: "cover"
-        }} />
+          objectFit: "cover",
+        }}
+      />
       <CircularProgress
         size={45}
         sx={{ color: "hsl(36, 100%, 60%)", marginTop: "1.6em" }}

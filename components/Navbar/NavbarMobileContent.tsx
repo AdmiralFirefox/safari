@@ -227,7 +227,9 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                   src="/assets/EmptyOrder.png"
                   alt="Box Logo"
                   fill
-                  sizes="100vw"
+                  sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
                   style={{
                     objectFit: "contain",
                   }}
@@ -269,7 +271,9 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                     src="/assets/BlackCart.png"
                     alt="cart"
                     fill
-                    sizes="100vw"
+                    sizes="(max-width: 768px) 100vw,
+                    (max-width: 1200px) 50vw,
+                    33vw"
                     style={{
                       objectFit: "contain",
                     }}

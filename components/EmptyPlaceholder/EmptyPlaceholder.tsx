@@ -29,8 +29,9 @@ const EmptyPlaceholder: FC<EmptyPlaceholderProps> = ({
             style={{
               maxWidth: "100%",
               height: "auto",
-              objectFit: "contain"
-            }} />
+              objectFit: "contain",
+            }}
+          />
         </div>
         <div className={styles["empty-placeholder-content"]}>
           <h1>{title}</h1>
