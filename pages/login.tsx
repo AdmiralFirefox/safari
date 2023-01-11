@@ -48,7 +48,7 @@ const LogIn: NextPage = () => {
       setLoading(false);
       toast.success("Signed In Successfully!", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         transition: Zoom,
         hideProgressBar: false,
         closeOnClick: true,
@@ -82,7 +82,7 @@ const LogIn: NextPage = () => {
       await signInWithPopup(auth, provider);
       toast.success("Signed In Successfully!", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         transition: Zoom,
         hideProgressBar: false,
         closeOnClick: true,
@@ -113,7 +113,7 @@ const LogIn: NextPage = () => {
       setLoading(false);
       toast.success("Signed In Successfully!", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 3000,
         transition: Zoom,
         hideProgressBar: false,
         closeOnClick: true,

@@ -37,7 +37,7 @@ const MainNavbar: FC = () => {
     setCountry(e.target.value);
     toast.success(`Country selected to ${e.target.value}`, {
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 3500,
       transition: Zoom,
       hideProgressBar: false,
       closeOnClick: true,

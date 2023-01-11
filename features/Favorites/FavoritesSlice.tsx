@@ -19,7 +19,7 @@ const favoriteSlice = createSlice({
         // Toast Success Message
         toast.success(`${action.payload.title} added to Favorites`, {
           position: "top-center",
-          autoClose: 4000,
+          autoClose: 2500,
           transition: Zoom,
           hideProgressBar: false,
           closeOnClick: true,
@@ -38,7 +38,7 @@ const favoriteSlice = createSlice({
       // Toast Removed Item From Favorites Message
       toast.error("Item removed from Favorites", {
         position: "top-center",
-        autoClose: 4000,
+        autoClose: 2500,
         transition: Zoom,
         hideProgressBar: false,
         closeOnClick: true,

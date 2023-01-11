@@ -19,7 +19,7 @@ const cartSlice = createSlice({
           // Toast Error Message
           toast.error(`Quantity limit reached for ${action.payload.title}`, {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2500,
             transition: Zoom,
             hideProgressBar: false,
             closeOnClick: true,
@@ -31,9 +31,9 @@ const cartSlice = createSlice({
           itemExists.quantity!++;
 
           // Toast Success Message
-          toast.success(`Increased ${action.payload.title} quantity`, {
+          toast.success(`${action.payload.title} increased quantity`, {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2500,
             transition: Zoom,
             hideProgressBar: false,
             closeOnClick: true,
@@ -48,7 +48,7 @@ const cartSlice = createSlice({
         // Toast Success Message
         toast.success(`${action.payload.title} added to cart`, {
           position: "top-center",
-          autoClose: 4000,
+          autoClose: 2500,
           transition: Zoom,
           hideProgressBar: false,
           closeOnClick: true,
@@ -82,7 +82,7 @@ const cartSlice = createSlice({
           // Toast Error Message
           toast.error(`Quantity limit reached for ${action.payload.title}`, {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2500,
             transition: Zoom,
             hideProgressBar: false,
             closeOnClick: true,
@@ -96,7 +96,7 @@ const cartSlice = createSlice({
           // Toast Error Message
           toast.error(`Quantity limit reached for ${action.payload.title}`, {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2500,
             transition: Zoom,
             hideProgressBar: false,
             closeOnClick: true,
@@ -108,9 +108,9 @@ const cartSlice = createSlice({
           itemExists.quantity! += action.payload.quantity!;
 
           // Toast Success Message
-          toast.success(`Increased ${action.payload.title} quantity`, {
+          toast.success(`${action.payload.title} increased quantity`, {
             position: "top-center",
-            autoClose: 4000,
+            autoClose: 2500,
             transition: Zoom,
             hideProgressBar: false,
             closeOnClick: true,
@@ -125,7 +125,7 @@ const cartSlice = createSlice({
         // Toast Success Message
         toast.success(`${action.payload.title} added to cart`, {
           position: "top-center",
-          autoClose: 4000,
+          autoClose: 2500,
           transition: Zoom,
           hideProgressBar: false,
           closeOnClick: true,
@@ -163,7 +163,7 @@ const cartSlice = createSlice({
       // Toast Clear Cart Message
       toast.error("Cart Cleared", {
         position: "top-center",
-        autoClose: 4000,
+        autoClose: 2500,
         transition: Zoom,
         hideProgressBar: false,
         closeOnClick: true,
@@ -183,7 +183,7 @@ const cartSlice = createSlice({
       // Toast Remove Item Message
       toast.error("Item removed from the cart", {
         position: "top-center",
-        autoClose: 4000,
+        autoClose: 2500,
         transition: Zoom,
         hideProgressBar: false,
         closeOnClick: true,
