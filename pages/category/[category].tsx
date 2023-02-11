@@ -160,7 +160,6 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                         <Image
                           src={product.image}
                           alt=""
-                          unoptimized={true}
                           priority
                           fill
                           sizes="100vw"

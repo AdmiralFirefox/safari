@@ -125,7 +125,6 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                       <Image
                         src={product.image}
                         alt=""
-                        unoptimized={true}
                         priority
                         fill
                         sizes="100vw"
