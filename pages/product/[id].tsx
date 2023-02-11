@@ -1,8 +1,8 @@
 import { useState, useContext, ChangeEvent } from "react";
 import type { NextPage } from "next";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context/AuthContext";
-import { GlassMagnifier } from "react-image-magnifiers";
 import { Product } from "../../types/Product/Product";
 import { ProductItem } from "../../types/Product/ProductItem";
 import Divider from "@mui/material/Divider";
@@ -74,16 +74,16 @@ const Product: NextPage<ProductItem> = ({ product }) => {
   return (
     <div className={styles["product-wrapper"]}>
       <div className={styles["product-image-wrapper"]}>
-        <GlassMagnifier
-          className={styles["product-image"]}
-          imageSrc={product.image}
-          largeImageSrc={product.image}
-          allowOverflow={true}
-          magnifierSize="45%"
-          magnifierBorderSize={3}
-          magnifierBorderColor="rgba(255, 255, 255, .5)"
-          square={true}
-        />
+        <div className={styles["product-image-content"]}>
+          <Image
+            src={product.image}
+            alt="Product Image"
+            className={styles["product-image"]}
+            priority
+            fill
+            sizes="100vw"
+          />
+        </div>
         {favoriteID.includes(product.id) && user ? (
           <IconButton
             sx={{ marginTop: "0.6em" }}
