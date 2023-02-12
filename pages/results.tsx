@@ -84,6 +84,9 @@ const Results: NextPage = () => {
     }
   }, [cart, dispatch, products?.data.payment_intent.status, user]);
 
+  console.log(products?.data);
+  console.log(`Status: ${products?.data.payment_intent.status}`)
+
   //When the payment status is loading
   if (isLoading) {
     return <Loading title="Confirming your Payment..." />;
