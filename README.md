@@ -12,7 +12,6 @@
 </div>
 
 <br />
-<br />
 
 <h3 align="center">Desktop View:</h3>
 
