@@ -4,10 +4,7 @@
          <p>An e-commerce website inspired by <a href="https://www.amazon.com/">Amazon</a></p>
     </strong>
     <strong>
-         <p><a href="https://safari-commerce.vercel.app/">You can view the live site here »</a></p>
-    </strong>
-       <strong>
-        <p><a href="https://safari-commerce.netlify.app/">Alternate Link »</a></p>
+         <p><a href="https://safari-commerce.netlify.app/">You can view the live site here »</a></p>
     </strong>
 </div>
 
