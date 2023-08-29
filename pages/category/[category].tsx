@@ -88,7 +88,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
         <div className={styles["category-page-content"]}>
           <div>
             <Image
-              src="/assets/CategoryBanner.gif"
+              src="/assets/CategoryBanner.png"
               alt=""
               priority
               sizes="100vw"
