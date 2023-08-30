@@ -11,7 +11,7 @@ const Loading: FC<LoadingProps> = ({ title }) => {
     <div className={styles["loading-wrapper"]}>
       <h1>{title}</h1>
       <Image
-        src="/assets/DeliveryTruck.gif"
+        src="/assets/DeliveryTruck.png"
         width={375}
         height={300}
         alt=""
