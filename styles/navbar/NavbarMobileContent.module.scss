@@ -76,6 +76,7 @@
     .mobile-nav-location-icon {
       color: theme_provider.$black_color;
       font-size: 2rem;
+      flex-shrink: 0;
     }
 
     //Location Text
