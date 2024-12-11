@@ -1,13 +1,10 @@
-import { FC } from "react";
 import Head from "next/head";
 
-interface MetaProps {
-  title?: string;
-  keywords?: string;
-  description?: string;
-}
-
-const Meta: FC<MetaProps> = ({ title, keywords, description }) => {
+const Meta = ({
+  title = "Safari",
+  keywords = "Safari, Safari Store, Safari E-Commerce",
+  description = "Shop and check valuable items and check out.",
+}) => {
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,12 +15,6 @@ const Meta: FC<MetaProps> = ({ title, keywords, description }) => {
       <title>{title}</title>
     </Head>
   );
-};
-
-Meta.defaultProps = {
-  title: "Safari",
-  keywords: "Safari, Safari Store, Safari E-Commerce",
-  description: "Safari E-Commerse Store",
 };
 
 export default Meta;
