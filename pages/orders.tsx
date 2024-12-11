@@ -117,7 +117,6 @@ const Orders: NextPage = () => {
                       width={150}
                       height={150}
                       unoptimized={true}
-                      priority
                       style={{
                         maxWidth: "100%",
                         height: "auto",

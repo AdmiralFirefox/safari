@@ -151,7 +151,6 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                         <Image
                           src={product.image}
                           alt=""
-                          priority
                           fill
                           sizes="100vw"
                           style={{
@@ -249,7 +248,6 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                         <Image
                           src={product.image}
                           alt=""
-                          priority
                           fill
                           sizes="100vw"
                           style={{
@@ -348,7 +346,6 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                           <Image
                             src={product.image}
                             alt=""
-                            priority
                             fill
                             sizes="100vw"
                             style={{
