@@ -33,7 +33,7 @@ const DoneButton = styled(Button)<ButtonProps>(() => ({
 }));
 
 const fetchCountries = async () => {
-  return await countriesInstance.get("/all");
+  return await countriesInstance.get("/independent?status=true");
 };
 
 const LocationModal: FC<LocationModalProps> = ({
