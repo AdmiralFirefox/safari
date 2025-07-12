@@ -21,12 +21,14 @@ import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import CircularProgress from "@mui/material/CircularProgress";
 const Placeholder = dynamic(
   () => import("../components/Placeholder/Placeholder")
 );
 const EmptyPlaceholder = dynamic(
   () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
 );
+import { toast, Zoom } from "react-toastify";
 import styles from "../styles/pages/Favorites.module.scss";
 
 const Favorites: NextPage = () => {
@@ -39,7 +41,23 @@ const Favorites: NextPage = () => {
   const deleteFavorite = async (product: Product) => {
     if (user) {
       const favoritesRef = collection(db, "favorites");
-      const q = query(favoritesRef, where("id", "==", product.id));
+      const q = query(
+        favoritesRef,
+        where("id", "==", product.id),
+        where("owner", "==", user!.uid)
+      );
+
+      // Toast Remove Message
+      toast.error("Item removed from Favorites", {
+        position: "top-center",
+        autoClose: 2500,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -53,7 +71,11 @@ const Favorites: NextPage = () => {
     if (user) {
       try {
         const favoritesRef = collection(db, "favorites");
-        const q = query(favoritesRef, orderBy("createdAt", "desc"));
+        const q = query(
+          favoritesRef,
+          orderBy("createdAt", "desc"),
+          where("owner", "==", user!.uid)
+        );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
           const favorites_data = snapshot.docs.map((doc) => ({
@@ -100,7 +122,15 @@ const Favorites: NextPage = () => {
   }
 
   if (loadingFavorites) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className={styles["loading-favorites"]}>
+        <h1>Loading Favorites</h1>
+        <CircularProgress
+          size={45}
+          sx={{ color: "hsl(36, 100%, 60%)", marginTop: "1.6em" }}
+        />
+      </div>
+    );
   }
 
   return (

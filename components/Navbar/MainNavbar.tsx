@@ -1,10 +1,11 @@
 import { FC, useContext, useState, useRef, useEffect } from "react";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { useLockedBody } from "../../hooks/useLockedBody";
-import { auth } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
 import { AuthContext } from "../../context/AuthContext";
 import { signOut } from "firebase/auth";
 import Image from "next/image";
+import { collection, query, onSnapshot, where } from "firebase/firestore";
 import Link from "next/link";
 import { IoLocationSharp } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
@@ -14,6 +15,7 @@ import CategoryNavbar from "./CategoryNavbar";
 import NavbarMobileContent from "./NavbarMobileContent";
 import ProfileDropdown from "./ProfileDropdown";
 import LocationModal from "../Modal/LocationModal";
+import CircularProgress from "@mui/material/CircularProgress";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { toast, Zoom } from "react-toastify";
 import { useAppSelector } from "../../app/reduxhooks";
@@ -23,11 +25,10 @@ import styles from "../../styles/navbar/MainNavbar.module.scss";
 const MainNavbar: FC = () => {
   const user = useContext(AuthContext);
   const cart = useAppSelector((state: { cart: Product[] }) => state.cart);
-  const favorites = useAppSelector(
-    (state: { favorites: Product[] }) => state.favorites
-  );
   const dropDownRef = useRef(null);
 
+  const [favoriteTitles, setFavoriteTitles] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
   const [locationModal, setLocationModal] = useState(false);
   const [lockBody, setLockBody] = useState(false);
   const [profileDropDown, setProfileDropDown] = useState(false);
@@ -81,6 +82,25 @@ const MainNavbar: FC = () => {
   const getTotalItems = () => {
     return cart.reduce((accumulator, item) => accumulator + item.quantity!, 0);
   };
+
+  // Load all favorites
+  useEffect(() => {
+    if (user) {
+      const q = query(
+        collection(db, "favorites"),
+        where("owner", "==", user!.uid)
+      );
+
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const titles = snapshot.docs.map((doc) => doc.data().title);
+        setFavoriteTitles(titles);
+        setLoading(false);
+      });
+
+      // Clean up
+      return () => unsubscribe();
+    }
+  }, [user]);
 
   //Storing Country State in Local Storage
   useEffect(() => {
@@ -179,7 +199,8 @@ const MainNavbar: FC = () => {
             country={country}
             openLocationModal={openLocationModal}
             cartItems={user ? getTotalItems() : 0}
-            favoriteItems={user ? favorites.length : 0}
+            favoriteItems={user ? favoriteTitles.length : 0}
+            loading={loading}
           />
 
           <Link href="/" passHref legacyBehavior>
@@ -259,7 +280,17 @@ const MainNavbar: FC = () => {
                 <BsHeartFill />
               </IconContext.Provider>
               <div className={styles["favorites-count"]}>
-                <p>{user ? favorites.length : 0}</p>
+                {loading && user ? (
+                  <CircularProgress
+                    size={25}
+                    sx={{
+                      color: "#000",
+                      marginTop: "0.25em",
+                    }}
+                  />
+                ) : (
+                  <p>{user ? favoriteTitles.length : 0}</p>
+                )}
               </div>
             </div>
           </Link>

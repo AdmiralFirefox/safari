@@ -18,6 +18,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import CircularProgress from "@mui/material/CircularProgress";
+import { toast, Zoom } from "react-toastify";
 
 const FavoriteButton = ({ product }: ProductItem) => {
   const user = useContext(AuthContext);
@@ -40,7 +41,20 @@ const FavoriteButton = ({ product }: ProductItem) => {
   ) => {
     const favoritesRef = collection(db, "favorites");
 
+    // Toast Success Message
+    toast.success(`${product_title} added to Favorites`, {
+      position: "top-center",
+      autoClose: 2500,
+      transition: Zoom,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    });
+
     await addDoc(favoritesRef, {
+      owner: user!.uid,
       id: product_id,
       createdAt: serverTimestamp(),
       category: product_category,
@@ -51,7 +65,6 @@ const FavoriteButton = ({ product }: ProductItem) => {
         rate: product_rating,
       },
       title: product_title,
-      favorite: true,
     });
   };
 
@@ -59,7 +72,23 @@ const FavoriteButton = ({ product }: ProductItem) => {
   const deleteFavorite = async (product: Product) => {
     if (user) {
       const favoritesRef = collection(db, "favorites");
-      const q = query(favoritesRef, where("id", "==", product.id));
+      const q = query(
+        favoritesRef,
+        where("id", "==", product.id),
+        where("owner", "==", user!.uid)
+      );
+
+      // Toast Remove Message
+      toast.error("Item removed from Favorites", {
+        position: "top-center",
+        autoClose: 2500,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
@@ -70,17 +99,22 @@ const FavoriteButton = ({ product }: ProductItem) => {
 
   // Load all favorites
   useEffect(() => {
-    const q = query(collection(db, "favorites"));
+    if (user) {
+      const q = query(
+        collection(db, "favorites"),
+        where("owner", "==", user!.uid)
+      );
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const titles = snapshot.docs.map((doc) => doc.data().title);
-      setFavoriteTitles(titles);
-      setLoading(false);
-    });
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const titles = snapshot.docs.map((doc) => doc.data().title);
+        setFavoriteTitles(titles);
+        setLoading(false);
+      });
 
-    // Clean up
-    return () => unsubscribe();
-  }, []);
+      // Clean up
+      return () => unsubscribe();
+    }
+  }, [user]);
 
   return (
     <>

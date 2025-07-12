@@ -1,5 +1,17 @@
 @use "../themeprovider/themeprovider" as theme-provider;
 
+.loading-favorites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin: 1.5em 1em 0em 1em;
+    text-align: center;
+  }
+}
+
 .favorites-page-container {
   width: 100%;
   margin: 0 auto;

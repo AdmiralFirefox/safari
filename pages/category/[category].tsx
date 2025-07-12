@@ -6,23 +6,16 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../context/AuthContext";
 import { CategoryProps } from "../../types/Category/Category";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { SelectChangeEvent } from "@mui/material/Select";
 import SortDropdown from "../../components/SortDropdown/SortDropdown";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
+import FavoriteButton from "../../components/Button/FavoriteButton";
 const Footer = dynamic(() => import("../../components/Footer/Footer"));
-import { Product } from "../../types/Product/Product";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { Size } from "../../types/WindowSize/WindowSize";
-import { useAppSelector, useAppDispatch } from "../../app/reduxhooks";
+import { useAppDispatch } from "../../app/reduxhooks";
 import { addItemToCart } from "../../features/Cart/CartSlice";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../../features/Favorites/FavoritesSlice";
 import styles from "../../styles/pages/Category.module.scss";
 
 type ContextProps = {
@@ -40,13 +33,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
   const router = useRouter();
   const categoryName = router.query.category;
 
-  const favorites = useAppSelector(
-    (state: { favorites: Product[] }) => state.favorites
-  );
-
   const dispatch = useAppDispatch();
-
-  const favoriteID = favorites.map((favorite) => favorite.id);
 
   const newCategoryProducts: CategoryProps["categoryProducts"] = [];
   const sortedCategoryProducts = newCategoryProducts
@@ -122,34 +109,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                   <div>
                     <div className={styles["category-product-item-category"]}>
                       <p>{product.category}</p>
-                      {favoriteID.includes(product.id) && user ? (
-                        <IconButton
-                          onClick={() =>
-                            dispatch(removeFromFavorites(product.id))
-                          }
-                        >
-                          <FavoriteIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      ) : !user ? (
-                        <IconButton onClick={() => router.push("/login")}>
-                          <FavoriteBorderIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          onClick={() => dispatch(addToFavorites(product))}
-                        >
-                          <FavoriteBorderIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      )}
+                      <FavoriteButton product={product} />
                     </div>
                     <Link
                       href={`/product/${product.id}`}

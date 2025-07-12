@@ -9,18 +9,11 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import { SearchProductProps } from "../types/SearchProduct/SearchProduct";
 import Rating from "@mui/material/Rating";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import IconButton from "@mui/material/IconButton";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
+import FavoriteButton from "../components/Button/FavoriteButton";
 import Fuse from "fuse.js";
 import { addItemToCart } from "../features/Cart/CartSlice";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../features/Favorites/FavoritesSlice";
-import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
-import { Product } from "../types/Product/Product";
+import { useAppDispatch } from "../app/reduxhooks";
 import styles from "../styles/pages/SearchProduct.module.scss";
 
 const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
@@ -37,13 +30,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
   const results = fuse.search(searchProduct);
 
   const productResults = results.map((result) => result.item);
-
-  const favorites = useAppSelector(
-    (state: { favorites: Product[] }) => state.favorites
-  );
   const dispatch = useAppDispatch();
-
-  const favoriteID = favorites.map((favorite) => favorite.id);
 
   const handleSearchProductChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -91,34 +78,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                 <div>
                   <div className={styles["search-product-item-category"]}>
                     <p>{product.category}</p>
-                    {favoriteID.includes(product.id) && user ? (
-                      <IconButton
-                        onClick={() =>
-                          dispatch(removeFromFavorites(product.id))
-                        }
-                      >
-                        <FavoriteIcon
-                          fontSize="large"
-                          sx={{ color: "#fd5da8" }}
-                        />
-                      </IconButton>
-                    ) : !user ? (
-                      <IconButton onClick={() => router.push("/login")}>
-                        <FavoriteBorderIcon
-                          fontSize="large"
-                          sx={{ color: "#fd5da8" }}
-                        />
-                      </IconButton>
-                    ) : (
-                      <IconButton
-                        onClick={() => dispatch(addToFavorites(product))}
-                      >
-                        <FavoriteBorderIcon
-                          fontSize="large"
-                          sx={{ color: "#fd5da8" }}
-                        />
-                      </IconButton>
-                    )}
+                    <FavoriteButton product={product} />
                   </div>
                   <Link href={`/product/${product.id}`} passHref legacyBehavior>
                     <div className={styles["search-product-item-image"]}>

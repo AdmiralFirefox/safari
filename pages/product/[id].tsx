@@ -9,17 +9,11 @@ import Divider from "@mui/material/Divider";
 import Rating from "@mui/material/Rating";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import IconButton from "@mui/material/IconButton";
 import ItemQuantityButton from "../../components/Button/ItemQuantityButton";
 import AddtoCartButton from "../../components/Button/AddtoCartButton";
-import { useAppSelector, useAppDispatch } from "../../app/reduxhooks";
+import FavoriteButton from "../../components/Button/FavoriteButton";
+import { useAppDispatch } from "../../app/reduxhooks";
 import { addProductQuantity } from "../../features/Cart/CartSlice";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../../features/Favorites/FavoritesSlice";
 import styles from "../../styles/pages/Product.module.scss";
 
 type ContextProps = {
@@ -28,19 +22,13 @@ type ContextProps = {
   };
 };
 
-const Product: NextPage<ProductItem> = ({ product }) => {
+const ProductPage: NextPage<ProductItem> = ({ product }) => {
   const [productQuantity, setProductQuantity] = useState(1);
 
   const user = useContext(AuthContext);
   const router = useRouter();
 
-  const favorites = useAppSelector(
-    (state: { favorites: Product[] }) => state.favorites
-  );
-
   const dispatch = useAppDispatch();
-
-  const favoriteID = favorites.map((favorite) => favorite.id);
 
   const incrementProductQuantity = () => {
     if (productQuantity >= 50) {
@@ -84,28 +72,7 @@ const Product: NextPage<ProductItem> = ({ product }) => {
             sizes="100vw"
           />
         </div>
-        {favoriteID.includes(product.id) && user ? (
-          <IconButton
-            sx={{ marginTop: "0.6em" }}
-            onClick={() => dispatch(removeFromFavorites(product.id))}
-          >
-            <FavoriteIcon fontSize="large" sx={{ color: "#fd5da8" }} />
-          </IconButton>
-        ) : !user ? (
-          <IconButton
-            sx={{ marginTop: "0.6em" }}
-            onClick={() => router.push("/login")}
-          >
-            <FavoriteBorderIcon fontSize="large" sx={{ color: "#fd5da8" }} />
-          </IconButton>
-        ) : (
-          <IconButton
-            sx={{ marginTop: "0.6em" }}
-            onClick={() => dispatch(addToFavorites(product))}
-          >
-            <FavoriteBorderIcon fontSize="large" sx={{ color: "#fd5da8" }} />
-          </IconButton>
-        )}
+        <FavoriteButton product={product} />
       </div>
       <div>
         <p className={styles["product-title"]}>{product.title}</p>
@@ -185,7 +152,7 @@ const Product: NextPage<ProductItem> = ({ product }) => {
   );
 };
 
-export default Product;
+export default ProductPage;
 
 export const getStaticPaths = async () => {
   const res = await fetch("https://fakestoreapi.com/products");

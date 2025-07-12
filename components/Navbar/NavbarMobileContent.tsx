@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { auth } from "../../firebase/firebase";
 import { signOut } from "firebase/auth";
 import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Button, { ButtonProps } from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
@@ -49,6 +50,7 @@ interface NavbarMobileProps {
   openLocationModal: () => void;
   cartItems: number;
   favoriteItems: number;
+  loading: boolean;
 }
 
 const NavbarMobileContent: FC<NavbarMobileProps> = ({
@@ -56,6 +58,7 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
   openLocationModal,
   cartItems,
   favoriteItems,
+  loading,
 }) => {
   const user = useContext(AuthContext);
   const router = useRouter();
@@ -253,7 +256,17 @@ const NavbarMobileContent: FC<NavbarMobileProps> = ({
                   <BsHeartFill />
                 </IconContext.Provider>
                 <p className={styles["mobile-nav-favorites-count"]}>
-                  {favoriteItems}
+                  {loading && user ? (
+                    <CircularProgress
+                      size={15}
+                      sx={{
+                        color: "#000",
+                        marginTop: "0.25em",
+                      }}
+                    />
+                  ) : (
+                    favoriteItems
+                  )}
                 </p>
               </div>
               <p>Favorites</p>
