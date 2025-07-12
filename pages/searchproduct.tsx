@@ -1,10 +1,8 @@
-import { ChangeEvent, useState, useContext } from "react";
+import { ChangeEvent, useState } from "react";
 import type { NextPage } from "next";
 import { GetStaticProps } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { AuthContext } from "../context/AuthContext";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import { SearchProductProps } from "../types/SearchProduct/SearchProduct";
@@ -17,8 +15,6 @@ import { useAppDispatch } from "../app/reduxhooks";
 import styles from "../styles/pages/SearchProduct.module.scss";
 
 const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
-  const user = useContext(AuthContext);
-  const router = useRouter();
   const [searchProduct, setSearchProduct] = useState("");
 
   const fuse = new Fuse(searchProducts, {
@@ -110,11 +106,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
                 </div>
                 <div>
                   <AddtoCartButton
-                    onButtonClick={() =>
-                      user
-                        ? dispatch(addItemToCart(product))
-                        : router.push("/login")
-                    }
+                    onButtonClick={() => dispatch(addItemToCart(product))}
                   />
                 </div>
               </div>

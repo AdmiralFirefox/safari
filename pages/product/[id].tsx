@@ -1,8 +1,6 @@
-import { useState, useContext, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import type { NextPage } from "next";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { AuthContext } from "../../context/AuthContext";
 import { Product } from "../../types/Product/Product";
 import { ProductItem } from "../../types/Product/ProductItem";
 import Divider from "@mui/material/Divider";
@@ -24,9 +22,6 @@ type ContextProps = {
 
 const ProductPage: NextPage<ProductItem> = ({ product }) => {
   const [productQuantity, setProductQuantity] = useState(1);
-
-  const user = useContext(AuthContext);
-  const router = useRouter();
 
   const dispatch = useAppDispatch();
 
@@ -135,14 +130,12 @@ const ProductPage: NextPage<ProductItem> = ({ product }) => {
           <div className={styles["add-to-cart-button-wrapper"]}>
             <AddtoCartButton
               onButtonClick={() =>
-                user
-                  ? dispatch(
-                      addProductQuantity({
-                        ...product,
-                        quantity: productQuantity,
-                      })
-                    )
-                  : router.push("/login")
+                dispatch(
+                  addProductQuantity({
+                    ...product,
+                    quantity: productQuantity,
+                  })
+                )
               }
             />
           </div>

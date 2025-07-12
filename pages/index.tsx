@@ -1,11 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
-import { AuthContext } from "../context/AuthContext";
 import HomeSlider from "../components/Slider/HomeSlider";
 const Footer = dynamic(() => import("../components/Footer/Footer"));
 import SortDropdown from "../components/SortDropdown/SortDropdown";
@@ -21,9 +19,6 @@ import { useAppDispatch } from "../app/reduxhooks";
 import styles from "../styles/pages/Home.module.scss";
 
 const Home: NextPage<ProductsProps> = ({ products }) => {
-  const user = useContext(AuthContext);
-  const router = useRouter();
-
   const [sortProducts, setSortProducts] = useState("default");
   const [arrowUp, setArrowUp] = useState(false);
 
@@ -137,11 +132,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   </div>
                   <div>
                     <AddtoCartButton
-                      onButtonClick={() =>
-                        user
-                          ? dispatch(addItemToCart(product))
-                          : router.push("/login")
-                      }
+                      onButtonClick={() => dispatch(addItemToCart(product))}
                     />
                   </div>
                 </div>
@@ -207,11 +198,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   </div>
                   <div>
                     <AddtoCartButton
-                      onButtonClick={() =>
-                        user
-                          ? dispatch(addItemToCart(product))
-                          : router.push("/login")
-                      }
+                      onButtonClick={() => dispatch(addItemToCart(product))}
                     />
                   </div>
                 </div>
@@ -278,11 +265,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                     </div>
                     <div>
                       <AddtoCartButton
-                        onButtonClick={() =>
-                          user
-                            ? dispatch(addItemToCart(product))
-                            : router.push("/login")
-                        }
+                        onButtonClick={() => dispatch(addItemToCart(product))}
                       />
                     </div>
                   </div>

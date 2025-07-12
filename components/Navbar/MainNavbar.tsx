@@ -198,7 +198,7 @@ const MainNavbar: FC = () => {
           <NavbarMobileContent
             country={country}
             openLocationModal={openLocationModal}
-            cartItems={user ? getTotalItems() : 0}
+            cartItems={getTotalItems()}
             favoriteItems={user ? favoriteTitles.length : 0}
             loading={loading}
           />
@@ -311,7 +311,7 @@ const MainNavbar: FC = () => {
                 />
               </div>
               <div className={styles["cart-link-count"]}>
-                <p>{user ? getTotalItems() : 0}</p>
+                <p>{getTotalItems()}</p>
               </div>
             </div>
           </Link>

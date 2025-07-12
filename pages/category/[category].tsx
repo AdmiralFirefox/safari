@@ -1,10 +1,9 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { AuthContext } from "../../context/AuthContext";
 import { CategoryProps } from "../../types/Category/Category";
 import { SelectChangeEvent } from "@mui/material/Select";
 import SortDropdown from "../../components/SortDropdown/SortDropdown";
@@ -25,7 +24,6 @@ type ContextProps = {
 };
 
 const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
-  const user = useContext(AuthContext);
   const [sortCategoryProducts, setSortCategoryProducts] = useState("default");
 
   const size: Size = useWindowSize();
@@ -145,11 +143,7 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
                   </div>
                   <div>
                     <AddtoCartButton
-                      onButtonClick={() =>
-                        user
-                          ? dispatch(addItemToCart(product))
-                          : router.push("/login")
-                      }
+                      onButtonClick={() => dispatch(addItemToCart(product))}
                     />
                   </div>
                 </div>

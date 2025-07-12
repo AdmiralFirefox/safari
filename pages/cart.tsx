@@ -23,9 +23,6 @@ import IconButton from "@mui/material/IconButton";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-const Placeholder = dynamic(
-  () => import("../components/Placeholder/Placeholder")
-);
 const EmptyPlaceholder = dynamic(
   () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
 );
@@ -114,47 +111,36 @@ const Cart: NextPage = () => {
   const createCheckoutSession = async () => {
     setLoadingCheckout(true);
 
-    const stripe = await stripePromise;
+    if (user) {
+      const stripe = await stripePromise;
 
-    //Passing the cart items on the checkout session on the api server
-    const checkoutSession = await Axios.post("/api/checkout/session", cart);
+      //Passing the cart items on the checkout session on the api server
+      const checkoutSession = await Axios.post("/api/checkout/session", cart);
 
-    const result = await stripe!.redirectToCheckout({
-      sessionId: checkoutSession.data.id,
-    });
-
-    if (result.error) {
-      console.log(result.error.message);
-      toast.error(`${result.error.message}`, {
-        position: "top-center",
-        autoClose: 5000,
-        transition: Zoom,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
+      const result = await stripe!.redirectToCheckout({
+        sessionId: checkoutSession.data.id,
       });
+
+      if (result.error) {
+        console.log(result.error.message);
+        toast.error(`${result.error.message}`, {
+          position: "top-center",
+          autoClose: 5000,
+          transition: Zoom,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        });
+      }
     }
 
     setLoadingCheckout(false);
   };
 
-  //If the user is not logged in
-  if (!user) {
-    return (
-      <Placeholder
-        image="/assets/EmptyCart.png"
-        title="Log In to see your Cart"
-        subtitle="Shop today's deal"
-        imageWidth={150}
-        imageHeight={150}
-      />
-    );
-  }
-
   //If the cart is empty
-  if (cart.length === 0 && user) {
+  if (cart.length === 0) {
     return (
       <EmptyPlaceholder
         image="/assets/EmptyCart.png"
@@ -333,9 +319,19 @@ const Cart: NextPage = () => {
             Total &#40;{getTotalItems()} items&#41;: $
             {getTotalPrice().toFixed(2)}
           </p>
-          <CheckoutButton onButtonClick={createCheckoutSession}>
-            {loadingCheckout ? "Processing..." : "Proceed to Checkout"}
-          </CheckoutButton>
+          {user ? (
+            <CheckoutButton onButtonClick={createCheckoutSession}>
+              {loadingCheckout ? "Processing..." : "Proceed to Checkout"}
+            </CheckoutButton>
+          ) : (
+            <CheckoutButton
+              onButtonClick={() =>
+                router.push("/login") as unknown as Promise<void>
+              }
+            >
+              {"Log In to Checkout"}
+            </CheckoutButton>
+          )}
         </div>
       </div>
     </>
