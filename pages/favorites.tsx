@@ -1,13 +1,22 @@
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
-import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
+import { db } from "../firebase/firebase";
+import {
+  deleteDoc,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  where,
+  getDocs,
+} from "firebase/firestore";
+import { useAppDispatch } from "../app/reduxhooks";
 import { addItemToCart } from "../features/Cart/CartSlice";
 import { Product } from "../types/Product/Product";
-import { removeFromFavorites } from "../features/Favorites/FavoritesSlice";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
 import Rating from "@mui/material/Rating";
 import IconButton from "@mui/material/IconButton";
@@ -21,12 +30,48 @@ const EmptyPlaceholder = dynamic(
 import styles from "../styles/pages/Favorites.module.scss";
 
 const Favorites: NextPage = () => {
-  const user = useContext(AuthContext);
+  const [favorites, setFavorites] = useState<Product[]>([]);
+  const [loadingFavorites, setLoadingFavorites] = useState(true);
 
-  const favorites = useAppSelector(
-    (state: { favorites: Product[] }) => state.favorites
-  );
+  const user = useContext(AuthContext);
   const dispatch = useAppDispatch();
+
+  const deleteFavorite = async (product: Product) => {
+    if (user) {
+      const favoritesRef = collection(db, "favorites");
+      const q = query(favoritesRef, where("id", "==", product.id));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        deleteDoc(doc.ref);
+      });
+    }
+  };
+
+  // Fetch Data from database
+  useEffect(() => {
+    if (user) {
+      try {
+        const favoritesRef = collection(db, "favorites");
+        const q = query(favoritesRef, orderBy("createdAt", "desc"));
+
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+          const favorites_data = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+
+          setFavorites(favorites_data as unknown as Product[]);
+          setLoadingFavorites(false);
+        });
+
+        // Clean up function
+        return () => unsubscribe();
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [user]);
 
   //If the user is not logged in
   if (!user) {
@@ -42,7 +87,7 @@ const Favorites: NextPage = () => {
   }
 
   //If favorites is empty
-  if (favorites.length === 0 && user) {
+  if (favorites.length === 0 && user && !loadingFavorites) {
     return (
       <EmptyPlaceholder
         image="/assets/EmptyFavorites.png"
@@ -52,6 +97,10 @@ const Favorites: NextPage = () => {
         imageHeight={150}
       />
     );
+  }
+
+  if (loadingFavorites) {
+    return <h1>Loading...</h1>;
   }
 
   return (
@@ -68,10 +117,7 @@ const Favorites: NextPage = () => {
                 <div>
                   <div className={styles["favorites-item-category"]}>
                     <p>{item.category}</p>
-
-                    <IconButton
-                      onClick={() => dispatch(removeFromFavorites(item.id))}
-                    >
+                    <IconButton onClick={() => deleteFavorite(item)}>
                       <FavoriteIcon
                         fontSize="large"
                         sx={{ color: "#fd5da8" }}

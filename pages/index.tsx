@@ -12,19 +12,12 @@ import SortDropdown from "../components/SortDropdown/SortDropdown";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { ProductsProps } from "../types/Products/Products";
 import Rating from "@mui/material/Rating";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import IconButton from "@mui/material/IconButton";
 import AddtoCartButton from "../components/Button/AddtoCartButton";
+import FavoriteButton from "../components/Button/FavoriteButton";
 import { IoArrowUpCircle } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import { addItemToCart } from "../features/Cart/CartSlice";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../features/Favorites/FavoritesSlice";
-import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
-import { Product } from "../types/Product/Product";
+import { useAppDispatch } from "../app/reduxhooks";
 import styles from "../styles/pages/Home.module.scss";
 
 const Home: NextPage<ProductsProps> = ({ products }) => {
@@ -34,12 +27,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
   const [sortProducts, setSortProducts] = useState("default");
   const [arrowUp, setArrowUp] = useState(false);
 
-  const favorites = useAppSelector(
-    (state: { favorites: Product[] }) => state.favorites
-  );
   const dispatch = useAppDispatch();
-
-  const favoriteID = favorites.map((favorite) => favorite.id);
 
   const newProducts: ProductsProps["products"] = [];
   const sortedProducts = newProducts
@@ -113,34 +101,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   <div>
                     <div className={styles["home-product-item-category"]}>
                       <p>{product.category}</p>
-                      {favoriteID.includes(product.id) && user ? (
-                        <IconButton
-                          onClick={() =>
-                            dispatch(removeFromFavorites(product.id))
-                          }
-                        >
-                          <FavoriteIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      ) : !user ? (
-                        <IconButton onClick={() => router.push("/login")}>
-                          <FavoriteBorderIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          onClick={() => dispatch(addToFavorites(product))}
-                        >
-                          <FavoriteBorderIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      )}
+                      <FavoriteButton product={product} />
                     </div>
                     <Link
                       href={`/product/${product.id}`}
@@ -210,34 +171,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                   <div>
                     <div className={styles["home-product-item-category"]}>
                       <p>{product.category}</p>
-                      {favoriteID.includes(product.id) && user ? (
-                        <IconButton
-                          onClick={() =>
-                            dispatch(removeFromFavorites(product.id))
-                          }
-                        >
-                          <FavoriteIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      ) : !user ? (
-                        <IconButton onClick={() => router.push("/login")}>
-                          <FavoriteBorderIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          onClick={() => dispatch(addToFavorites(product))}
-                        >
-                          <FavoriteBorderIcon
-                            fontSize="large"
-                            sx={{ color: "#fd5da8" }}
-                          />
-                        </IconButton>
-                      )}
+                      <FavoriteButton product={product} />
                     </div>
                     <Link
                       href={`/product/${product.id}`}
@@ -308,34 +242,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
                     <div>
                       <div className={styles["home-product-item-category"]}>
                         <p>{product.category}</p>
-                        {favoriteID.includes(product.id) && user ? (
-                          <IconButton
-                            onClick={() =>
-                              dispatch(removeFromFavorites(product.id))
-                            }
-                          >
-                            <FavoriteIcon
-                              fontSize="large"
-                              sx={{ color: "#fd5da8" }}
-                            />
-                          </IconButton>
-                        ) : !user ? (
-                          <IconButton onClick={() => router.push("/login")}>
-                            <FavoriteBorderIcon
-                              fontSize="large"
-                              sx={{ color: "#fd5da8" }}
-                            />
-                          </IconButton>
-                        ) : (
-                          <IconButton
-                            onClick={() => dispatch(addToFavorites(product))}
-                          >
-                            <FavoriteBorderIcon
-                              fontSize="large"
-                              sx={{ color: "#fd5da8" }}
-                            />
-                          </IconButton>
-                        )}
+                        <FavoriteButton product={product} />
                       </div>
                       <Link
                         href={`/product/${product.id}`}
