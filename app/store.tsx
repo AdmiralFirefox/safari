@@ -10,11 +10,9 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import cartReducer from "../features/Cart/CartSlice";
-import favoriteReducer from "../features/Favorites/FavoritesSlice";
 
 const reducers = combineReducers({
   cart: cartReducer,
-  favorites: favoriteReducer,
 });
 
 const persistConfig = {
