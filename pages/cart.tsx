@@ -320,7 +320,10 @@ const Cart: NextPage = () => {
             {getTotalPrice().toFixed(2)}
           </p>
           {user ? (
-            <CheckoutButton onButtonClick={createCheckoutSession}>
+            <CheckoutButton
+              onButtonClick={createCheckoutSession}
+              loadingCheckout={loadingCheckout}
+            >
               {loadingCheckout ? "Processing..." : "Proceed to Checkout"}
             </CheckoutButton>
           ) : (
