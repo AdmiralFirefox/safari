@@ -37,19 +37,17 @@ https://user-images.githubusercontent.com/79429518/179766763-8a2b3092-408f-49f5-
 I have created this project to expand my knowledge with React and Next JS, as well as structuring a mid-level complexity project integrating Redux logic and Stripe. It is an e-commerce website inspired by [Amazon](https://www.amazon.com/) which you can choose to buy items/products and add them to your cart. This project uses Stripe as a payment service provider that accepts credit cards, digital wallets and many other payment methods. Right after working with [Filmflix,](https://github.com/AdmiralFirefox/filmflix) I'm thinking for an e-commerce site to work with and I choose Amazon as an inspiration. Like Filmflix, this project also took me months to finish, while also focusing on my college studies. As much as possible, I've tried to maintain this project whenever a certain package package has an update, as well as adding minor features, bug fixes and performance improvements.
 
 ### Built With...
-* [Next Js](https://nextjs.org/)
-* [Typescript](https://www.typescriptlang.org/)
-* [Stripe](https://stripe.com/)
-* [Firebase](https://firebase.google.com/)
-* [Firestore](https://cloud.google.com/firestore)
-* [Redux Toolkit](https://redux-toolkit.js.org/)
-* [Redux Thunk](https://redux.js.org/usage/writing-logic-thunks)
-* [React Query](https://tanstack.com/query/v4/?from=reactQueryV3&original=https://react-query-v3.tanstack.com/)
-* [React Hook Form](https://react-hook-form.com/)
-* [Framer Motion](https://www.framer.com/motion/)
-* [MUI](https://mui.com/)
-* [SASS](https://sass-lang.com/)
-* [Fakestore API](https://fakestoreapi.com/)
+* Next Js
+* Typescript
+* Stripe
+* Firebase and Firestore
+* Redux Toolkit
+* React Query
+* React Hook Form
+* Framer Motion
+* MUI
+* SASS
+* [Custom product API made with Express](https://github.com/admiralfirefox/safari-product-api)
 
 ### Features
 ☑️ Add/remove products to cart. <br />
@@ -59,7 +57,7 @@ I have created this project to expand my knowledge with React and Next JS, as we
 ☑️ Sort product by lowest and highest on prices, as well as lowest and highest on ratings. <br />
 ☑️ Search products. <br />
 ☑️ Uses [Stripe](https://stripe.com/) to accept payments. <br />
-☑️ Uses [Firestore](https://cloud.google.com/firestore) to keep track of ordered products. <br /> 
+☑️ Uses [Firestore](https://cloud.google.com/firestore) to keep track of ordered and favorite products. <br /> 
 ☑️ Users can sign up with their google account, create their own Safari account, and sign in anonymously. <br />
 ☑️ Responsive Layout (can be viewed from a galaxy fold to a 4k monitor screen). <br />
 
