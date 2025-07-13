@@ -148,7 +148,7 @@ const ProductPage: NextPage<ProductItem> = ({ product }) => {
 export default ProductPage;
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_BASE}/products`);
   const products = await res.json();
 
   const paths = products.map((product: Product) => {
@@ -165,7 +165,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context: ContextProps) => {
   const id = context.params.id;
-  const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_BASE}/products/${id}`);
   const product = await res.json();
 
   return {

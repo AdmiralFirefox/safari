@@ -300,7 +300,7 @@ const Home: NextPage<ProductsProps> = ({ products }) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_BASE}/products`);
   const products = await res.json();
 
   return {

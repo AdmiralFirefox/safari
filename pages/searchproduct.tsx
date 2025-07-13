@@ -121,7 +121,7 @@ const SearchProduct: NextPage<SearchProductProps> = ({ searchProducts }) => {
 export default SearchProduct;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch("https://fakestoreapi.com/products");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL_BASE}/products`);
   const searchProducts = await res.json();
 
   return {

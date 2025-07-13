@@ -163,7 +163,9 @@ const Category: NextPage<CategoryProps> = ({ categoryProducts }) => {
 export default Category;
 
 export const getStaticPaths = async () => {
-  const res = await fetch("https://fakestoreapi.com/products/categories");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL_BASE}/products/categories`
+  );
   const categories: string[] = await res.json();
 
   const paths = categories.map((category) => {
@@ -181,7 +183,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (context: ContextProps) => {
   const category = context.params.category;
   const res = await fetch(
-    `https://fakestoreapi.com/products/category/${category}`
+    `${process.env.NEXT_PUBLIC_URL_BASE}/products/category/${category}`
   );
   const categoryProducts = await res.json();
 

@@ -7,6 +7,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   images: {
-    domains: ["fakestoreapi.com", "lh3.googleusercontent.com"],
+    domains: ["lh3.googleusercontent.com", "res.cloudinary.com"],
   },
 });
