@@ -65,7 +65,7 @@ I have created this project to expand my knowledge with React and Next JS, as we
 
 ## Usage
 
-<img src="public/documentation/SafariPaymentDemo.gif" alt="Safari Payment Demo" width="100%" height="100%">
+<img src="public/documentation/SafariPaymentDemo.gif" alt="Safari Payment Demo" width="100%" height="100%" style="max-height: 100%;">
 
 <br />
 
