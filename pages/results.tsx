@@ -12,7 +12,6 @@ import { ProductResults } from "../types/Results/ProductResults";
 import Axios from "axios";
 import { useQuery, UseQueryResult } from "react-query";
 import { clearCart } from "../features/Cart/CartSlice";
-import dayjs from "dayjs";
 import UserButton from "../components/Button/UserButton";
 const EmptyPlaceholder = dynamic(
   () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
@@ -104,42 +103,12 @@ const Results: NextPage = () => {
 
   return (
     <>
-      <div className={styles["result-product-wrapper"]}>
-        <div className={styles["result-product-container"]}>
-          {products?.data.line_items.data.map((product) => {
-            return (
-              <div key={product.id} className={styles["result-product"]}>
-                <p className={styles["result-date"]}>
-                  {dayjs(product.price.created * 1000).format(
-                    "MM/DD/YYYY, h:mm:ss a"
-                  )}
-                </p>
-                <p className={styles["result-description"]}>
-                  {product.description}
-                </p>
-                <div className={styles["result-product-amount-info"]}>
-                  <p>Quantity: {product.quantity}</p>
-                  <p>Price: ${(product.price.unit_amount / 100).toFixed(2)}</p>
-                  <p>
-                    Subtotal: $
-                    {(
-                      (product.price.unit_amount / 100) *
-                      product.quantity
-                    ).toFixed(2)}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
       <div className={styles["result-grand-total-wrapper"]}>
         <div className={styles["result-grand-total-content"]}>
           {products?.data.line_items.data.map((item) => item.quantity) ===
           undefined ? null : (
             <p>
-              Total &#40;{getTotalItems()} items&#41;: $
+              Total Ordered &#40;{getTotalItems()} items&#41;: $
               {getTotalPrice()!.toFixed(2)}
             </p>
           )}
@@ -149,7 +118,7 @@ const Results: NextPage = () => {
       <div className={styles["cart-cleared-info-wrapper"]}>
         <div className={styles["cart-cleared-info-content"]}>
           <div>
-            <p>Cart Cleared</p>
+            <p>Order Successful and Cart Cleared</p>
             <Image
               src="/assets/EmptyCart.png"
               alt=""

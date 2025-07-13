@@ -1,60 +1,11 @@
 @use "../themeprovider/themeprovider" as theme_provider;
 
-.result-product-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 3em;
-
-  .result-product-container {
-    width: min(63em, 90%);
-
-    //Product Item
-    .result-product {
-      border: 3px solid theme_provider.$black_color;
-      margin-bottom: 2em;
-      padding: 1.4em;
-
-      //Date
-      .result-date {
-        color: theme_provider.$slightly_light_gray_color;
-        font-weight: 700;
-        font-style: italic;
-        margin-bottom: 0.7em;
-        font-size: 1rem;
-      }
-
-      //Description
-      .result-description {
-        color: theme_provider.$black_color;
-        font-weight: 700;
-        line-height: 1.5em;
-        margin-bottom: 0.8em;
-        font-size: 1.2rem;
-      }
-
-      //Amount Info
-      .result-product-amount-info {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-
-        p {
-          color: theme_provider.$black_color;
-          font-weight: 700;
-          margin-right: 1.25em;
-          font-size: 1.1rem;
-        }
-      }
-    }
-  }
-}
-
 //Grand Total
 .result-grand-total-wrapper {
   display: flex;
   justify-content: center;
   margin-bottom: 1.8em;
-  margin-top: 1.3em;
+  margin-top: 2em;
 
   .result-grand-total-content {
     display: flex;
@@ -63,7 +14,7 @@
     background: theme_provider.$light_gray_background;
     padding: 1em;
     width: min(63em, 90%);
-    border-radius: 20px;
+    border-radius: 10px;
 
     //Grand Total Text
     p {
@@ -88,10 +39,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 10px;
 
     div:first-child {
       display: flex;
+      flex-direction: column;
       align-items: center;
       margin-bottom: 1.1em;
 
@@ -101,21 +53,7 @@
         font-size: 1.3rem;
         text-align: center;
         margin-right: 0.3em;
-      }
-    }
-  }
-}
-
-@media (min-width: theme_provider.$media_query_small_value) {
-  .result-product-wrapper {
-    .result-product-container {
-      //Product Item
-      .result-product {
-        //Amount Info
-        .result-product-amount-info {
-          flex-direction: row;
-          justify-content: flex-start;
-        }
+        margin-bottom: 0.5em;
       }
     }
   }
