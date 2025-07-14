@@ -139,7 +139,7 @@ const Orders: NextPage = () => {
                 <div className={styles["order-item-header"]}>
                   <p className={styles["order-date"]}>
                     {dayjs(order.createdAt!.seconds * 1000).format(
-                      "MMMM D YYYY, h:mm:ss a"
+                      "MMMM D YYYY, h:mm a"
                     )}
                   </p>
 
