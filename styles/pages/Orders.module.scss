@@ -14,9 +14,11 @@
 
     //Product Item
     .order-item {
-      border: 3px solid theme_provider.$black_color;
+      // border: 3px solid theme_provider.$black_color;
       margin-bottom: 2em;
       padding: 1.5em;
+      border: 5px solid theme_provider.$category_nav_background;
+      border-radius: 10px;
 
       //Date
       .order-date {

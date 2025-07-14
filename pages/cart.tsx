@@ -199,13 +199,36 @@ const Cart: NextPage = () => {
         {cart.map((item) => {
           return (
             <div key={item.id} className={styles["cart-content"]}>
-              <div className={styles["cart-item-category"]}>
-                <p>{item.category}</p>
+              <div className={styles["cart-item-header"]}>
+                <div className={styles["cart-item-category"]}>
+                  <p>{item.category}</p>
+                </div>
+
+                <div
+                  className={styles["cart-item-remove-icon"]}
+                  onClick={() => dispatch(removeItemFromCart(item.id))}
+                >
+                  <IconButton>
+                    <RemoveCircleIcon
+                      sx={{
+                        fontSize: "2.5rem",
+                        color: "hsl(12, 96%, 40%)",
+                        transition: "color 0.5s ease-in-out",
+                        "&:hover": {
+                          color: "hsl(12, 96%, 50%)",
+                        },
+                      }}
+                    />
+                  </IconButton>
+                </div>
               </div>
 
               <div className={styles["cart-item"]}>
                 <div className={styles["cart-item-content"]}>
-                  <div className={styles["cart-item-image"]}>
+                  <div
+                    className={styles["cart-item-image"]}
+                    onClick={() => router.push(`/product/${item.id}`)}
+                  >
                     <Image
                       src={item.image}
                       alt=""
@@ -217,24 +240,6 @@ const Cart: NextPage = () => {
                         objectFit: "contain",
                       }}
                     />
-                  </div>
-
-                  <div
-                    className={styles["cart-item-info-icon"]}
-                    onClick={() => router.push(`/product/${item.id}`)}
-                  >
-                    <IconButton>
-                      <InfoIcon
-                        sx={{
-                          color: "#004b91",
-                          fontSize: "2.5rem",
-                          transition: "color 0.5s ease-in-out",
-                          "&:hover": {
-                            color: "hsl(209, 100%, 35%)",
-                          },
-                        }}
-                      />
-                    </IconButton>
                   </div>
 
                   <div className={styles["cart-item-info"]}>
@@ -288,24 +293,6 @@ const Cart: NextPage = () => {
                     <p>Subtotal:</p>
                     <p>${(item.quantity! * item.price).toFixed(2)}</p>
                   </div>
-                </div>
-
-                <div
-                  className={styles["cart-item-remove-icon"]}
-                  onClick={() => dispatch(removeItemFromCart(item.id))}
-                >
-                  <IconButton>
-                    <RemoveCircleIcon
-                      sx={{
-                        fontSize: "2.5rem",
-                        color: "hsl(12, 96%, 40%)",
-                        transition: "color 0.5s ease-in-out",
-                        "&:hover": {
-                          color: "hsl(12, 96%, 50%)",
-                        },
-                      }}
-                    />
-                  </IconButton>
                 </div>
               </div>
             </div>

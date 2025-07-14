@@ -20,39 +20,44 @@
   align-items: center;
   margin-bottom: 2.5em;
 
-  //Category
-  .cart-item-category {
-    @include theme-provider.product-item-category-text();
-  }
-
   .cart-content {
-    background: theme-provider.$light_gray_background;
     width: min(85%, 27em);
     padding: 2em;
     margin: 1em 0em;
+    border: 5px solid theme-provider.$category_nav_background;
     border-radius: 10px;
 
-    .cart-item {
+    .cart-item-header {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 0.8em;
+      justify-content: space-between;
+      align-items: flex-start;
 
+      //Category
+      .cart-item-category {
+        @include theme-provider.product-item-category-text();
+      }
+
+      //Remove Icon
+      .cart-item-remove-icon {
+        position: relative;
+        bottom: 1em;
+      }
+    }
+
+    .cart-item {
       .cart-item-content {
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
+        bottom: 0.5em;
 
         //Image
         .cart-item-image {
           position: relative;
-          width: 100%;
+          width: min(10em, 100%);
           height: 10em;
           margin-bottom: 1em;
-        }
-
-        //Info Icon
-        .cart-item-info-icon {
           cursor: pointer;
         }
 
@@ -159,27 +164,14 @@
       padding: 1.5em;
 
       .cart-item {
-        flex-direction: row;
-        justify-content: space-around;
-
         .cart-item-content {
           flex-direction: row;
           justify-content: center;
           flex-wrap: wrap;
 
-          //Image
-          .cart-item-image {
-            width: 10em;
-          }
-
-          //Info Icon
-          .cart-item-info-icon {
-            margin-left: 0.5em;
-          }
-
           .cart-item-info {
             align-items: flex-start;
-            margin-left: 0.7em;
+            margin-left: 1.5em;
 
             //Title
             .cart-item-title {
@@ -203,12 +195,6 @@
             margin-left: 1.5em;
             margin-top: 0em;
           }
-        }
-
-        //Remove Icon
-        .cart-item-remove-icon {
-          margin-left: 0.5em;
-          margin-top: 0em;
         }
       }
     }
