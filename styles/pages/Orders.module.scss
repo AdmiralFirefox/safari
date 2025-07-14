@@ -14,19 +14,31 @@
 
     //Product Item
     .order-item {
-      // border: 3px solid theme_provider.$black_color;
       margin-bottom: 2em;
       padding: 1.5em;
       border: 5px solid theme_provider.$category_nav_background;
       border-radius: 10px;
 
-      //Date
-      .order-date {
-        color: theme_provider.$slightly_light_gray_color;
-        font-weight: 700;
-        font-style: italic;
-        font-size: 1rem;
-        margin-bottom: 1.5em;
+      .order-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        //Date
+        .order-date {
+          color: theme_provider.$slightly_light_gray_color;
+          font-weight: 700;
+          font-style: italic;
+          font-size: 1rem;
+          margin-bottom: 1.5em;
+        }
+
+        //Remove Icon
+        .order-item-remove-icon {
+          position: relative;
+          bottom: 1em;
+          left: 1em;
+        }
       }
 
       //Order Information

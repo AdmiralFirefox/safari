@@ -18,7 +18,6 @@ import { toast, Zoom } from "react-toastify";
 import { useLockedBody } from "../hooks/useLockedBody";
 import Rating from "@mui/material/Rating";
 import { Product } from "../types/Product/Product";
-import InfoIcon from "@mui/icons-material/Info";
 import IconButton from "@mui/material/IconButton";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import RemoveIcon from "@mui/icons-material/Remove";

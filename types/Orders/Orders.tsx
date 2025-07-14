@@ -1,5 +1,6 @@
 export interface OrderProps {
   id: string;
+  order_id?: string;
   createdAt?: {
     seconds: number;
   };

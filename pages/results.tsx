@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import type { NextPage } from "next";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../firebase/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, doc } from "firebase/firestore";
 import { useAppSelector, useAppDispatch } from "../app/reduxhooks";
 import { Product } from "../types/Product/Product";
 import { ProductResults } from "../types/Results/ProductResults";
@@ -63,9 +63,14 @@ const Results: NextPage = () => {
 
   // If checkout was successful, added items to orders
   useEffect(() => {
-    if (products?.data.payment_intent.status) {
-      cart.map((item) => {
-        return addDoc(collection(db, "orders"), {
+    if (products?.data.payment_intent.status && cart.length > 0) {
+      const ordersRef = collection(db, "orders");
+
+      const orderPromises = cart.map(async (item) => {
+        const docRef = doc(ordersRef);
+
+        return await addDoc(ordersRef, {
+          order_id: docRef.id,
           createdAt: serverTimestamp(),
           title: item.title,
           description: item.description,
@@ -78,8 +83,13 @@ const Results: NextPage = () => {
         });
       });
 
-      //Clearing Cart when payment is successful
-      setTimeout(() => dispatch(clearCart()), 100);
+      Promise.all(orderPromises)
+        .then(() => {
+          dispatch(clearCart());
+        })
+        .catch((error) => {
+          console.error("Error creating orders:", error);
+        });
     }
   }, [cart, dispatch, products?.data.payment_intent.status, user]);
 

@@ -9,9 +9,13 @@ import {
   orderBy,
   onSnapshot,
   where,
+  getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import Rating from "@mui/material/Rating";
+import IconButton from "@mui/material/IconButton";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 const Placeholder = dynamic(
   () => import("../components/Placeholder/Placeholder")
 );
@@ -22,6 +26,7 @@ const Loading = dynamic(() => import("../components/Loading/Loading"));
 import ReactPaginate from "react-paginate";
 import dayjs from "dayjs";
 import { OrderProps } from "../types/Orders/Orders";
+import { toast, Zoom } from "react-toastify";
 import styles from "../styles/pages/Orders.module.scss";
 
 const Orders: NextPage = () => {
@@ -40,6 +45,34 @@ const Orders: NextPage = () => {
 
   const changePage = ({ selected }: { selected: number }) => {
     setPageNumber(selected);
+  };
+
+  const deleteOrder = async (order: OrderProps) => {
+    if (user) {
+      const ordersRef = collection(db, "orders");
+      const q = query(
+        ordersRef,
+        where("order_id", "==", order.order_id),
+        where("owner", "==", user!.uid)
+      );
+
+      // Toast Remove Message
+      toast.error("Order Removed", {
+        position: "top-center",
+        autoClose: 2500,
+        transition: Zoom,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        deleteDoc(doc.ref);
+      });
+    }
   };
 
   //Getting Orders from the collection
@@ -103,11 +136,31 @@ const Orders: NextPage = () => {
           {displayOrders.map((order) => {
             return (
               <div key={order.id} className={styles["order-item"]}>
-                <p className={styles["order-date"]}>
-                  {dayjs(order.createdAt!.seconds * 1000).format(
-                    "MMMM D YYYY, h:mm:ss a"
-                  )}
-                </p>
+                <div className={styles["order-item-header"]}>
+                  <p className={styles["order-date"]}>
+                    {dayjs(order.createdAt!.seconds * 1000).format(
+                      "MMMM D YYYY, h:mm:ss a"
+                    )}
+                  </p>
+
+                  <div
+                    className={styles["order-item-remove-icon"]}
+                    onClick={() => deleteOrder(order)}
+                  >
+                    <IconButton>
+                      <RemoveCircleIcon
+                        sx={{
+                          fontSize: "2.5rem",
+                          color: "hsl(12, 96%, 40%)",
+                          transition: "color 0.5s ease-in-out",
+                          "&:hover": {
+                            color: "hsl(12, 96%, 50%)",
+                          },
+                        }}
+                      />
+                    </IconButton>
+                  </div>
+                </div>
 
                 <div className={styles["order-info"]}>
                   <div>
