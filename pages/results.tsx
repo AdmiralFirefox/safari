@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -17,6 +17,7 @@ const EmptyPlaceholder = dynamic(
   () => import("../components/EmptyPlaceholder/EmptyPlaceholder")
 );
 const Loading = dynamic(() => import("../components/Loading/Loading"));
+import CircularProgress from "@mui/material/CircularProgress";
 import styles from "../styles/pages/Results.module.scss";
 
 const fetchDataItems = async (sessionId: string | string[] | undefined) => {
@@ -24,6 +25,8 @@ const fetchDataItems = async (sessionId: string | string[] | undefined) => {
 };
 
 const Results: NextPage = () => {
+  const [loadingPurchase, setLoadingPurchase] = useState(false);
+
   const user = useContext(AuthContext);
   const router = useRouter();
   const sessionId = router.query.session_id;
@@ -64,6 +67,8 @@ const Results: NextPage = () => {
   // If checkout was successful, added items to orders
   useEffect(() => {
     if (products?.data.payment_intent.status && cart.length > 0) {
+      setLoadingPurchase(true);
+
       const ordersRef = collection(db, "orders");
 
       const orderPromises = cart.map(async (item) => {
@@ -86,9 +91,11 @@ const Results: NextPage = () => {
       Promise.all(orderPromises)
         .then(() => {
           dispatch(clearCart());
+          setLoadingPurchase(false);
         })
         .catch((error) => {
           console.error("Error creating orders:", error);
+          setLoadingPurchase(false);
         });
     }
   }, [cart, dispatch, products?.data.payment_intent.status, user]);
@@ -127,23 +134,35 @@ const Results: NextPage = () => {
 
       <div className={styles["cart-cleared-info-wrapper"]}>
         <div className={styles["cart-cleared-info-content"]}>
-          <div>
-            <p>Order Successful and Cart Cleared</p>
-            <Image
-              src="/assets/EmptyCart.png"
-              alt=""
-              width={75}
-              height={75}
-              style={{
-                maxWidth: "100%",
-                height: "auto",
-                objectFit: "contain",
-              }}
-            />
-          </div>
-          <UserButton changeRoute={() => router.push("/orders")}>
-            Go to My Orders
-          </UserButton>
+          {loadingPurchase ? (
+            <div>
+              <p>Verifying Purchase...</p>
+              <CircularProgress
+                size={45}
+                sx={{ color: "hsl(36, 100%, 60%)", marginTop: "0.5em" }}
+              />
+            </div>
+          ) : (
+            <>
+              <div>
+                <p>Order Successful and Cart Cleared</p>
+                <Image
+                  src="/assets/EmptyCart.png"
+                  alt=""
+                  width={75}
+                  height={75}
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
+              <UserButton changeRoute={() => router.push("/orders")}>
+                Go to My Orders
+              </UserButton>
+            </>
+          )}
         </div>
       </div>
     </>
