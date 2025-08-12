@@ -263,7 +263,7 @@ const LogIn: NextPage = () => {
                 )}
 
                 <p className={styles["login-conditions"]}>
-                  Note: This application is just to to demonstrate my
+                  Note: This is just a demo application to demonstrate my
                   development skills. DO NOT ENTER any sensitive information.
                 </p>
 
