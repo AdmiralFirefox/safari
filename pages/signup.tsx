@@ -222,7 +222,7 @@ const SignUp: NextPage = () => {
                 )}
 
                 <p className={styles["signup-conditions"]}>
-                  Note: This is just a demo application to demonstrate my
+                  Note: This is just a demo application to showcase my
                   development skills. DO NOT ENTER any sensitive information.
                 </p>
 
