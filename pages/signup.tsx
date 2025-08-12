@@ -222,20 +222,8 @@ const SignUp: NextPage = () => {
                 )}
 
                 <p className={styles["signup-conditions"]}>
-                  By Logging in, you agree to Safari&apos;s{" "}
-                  <Link
-                    href="/login"
-                    className={styles["signup-conditions-highlights"]}
-                  >
-                    Conditions of Use
-                  </Link>{" "}
-                  and{" "}
-                  <Link
-                    href="/login"
-                    className={styles["signup-conditions-highlights"]}
-                  >
-                    Privacy Notice
-                  </Link>
+                  Note: This application is just to to demonstrate my
+                  development skills. DO NOT ENTER any sensitive information.
                 </p>
 
                 {loadingInfo()}

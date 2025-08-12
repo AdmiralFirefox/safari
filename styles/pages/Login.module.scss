@@ -58,14 +58,6 @@
       font-size: 1rem;
       font-weight: 700;
       text-align: left;
-
-      .login-conditions-highlights {
-        color: theme-provider.$blue_color;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
     }
 
     //Circular Progress Wrapper

@@ -263,20 +263,8 @@ const LogIn: NextPage = () => {
                 )}
 
                 <p className={styles["login-conditions"]}>
-                  By Logging in, you agree to Safari&apos;s{" "}
-                  <Link
-                    href="/login"
-                    className={styles["login-conditions-highlights"]}
-                  >
-                    Conditions of Use
-                  </Link>{" "}
-                  and{" "}
-                  <Link
-                    href="/login"
-                    className={styles["login-conditions-highlights"]}
-                  >
-                    Privacy Notice
-                  </Link>
+                  Note: This application is just to to demonstrate my
+                  development skills. DO NOT ENTER any sensitive information.
                 </p>
 
                 {loadingInfo()}
