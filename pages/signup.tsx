@@ -12,6 +12,7 @@ import { AuthContext } from "../context/AuthContext";
 import { auth } from "../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import AccountButton from "../components/Button/AccountButton";
+import Banner from "../components/Navbar/Banner";
 import styles from "../styles/pages/SignUp.module.scss";
 
 const SignUp: NextPage = () => {
@@ -95,7 +96,8 @@ const SignUp: NextPage = () => {
   };
 
   return (
-    <div>
+    <>
+      <Banner />
       {!user ? (
         <>
           <div className={styles["signup-web-logo"]}>
@@ -237,7 +239,7 @@ const SignUp: NextPage = () => {
           </div>
         </>
       ) : null}
-    </div>
+    </>
   );
 };
 

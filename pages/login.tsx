@@ -16,10 +16,11 @@ import {
   signInAnonymously,
 } from "firebase/auth";
 import { useForm } from "react-hook-form";
-import styles from "../styles/pages/Login.module.scss";
+import Banner from "../components/Navbar/Banner";
 import AccountButton from "../components/Button/AccountButton";
 import GoogleSignInButton from "../components/Button/GoogleSignInButton";
 import AnonymousSignInButton from "../components/Button/AnonymousSignInButton";
+import styles from "../styles/pages/Login.module.scss";
 
 const LogIn: NextPage = () => {
   const [loading, setLoading] = useState(false);
@@ -169,6 +170,7 @@ const LogIn: NextPage = () => {
 
   return (
     <>
+      <Banner />
       {!user && (
         <>
           <div className={styles["login-web-logo"]}>

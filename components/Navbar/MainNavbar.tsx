@@ -11,6 +11,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
 import { BsHeartFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
+import Banner from "./Banner";
 import CategoryNavbar from "./CategoryNavbar";
 import NavbarMobileContent from "./NavbarMobileContent";
 import ProfileDropdown from "./ProfileDropdown";
@@ -193,6 +194,7 @@ const MainNavbar: FC = () => {
 
   return (
     <>
+      <Banner />
       <div className={styles["main-nav-wrapper"]}>
         <div className={styles["nav-left-side"]}>
           <NavbarMobileContent
